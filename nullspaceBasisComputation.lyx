@@ -1,5 +1,5 @@
-#LyX 1.6.6 created this file. For more info see http://www.lyx.org/
-\lyxformat 345
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
 \begin_document
 \begin_header
 \textclass articleMath
@@ -27,20 +27,58 @@
 \def\mmab{\qopname\relax n{FastBasis}}
 \def\umab{\qopname\relax n{UnbalancedFastBasis}}
 \newcommand{\bb}{\\}
+
+
+\newrefformat{eq}{\textup{(\ref{#1})}}
+\newrefformat{lem}{Lemma \ref{#1}}
+\newrefformat{cla}{Claim \ref{#1}}
+\newrefformat{thm}{Theorem \ref{#1}}
+\newrefformat{cha}{Chapter \ref{#1}}
+\newrefformat{sec}{Section \ref{#1}}
+\newrefformat{rem}{Remark \ref{#1}}
+\newrefformat{fac}{Fact \ref{#1}}
+\newrefformat{sub}{Subsection \ref{#1}}
+\newrefformat{cor}{Corollary \ref{#1}}
+\newrefformat{cond}{Condition \ref{#1}}
+\newrefformat{con}{Conjecture \ref{#1}}
+\newrefformat{def}{Definition \ref{#1}}
+\newrefformat{pro}{Proposition \ref{#1}}
+\newrefformat{alg}{Algorithm \ref{#1}}
+\newrefformat{exm}{Example \ref{#1}}
+\newrefformat{line}{line \ref{#1}}
+\newrefformat{tab}{Table \ref{#1} on page \pageref{#1}}
+\newrefformat{fig}{Figure \ref{#1} on page \pageref{#1}}
+\def\prettyref#1{\@prettyref#1:}
+\def\@prettyref#1:#2:{%
+  \expandafter\ifx\csname pr@#1\endcsname\relax%
+    \PackageWarning{prettyref}{Reference format #1\space undefined}%
+    \ref{#1:#2}%
+  \else%
+    \csname pr@#1\endcsname{#1:#2}%
+  \fi%
+}
 \end_preamble
 \use_default_options false
+\maintain_unincluded_children false
 \language english
+\language_package default
 \inputencoding latin1
+\fontencoding global
 \font_roman default
 \font_sans default
 \font_typewriter default
 \font_default_family default
+\use_non_tex_fonts false
 \font_sc false
 \font_osf false
 \font_sf_scale 100
 \font_tt_scale 100
 
 \graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
 \paperfontsize default
 \spacing single
 \use_hyperref false
@@ -48,21 +86,31 @@
 \use_geometry false
 \use_amsmath 1
 \use_esint 0
+\use_mhchem 1
+\use_mathdots 1
 \cite_engine basic
 \use_bibtopic false
+\use_indices false
 \paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
 \secnumdepth 3
 \tocdepth 3
 \paragraph_separation indent
-\defskip medskip
+\paragraph_indentation default
 \quotes_language english
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
 \tracking_changes false
 \output_changes false
-\author "" 
-\author "" 
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
 \end_header
 
 \begin_body
@@ -105,7 +153,7 @@ Let us first assume that the dimension of the
 
 .
  Let 
-\begin_inset Formula $\vec{s}$
+\begin_inset Formula $\vec{s}=[s_{1},\dots,s_{n}]\in\mathbb{Z}$
 \end_inset
 
  be a list of shift, such that each column degree of 
@@ -116,15 +164,56 @@ Let us first assume that the dimension of the
 \begin_inset Formula $\vec{s}$
 \end_inset
 
- (for easier understanding, just think of 
+.
+ For example, we can set each entry of 
 \begin_inset Formula $\vec{s}$
 \end_inset
 
- equals the column degrees of 
+ to be the corresponding column degree of 
 \begin_inset Formula $\mathbf{F}$
 \end_inset
 
-).
+, or we can simply set each entry of 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+ to be the maximum column degree of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+.
+ This condition on the shift is very useful, since it makes the column degrees
+ of 
+\begin_inset Formula $\mathbf{F}\mathbf{A}$
+\end_inset
+
+ for any polynomial matrix 
+\begin_inset Formula $\mathbf{A}$
+\end_inset
+
+ bounded component-wise by the 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column degrees of 
+\begin_inset Formula $\mathbf{A}$
+\end_inset
+
+.
+ For simplicity, we also assume without loss of generality that the columns
+ of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ and the corresponding entries of 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+ are arranged to make the entries of 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+ in increasing orders.
  Let 
 \begin_inset Formula $\xi=\sum\vec{s}$
 \end_inset
@@ -147,8 +236,17 @@ Let us first assume that the dimension of the
 \end_layout
 
 \begin_layout Standard
-First, we comput an 
-\begin_inset Formula $\left(\mathbf{F},\vec{s},15\xi/n\right)$
+Let 
+\begin_inset Formula $s=\xi/n$
+\end_inset
+
+ be the average of the entries of 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+.
+ First, we compute an 
+\begin_inset Formula $\left(\mathbf{F},4s,\vec{s}\right)$
 \end_inset
 
 -basis 
@@ -232,12 +330,7 @@ Let
 \end_layout
 
 \begin_layout Standard
-Assume that the columns of 
-\begin_inset Formula $\mathbf{F}$
-\end_inset
-
- are arranged in increasing order of their column degrees, and the columns
- of 
+Assume the columns of 
 \begin_inset Formula $\mathbf{P}$
 \end_inset
 
@@ -246,33 +339,55 @@ Assume that the columns of
 \end_inset
 
 -column degrees.
+ Then by 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:boundOnShiftedDegrees"
+
+\end_inset
+
+ the 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column degrees of 
+\begin_inset Formula $\mathbf{P}$
+\end_inset
+
+ are bounded component-wise by 
+\begin_inset Formula $\vec{s}+4s$
+\end_inset
+
+.
  Let 
-\begin_inset Formula $[\vec{s}_{1},\vec{s}_{2}]=\vec{s}$
+\begin_inset Formula $\vec{t}=\vec{b}-4s$
 \end_inset
 
- such that 
-\begin_inset Formula $\vec{s}_{2}$
+, where 
+\begin_inset Formula $\vec{b}$
 \end_inset
 
- having the same column dimension as 
+ is the 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column degrees of 
 \begin_inset Formula $\mathbf{P}_{2}$
 \end_inset
 
+, then 
+\begin_inset Formula $\vec{t}$
+\end_inset
+
+ is bounded component-wise by the largest entries of 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+, with the sum of the entries bounded by 
+\begin_inset Formula $\xi$
+\end_inset
+
 .
- Then we claim that each column degree of 
-\begin_inset Formula $\mathbf{F}\mathbf{P}_{2}/x^{15d}$
-\end_inset
-
- (equivalently, 
-\begin_inset Formula $\vec{t}=\vec{b}-15d$
-\end_inset
-
-) is bounded by the corresponding entry in 
-\begin_inset Formula $\vec{s}_{2}$
-\end_inset
-
-.
- 
 \end_layout
 
 \begin_layout Standard
@@ -281,7 +396,7 @@ At this point, the problem is reduced to computing a
 \end_inset
 
 -minimal nullspace basis of 
-\begin_inset Formula $\mathbf{G}=\mathbf{F}\mathbf{P}_{2}/x^{15d}$
+\begin_inset Formula $\mathbf{G}=\mathbf{F}\mathbf{P}_{2}/x^{4s}$
 \end_inset
 
 , which still has row dimension 
@@ -293,10 +408,14 @@ At this point, the problem is reduced to computing a
 \end_inset
 
  and column degrees bounded by 
-\begin_inset Formula $\vec{s}_{2}$
+\begin_inset Formula $\vec{t}$
 \end_inset
 
-, with degree sum still bounded by 
+, with 
+\begin_inset Formula $\sum\vec{t}$
+\end_inset
+
+ bounded by 
 \begin_inset Formula $\xi$
 \end_inset
 
@@ -305,10 +424,13 @@ At this point, the problem is reduced to computing a
 
 \begin_layout Standard
 Let 
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 \left[\begin{array}{c}
 \mathbf{G}_{1}\\
-\mathbf{G}_{2}\end{array}\right]=\mathbf{G}\]
+\mathbf{G}_{2}
+\end{array}\right]=\mathbf{G}
+\]
 
 \end_inset
 
@@ -357,7 +479,7 @@ having
 \begin_inset Formula $\vec{u}$
 \end_inset
 
--minimual nullspace basis 
+-minimal nullspace basis 
 \begin_inset Formula $\mathbf{N}_{2}$
 \end_inset
 
@@ -453,10 +575,12 @@ Let
 \begin_inset Formula $h(n,\xi)$
 \end_inset
 
- be the computational cost of the original problem, then we have the recurence
+ be the computational cost of the original problem, then we have the recurrence
  relation 
-\begin_inset Formula \[
-h(n,\xi)\in O^{\sim}(n^{\omega-1}\xi)+h(3n/5,\xi)+h(2n/5,\xi),\]
+\begin_inset Formula 
+\[
+h(n,\xi)\in O^{\sim}(n^{\omega-1}\xi)+h(3n/5,\xi)+h(2n/5,\xi),
+\]
 
 \end_inset
 
@@ -567,18 +691,176 @@ Proof of some of the claims
 Now we give the proofs of some of the claims:
 \end_layout
 
+\begin_layout Lemma
+\begin_inset CommandInset label
+LatexCommand label
+name "lem:boundOfSumOfShiftedDegreesOfNullspaceBasis"
+
+\end_inset
+
+Given an 
+\begin_inset Formula $\mathbf{F}\in\mathbb{K}\left[x\right]^{m\times n}$
+\end_inset
+
+, and a shift 
+\begin_inset Formula $\vec{s}\in\mathbb{Z}_{\ge0}$
+\end_inset
+
+ with entries bounding the corresponding column degrees of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+.
+ The sum of the 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column degrees of any
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+need to mention all minimal nullspace basis have the same lexical graphical
+ degrees.
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-minimal nullspace basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ is bounded by 
+\begin_inset Formula $\xi=\sum\vec{s}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Let 
+\begin_inset Formula $\mathbf{P}$
+\end_inset
+
+ be a 
+\begin_inset Formula $(\mathbf{F},\vec{s},\sigma)$
+\end_inset
+
+-basis with high enough order 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ so 
+\begin_inset Formula $\mathbf{P}=\left[\mathbf{N},\bar{\mathbf{N}}\right]$
+\end_inset
+
+ contains a complete null space basis 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $k$
+\end_inset
+
+ be the column dimension of 
+\begin_inset Formula $\bar{\mathbf{N}}$
+\end_inset
+
+.
+ Note that the sum of the 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column degrees of 
+\begin_inset Formula $\mathbf{P}$
+\end_inset
+
+ is at most 
+\begin_inset Formula $\xi+k\sigma$
+\end_inset
+
+, since the sum is 
+\begin_inset Formula $\xi$
+\end_inset
+
+ at order 0 and increases by at most 
+\begin_inset Formula $k$
+\end_inset
+
+ for each order increase.
+ Also note that the sum of the 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-degrees of 
+\begin_inset Formula $\bar{\mathbf{N}}$
+\end_inset
+
+ is greater than or equal to the sum of the column degrees of 
+\begin_inset Formula $\mathbf{F}\bar{\mathbf{N}}$
+\end_inset
+
+, which is at least 
+\begin_inset Formula $k\sigma$
+\end_inset
+
+ since every column of 
+\begin_inset Formula $\mathbf{F}\bar{\mathbf{N}}$
+\end_inset
+
+ is nonzero and has order 
+\begin_inset Formula $\sigma$
+\end_inset
+
+.
+ So the sum of the 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column degrees of 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+ is bounded by 
+\begin_inset Formula $\xi+k\sigma-k\sigma=\xi$
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Claim
 Let 
 \begin_inset Formula $\mathbf{F}\in\mathbb{K}[x]^{n/3\times n}$
 \end_inset
 
- and 
-\begin_inset Formula $d$
+, 
+\begin_inset Formula $\vec{s}$
 \end_inset
 
- be its average column degree.
+ be a shift with entries bound the corresponding column degrees of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+, and 
+\begin_inset Formula $s=\sum\vec{s}/n$
+\end_inset
+
+ be the average of the entries of 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+.
  Then an 
-\begin_inset Formula $(\mathbf{F},15d)$
+\begin_inset Formula $(\mathbf{F},4s,\vec{s})$
 \end_inset
 
 -basis contains at least 
@@ -589,125 +871,570 @@ Let
 \end_layout
 
 \begin_layout Proof
-Note that 
+From 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:boundOfSumOfShiftedDegreesOfNullspaceBasis"
+
+\end_inset
+
+, the sum of 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column degrees of any 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-minimal nullspace basis of 
 \begin_inset Formula $\mathbf{F}$
 \end_inset
 
- has at least 
-\begin_inset Formula $5n/6$
+ is bounded by 
+\begin_inset Formula $\xi=\sum\vec{s}$
 \end_inset
 
- columns with degree bounded by 
-\begin_inset Formula $6d$
+.
+ Also, such a nullspace basis has at least 
+\begin_inset Formula $2n/3$
+\end_inset
+
+ columns so the average 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column degree is bounded by 
+\begin_inset Formula $3s/2$
+\end_inset
+
+.
+ Therefore, at least 
+\begin_inset Formula $3/5$
+\end_inset
+
+ of the columns of such nullspace basis, that is, at least 
+\begin_inset Formula $2n/5$
+\end_inset
+
+ columns have 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column degrees bounded by 
+\begin_inset Formula $15s/4$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ multiplied by these columns has the column degrees bounded component-wise
+ by the 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column degrees of these columns, which are bounded by 
+\begin_inset Formula $15s/4$
+\end_inset
+
+, an 
+\begin_inset Formula $(\mathbf{F},15s/4,\vec{s})$
+\end_inset
+
+-basis must contain at least 
+\begin_inset Formula $2n/5$
+\end_inset
+
+ such columns.
+ We can just take the order to be 
+\begin_inset Formula $4s$
+\end_inset
+
+ instead of 
+\begin_inset Formula $15s/4$
+\end_inset
+
+ for simplicity.
+\end_layout
+
+\begin_layout Lemma
+\begin_inset CommandInset label
+LatexCommand label
+name "lem:boundOnShiftedDegrees"
+
+\end_inset
+
+Let 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+, 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ be as before.
+ If an 
+\begin_inset Formula $(\mathbf{F},\sigma,\vec{s})$
+\end_inset
+
+-basis has columns arranged in increasing 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column degrees, with 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column degrees 
+\begin_inset Formula $\vec{b}$
 \end_inset
 
 .
  Let 
-\begin_inset Formula $\mathbf{G}$
-\end_inset
-
- be the submatrix of 
-\begin_inset Formula $\mathbf{F}$
-\end_inset
-
- formed by these columns.
- A null space basis 
-\begin_inset Formula $\mathbf{M}$
-\end_inset
-
- of 
-\begin_inset Formula $\mathbf{G}$
-\end_inset
-
- then have at least 
-\begin_inset Formula $(5n/6-n/3)=n/2$
-\end_inset
-
- columns.
- The sum of the column degrees of 
-\begin_inset Formula $\mathbf{M}$
-\end_inset
-
- is bounded by 
-\begin_inset Formula $5nd/6$
+\begin_inset Formula $\vec{t}=\vec{b}-\sigma$
 \end_inset
 
 .
- The average column degree of 
-\begin_inset Formula $\mathbf{M}$
+ Then the 
+\begin_inset Formula $\vec{t}$
 \end_inset
 
- is 
-\begin_inset Formula $(5nd/6)/(n/2)=5d/3$
-\end_inset
-
-.
- Hence there at least 
-\begin_inset Formula $4/5$
-\end_inset
-
- of the columns of 
-\begin_inset Formula $\mathbf{M}$
-\end_inset
-
- has degree bounded by 
-\begin_inset Formula $25d/3$
-\end_inset
-
-, that is at least 
-\begin_inset Formula $(n/2)\cdot(4/5)=2n/5$
-\end_inset
-
- columns.
- Therefore, if we compute a 
-\begin_inset Formula $(\mathbf{G},25d/3+6d)=(\mathbf{G},43d/3)$
-\end_inset
-
--basis, we get at least 
-\begin_inset Formula $2n/5$
-\end_inset
-
- columns of a null space basis of 
-\begin_inset Formula $\mathbf{G}$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Claim
-The column degrees of 
-\begin_inset Formula $\mathbf{F}\mathbf{P}_{2}/x^{15d}$
-\end_inset
-
- is bounded by 
-\begin_inset Formula $\vec{s}_{2}$
+-column degrees of the basis are bounded component-wise by 
+\begin_inset Formula $\vec{s}$
 \end_inset
 
 .
 \end_layout
 
 \begin_layout Proof
-Viewing the iterative order basis computation as an elimination process
- as in euclidean algorithm, we see that any column degree of 
-\begin_inset Formula $\mathbf{F}\mathbf{P}/x^{\sigma}$
+An 
+\begin_inset Formula $(\mathbf{F},0,\vec{s})$
 \end_inset
 
- for any 
-\begin_inset Formula $(\mathbf{F},\vec{s},\sigma)$
+-basis has 
+\begin_inset Formula $\vec{s}$
 \end_inset
 
--basis 
-\begin_inset Formula $\mathbf{P}$
+-column degrees 
+\begin_inset Formula $\vec{s}$
 \end_inset
 
- never increase for increasing 
+.
+ Then for each order increase, any column of the basis has its 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column degree increase by at most one, hence at order 
+\begin_inset Formula $\sigma$
+\end_inset
+
+, the 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column degree increase for each column is at most 
 \begin_inset Formula $\sigma$
 \end_inset
 
 .
 \end_layout
 
-\begin_layout Claim
+\begin_layout Remark
+Note the difference between 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:boundOfSumOfShiftedDegreesOfNullspaceBasis"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:boundOnShiftedDegrees"
+
+\end_inset
+
+.
+ In 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:boundOfSumOfShiftedDegreesOfNullspaceBasis"
+
+\end_inset
+
+, we consider only the shifted degree of a nullspace basis, where as in
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:boundOnShiftedDegrees"
+
+\end_inset
+
+ applies to a order basis but the order is subtracted from the degrees.
+\end_layout
+
+\begin_layout Lemma
+\begin_inset CommandInset label
+LatexCommand label
+name "lem:multiplyUnbalancedMatrices"
+
+\end_inset
+
+Given 
+\begin_inset Formula $\mathbf{A}\in\mathbb{K}\left[x\right]^{m\times n}$
+\end_inset
+
+, and a shift 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+ with entries bound the column degrees of 
+\begin_inset Formula $\mathbf{A}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\xi=\sum\vec{s}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\mathbf{B}\in\mathbb{K}\left[x\right]^{n\times k}$
+\end_inset
+
+ be 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column reduced and the sum of 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column degrees of 
+\begin_inset Formula $\mathbf{B}$
+\end_inset
+
+ is bounded by 
+\begin_inset Formula $\xi$
+\end_inset
+
+.
+ Then we can multiply 
+\begin_inset Formula $\mathbf{A}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{B}$
+\end_inset
+
+ with a cost of 
+\begin_inset Formula $O^{\sim}(n^{\omega-1}\xi)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+First consider multiplying 
+\begin_inset Formula $\mathbf{A}$
+\end_inset
+
+ with the columns 
+\begin_inset Formula $\mathbf{B}^{(1)}$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathbf{B}$
+\end_inset
+
+ whose 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-degrees are in the range 
+\begin_inset Formula $(\xi/2,\xi]$
+\end_inset
+
+.
+ There is at most one such column.
+ We do this in 
+\begin_inset Formula $\log n$
+\end_inset
+
+ steps.
+ At step 
+\begin_inset Formula $j$
+\end_inset
+
+ we work with the columns 
+\begin_inset Formula $\mathbf{A}_{j}$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathbf{A}$
+\end_inset
+
+ whose column degrees are in the range 
+\begin_inset Formula $(\xi/2^{j},\xi/2^{j-1}]$
+\end_inset
+
+, the the corresponding rows 
+\begin_inset Formula $\mathbf{B}_{j}^{(1)}$
+\end_inset
+
+ in 
+\begin_inset Formula $\mathbf{B}^{(1)}$
+\end_inset
+
+.
+ The column dimension of 
+\begin_inset Formula $\mathbf{A}_{j}$
+\end_inset
+
+, which is the same as the row dimension of 
+\begin_inset Formula $\mathbf{B}_{j}^{(1)}$
+\end_inset
+
+, is less then 
+\begin_inset Formula $2^{j}$
+\end_inset
+
+.
+ The degree of 
+\begin_inset Formula $\mathbf{B}_{j}^{(1)}$
+\end_inset
+
+ is less than 
+\begin_inset Formula $\xi$
+\end_inset
+
+.
+ To use fast multiplication, we expand 
+\begin_inset Formula $\mathbf{B}_{j}^{(1)}$
+\end_inset
+
+ to a matrix 
+\begin_inset Formula $\bar{\mathbf{B}}_{j}^{(1)}$
+\end_inset
+
+ with degree 
+\begin_inset Formula $\delta\in\Theta(\xi/2^{j})$
+\end_inset
+
+ and column dimension 
+\begin_inset Formula $q\in O(2^{j})$
+\end_inset
+
+ as follows.
+ Write 
+\begin_inset Formula 
+\[
+\mathbf{B}_{j}^{(1)}=\mathbf{B}_{j,0}^{(1)}+\mathbf{B}_{j,1}^{(1)}x^{\delta}+\dots+\mathbf{B}_{j,q-1}^{(1)}x^{\delta(q-1)}=\sum_{k=0}^{q-1}\mathbf{B}_{j,k}^{(1)}x^{\delta k}
+\]
+
+\end_inset
+
+ with each 
+\begin_inset Formula $\mathbf{B}_{j,k}^{(1)}$
+\end_inset
+
+ having degree less than 
+\begin_inset Formula $\delta.$
+\end_inset
+
+ Set 
+\begin_inset Formula $\bar{\mathbf{B}}_{j}^{(1)}=\left[\mathbf{B}_{j,0}^{(1)},\mathbf{B}_{j,1}^{(1)},\dots,\mathbf{B}_{j,q-1}^{(1)}\right]$
+\end_inset
+
+.
+ We can then multiply 
+\begin_inset Formula $\mathbf{A}_{j}$
+\end_inset
+
+, which has dimension 
+\begin_inset Formula $m\times O(2^{j})$
+\end_inset
+
+, and 
+\begin_inset Formula $\bar{\mathbf{B}}_{j}^{(1)}$
+\end_inset
+
+, which has dimension 
+\begin_inset Formula $O(2^{j})\times O(2^{j})$
+\end_inset
+
+, with a cost of 
+\begin_inset Formula $O^{\sim}\left((m/2^{j})\left(2^{j}\right)^{\omega}\xi/2^{j}\right)=O^{\sim}\left(\left(2^{j}\right)^{\omega-2}m\xi\right)$
+\end_inset
+
+.
+ Adding up the columns of 
+\begin_inset Formula $\mathbf{A}_{j}\bar{\mathbf{B}}_{j}^{(1)}$
+\end_inset
+
+ gives 
+\begin_inset Formula $\mathbf{A}_{j}\mathbf{B}_{j}^{(1)}$
+\end_inset
+
+ and cost 
+\begin_inset Formula $O(2^{j}\xi)$
+\end_inset
+
+.
+ Therefore, multiplying 
+\begin_inset Formula $\mathbf{A}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{B}^{(1)}$
+\end_inset
+
+ over 
+\begin_inset Formula $\log(n)$
+\end_inset
+
+ steps cost 
+\begin_inset Formula $O^{\sim}(n^{\omega-2}m\xi)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Next we multiply 
+\begin_inset Formula $\mathbf{A}$
+\end_inset
+
+ with the columns 
+\begin_inset Formula $\mathbf{B}^{(2)}$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathbf{B}$
+\end_inset
+
+ whose 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column degrees are in the range 
+\begin_inset Formula $(\xi/4,\xi/2]$
+\end_inset
+
+.
+ We proceed in the same way as before, but notice that the columns of 
+\begin_inset Formula $\mathbf{A}$
+\end_inset
+
+ whose degrees are higher than 
+\begin_inset Formula $\xi/2$
+\end_inset
+
+ are no longer needed since the corresponding rows in 
+\begin_inset Formula $\mathbf{N}^{(2)}$
+\end_inset
+
+ must be 0, as the 
+\begin_inset Formula $\vec{t}$
+\end_inset
+
+-column degree of 
+\begin_inset Formula $\mathbf{N}^{(2)}$
+\end_inset
+
+ is bounded by 
+\begin_inset Formula $\xi/2$
+\end_inset
+
+.
+ Multiplying 
+\begin_inset Formula $\mathbf{A}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{B}^{(2)}$
+\end_inset
+
+ also cost 
+\begin_inset Formula $O^{\sim}(n^{\omega-2}m\xi)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Continue doing this, it cost 
+\begin_inset Formula $O^{\sim}(n^{\omega-2}m\xi)$
+\end_inset
+
+ to multiply 
+\begin_inset Formula $\mathbf{A}$
+\end_inset
+
+ with the columns 
+\begin_inset Formula $\mathbf{B}^{(i)}$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathbf{B}$
+\end_inset
+
+ whose 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column degrees are in the range 
+\begin_inset Formula $(\xi/2^{i},\xi/2^{i-1}]$
+\end_inset
+
+.
+ As before, notice that the columns of 
+\begin_inset Formula $\mathbf{A}$
+\end_inset
+
+ whose degrees are higher than 
+\begin_inset Formula $\xi/2^{i-1}$
+\end_inset
+
+ are not needed, as 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column degrees of 
+\begin_inset Formula $\mathbf{B}^{(i)}$
+\end_inset
+
+ is bounded by 
+\begin_inset Formula $\xi/2^{i-1}$
+\end_inset
+
+.
+ The overall cost for 
+\begin_inset Formula $i$
+\end_inset
+
+ from 1 to 
+\begin_inset Formula $\log n$
+\end_inset
+
+ is 
+\begin_inset Formula $O^{\sim}(n^{\omega-2}m\xi)$
+\end_inset
+
+ to multiply 
+\begin_inset Formula $\mathbf{A}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{B}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Corollary
 The multiplication of 
 \begin_inset Formula $\mathbf{F}$
 \end_inset
@@ -724,139 +1451,37 @@ The multiplication of
 \end_layout
 
 \begin_layout Proof
-The proof is similar to the proof in 
+Since the 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column degrees 
+\begin_inset Formula $\vec{b}$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathbf{P}_{2}$
+\end_inset
+
+ satisfies 
+\begin_inset Formula $\sum\vec{b}\le4sn+\xi=5\xi$
+\end_inset
+
+, one way to use 
 \begin_inset CommandInset ref
-LatexCommand prettyref
-reference "cla:mutiplyingG2N1"
+LatexCommand formatted
+reference "lem:multiplyUnbalancedMatrices"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Claim
-\begin_inset CommandInset label
-LatexCommand label
-name "cla:G2N1"
-
-\end_inset
-
-The sum of the column degrees of 
-\begin_inset Formula $\mathbf{G}_{2}\mathbf{N}_{1}$
-\end_inset
-
- is bounded by 
-\begin_inset Formula $\xi$
+ is to use the shift 
+\begin_inset Formula $\vec{s}'=\vec{s}+4s$
 \end_inset
 
 .
 \end_layout
 
-\begin_layout Proof
-Note that since 
-\begin_inset Formula $\vec{t}$
-\end_inset
-
- bounds the column degrees of 
-\begin_inset Formula $\mathbf{G}$
-\end_inset
-
-, the 
-\begin_inset Formula $\vec{t}$
-\end_inset
-
--column degrees of any polynomail matrix 
-\begin_inset Formula $\mathbf{A}$
-\end_inset
-
- bounds the column degree of 
-\begin_inset Formula $\mathbf{G}\mathbf{A}$
-\end_inset
-
-.
- Consider iteratively computing a 
-\begin_inset Formula $(\mathbf{G}_{1},\vec{t},\sigma)$
-\end_inset
-
--basis 
-\begin_inset Formula $\mathbf{P}$
-\end_inset
-
- where 
-\begin_inset Formula $\sigma$
-\end_inset
-
- is high enough so 
-\begin_inset Formula $\mathbf{P}=\left[\mathbf{N}_{1},\bar{\mathbf{N}}_{1}\right]$
-\end_inset
-
- contains a null space basis 
-\begin_inset Formula $\mathbf{N}_{1}$
-\end_inset
-
-.
- Let 
-\begin_inset Formula $k$
-\end_inset
-
- be the column dimension of 
-\begin_inset Formula $\bar{\mathbf{N}}_{1}$
-\end_inset
-
-.
- Note that the sum of the 
-\begin_inset Formula $\vec{t}$
-\end_inset
-
--column degrees of 
-\begin_inset Formula $\mathbf{P}$
-\end_inset
-
- increases from 
-\begin_inset Formula $\sum\vec{t}$
-\end_inset
-
- at order 
-\begin_inset Formula $0$
-\end_inset
-
- to at most 
-\begin_inset Formula $\sum\vec{t}+k\sigma$
-\end_inset
-
- at order 
-\begin_inset Formula $\sigma$
-\end_inset
-
-.
- But the sum of the 
-\begin_inset Formula $\vec{t}$
-\end_inset
-
--degrees of
-\begin_inset Formula $\bar{\mathbf{N}}_{1}$
-\end_inset
-
- is at least 
-\begin_inset Formula $k\sigma$
-\end_inset
-
-, so the sum of the 
-\begin_inset Formula $\vec{t}$
-\end_inset
-
--column degrees of 
-\begin_inset Formula $\mathbf{N}_{1}$
-\end_inset
-
- is bounded by 
-\begin_inset Formula $\sum\vec{t}+k\sigma-k\sigma=\sum\vec{t}\le\xi$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Claim
+\begin_layout Corollary
 \begin_inset CommandInset label
 LatexCommand label
 name "cla:mutiplyingG2N1"
@@ -878,262 +1503,6 @@ The multiplication of
 .
 \end_layout
 
-\begin_layout Proof
-Recall that the column degrees of 
-\begin_inset Formula $\mathbf{N}_{1}$
-\end_inset
-
- are bounded by its 
-\begin_inset Formula $\vec{t}$
-\end_inset
-
--column degrees, and the sum of these degrees are bounded by 
-\begin_inset Formula $\xi$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Proof
-First consider multiplying 
-\begin_inset Formula $\mathbf{G}_{2}$
-\end_inset
-
- and a subset 
-\begin_inset Formula $\mathbf{N}^{(1)}$
-\end_inset
-
- of 
-\begin_inset Formula $\mathbf{N}_{1}$
-\end_inset
-
-whose 
-\begin_inset Formula $\vec{t}$
-\end_inset
-
--degrees are between 
-\begin_inset Formula $\xi/2$
-\end_inset
-
- and 
-\begin_inset Formula $\xi$
-\end_inset
-
-.
- We do this in 
-\begin_inset Formula $\log n$
-\end_inset
-
- steps.
- At each step we work with the columns 
-\begin_inset Formula $\mathbf{G}^{(i)}$
-\end_inset
-
- of 
-\begin_inset Formula $\mathbf{G}_{2}$
-\end_inset
-
- whose column degrees are between 
-\begin_inset Formula $\xi/2^{i}$
-\end_inset
-
- and 
-\begin_inset Formula $\xi/2^{i-1}$
-\end_inset
-
-, and the corresponding rows 
-\begin_inset Formula $\mathbf{N}^{(1,i)}$
-\end_inset
-
- of 
-\begin_inset Formula $\mathbf{N}^{(1)}$
-\end_inset
-
-.
- The column dimension of 
-\begin_inset Formula $\mathbf{G}^{(i)}$
-\end_inset
-
- and the row dimension of 
-\begin_inset Formula $\mathbf{N}^{(1,j)}$
-\end_inset
-
- are no more than 
-\begin_inset Formula $2^{i}$
-\end_inset
-
-.
- The degree of 
-\begin_inset Formula $\mathbf{N}^{(1,j)}$
-\end_inset
-
- is bounded by 
-\begin_inset Formula $\xi-\xi/2^{i}=(2^{i}-1)\xi/2^{i}$
-\end_inset
-
-.
- To use fast multiplication, we can expand 
-\begin_inset Formula $\mathbf{N}^{(1,j)}$
-\end_inset
-
- to 
-\begin_inset Formula $\Theta(2^{i})$
-\end_inset
-
- columns with degrees bounded by 
-\begin_inset Formula $(\xi-\xi/2^{i})/2^{i}<\xi/2^{i}$
-\end_inset
-
-.
- We can then multiply 
-\begin_inset Formula $\mathbf{G}^{(i)}$
-\end_inset
-
- and 
-\begin_inset Formula $\mathbf{N}^{(1,j)}$
-\end_inset
-
- with a cost of 
-\begin_inset Formula $O^{\sim}\left((m/2^{i})\left(2^{i}\right)^{\omega}\xi/2^{i}\right)=O^{\sim}\left(\left(2^{i}\right)^{\omega-2}m\xi\right)$
-\end_inset
-
-.
- Hence multiplying 
-\begin_inset Formula $\mathbf{G}_{2}$
-\end_inset
-
- with 
-\begin_inset Formula $\mathbf{N}^{(1)}$
-\end_inset
-
- over 
-\begin_inset Formula $\log n$
-\end_inset
-
- steps cost 
-\begin_inset Formula $O^{\sim}\left(n^{\omega-2}m\xi\right)$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Proof
-Next, we multiply 
-\begin_inset Formula $\mathbf{G}_{2}$
-\end_inset
-
- with a subset 
-\begin_inset Formula $\mathbf{N}^{(2)}$
-\end_inset
-
- of 
-\begin_inset Formula $\mathbf{N}_{1}$
-\end_inset
-
-whose 
-\begin_inset Formula $\vec{t}$
-\end_inset
-
--degrees are between 
-\begin_inset Formula $\xi/4$
-\end_inset
-
- and 
-\begin_inset Formula $\xi/2$
-\end_inset
-
-.
- We proceed in the same way, but notice that the columns of 
-\begin_inset Formula $\mathbf{G}_{2}$
-\end_inset
-
- whose degrees are higher than 
-\begin_inset Formula $\xi/2$
-\end_inset
-
- are no longer needed, as 
-\begin_inset Formula $\vec{t}$
-\end_inset
-
--degree of 
-\begin_inset Formula $\mathbf{N}^{(2)}$
-\end_inset
-
- is bounded by 
-\begin_inset Formula $\xi/2$
-\end_inset
-
-.
- Similarly, this multiplication can be done with a cost of 
-\begin_inset Formula $O^{\sim}\left(n^{\omega-2}m\xi\right).$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Proof
-Continue doing this, at stage 
-\begin_inset Formula $j$
-\end_inset
-
-, we multiply 
-\begin_inset Formula $\mathbf{G}_{2}$
-\end_inset
-
- with a subset 
-\begin_inset Formula $\mathbf{N}^{(j)}$
-\end_inset
-
- of 
-\begin_inset Formula $\mathbf{N}_{1}$
-\end_inset
-
-whose 
-\begin_inset Formula $\vec{t}$
-\end_inset
-
--degrees are between 
-\begin_inset Formula $\xi/2^{j}$
-\end_inset
-
- and 
-\begin_inset Formula $\xi/2^{j-1}$
-\end_inset
-
-.
- The columns of 
-\begin_inset Formula $\mathbf{G}_{2}$
-\end_inset
-
- whose degrees are higher than 
-\begin_inset Formula $\xi/2^{j-1}$
-\end_inset
-
- are not needed, as 
-\begin_inset Formula $\vec{t}$
-\end_inset
-
--degree of 
-\begin_inset Formula $\mathbf{N}^{(j)}$
-\end_inset
-
- is bounded by 
-\begin_inset Formula $\xi/2^{j-1}$
-\end_inset
-
-.
- At each stage the multiplication can be done with a cost of 
-\begin_inset Formula $O^{\sim}\left(n^{\omega-2}m\xi\right).$
-\end_inset
-
- The overall cost is therefore 
-\begin_inset Formula $O^{\sim}\left(n^{\omega-2}m\xi\right).$
-\end_inset
-
-
-\end_layout
-
 \begin_layout Claim
 The multiplication of 
 \begin_inset Formula $\mathbf{N}_{1}$
@@ -1151,54 +1520,38 @@ The multiplication of
 \end_layout
 
 \begin_layout Proof
-To use the same argument as before, we just need to see that both the column
- degree sum of 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:multiplyUnbalancedMatrices"
+
+\end_inset
+
+ can be applied because the sum of the column degrees of 
 \begin_inset Formula $\mathbf{N}_{1}$
 \end_inset
 
- and the column degree sum of 
-\begin_inset Formula $\mathbf{N}=\mathbf{N}_{1}\mathbf{N}_{2}$
-\end_inset
-
- are bounded by 
-\begin_inset Formula $\xi$
-\end_inset
-
-.
- The sum of the column degrees of 
-\begin_inset Formula $\mathbf{N}_{1}$
-\end_inset
-
- is bounded by that of 
-\begin_inset Formula $\mathbf{G}_{2}\mathbf{N}_{1}$
-\end_inset
-
- and hence by 
-\begin_inset Formula $\xi$
-\end_inset
-
-.
- The sum of the column degrees of 
-\begin_inset Formula $\mathbf{N}_{2}$
-\end_inset
-
- is bounded by the 
+ is bounded by the sum of the 
 \begin_inset Formula $\vec{t}$
 \end_inset
 
 -column degrees of 
-\begin_inset Formula $\mathbf{N}$
+\begin_inset Formula $\mathbf{N}_{1}$
 \end_inset
 
-, which is bounded by 
+, which is 
+\begin_inset Formula $\sum\vec{u}\le\xi$
+\end_inset
+
+, and the sum of 
+\begin_inset Formula $\vec{u}$
+\end_inset
+
+-column degrees of 
+\begin_inset Formula $\mathbf{N}_{2}$
+\end_inset
+
+ is also bounded by 
 \begin_inset Formula $\xi$
-\end_inset
-
- using the reasoning from 
-\begin_inset CommandInset ref
-LatexCommand prettyref
-reference "cla:G2N1"
-
 \end_inset
 
 .
