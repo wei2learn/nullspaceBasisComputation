@@ -267,7 +267,14 @@ Let
 \end_inset
 
  null space basis elements.
- 
+ (See 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:partialNullspaceBasis"
+
+\end_inset
+
+ for a proof.)
 \end_layout
 
 \begin_layout Standard
@@ -290,7 +297,14 @@ Let
 \end_inset
 
  can be done efficiently.
- If 
+ (See 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "cor:multiplyingFP2"
+
+\end_inset
+
+) If 
 \begin_inset Formula $\vec{b}$
 \end_inset
 
@@ -508,15 +522,36 @@ having
 \begin_inset Formula $\xi$
 \end_inset
 
-, and the multiplication 
+ (
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:boundOfSumOfShiftedDegreesOfNullspaceBasis"
+
+\end_inset
+
+), and the multiplication 
 \begin_inset Formula $\mathbf{G}_{2}\mathbf{N}_{1}$
 \end_inset
 
- can be computed efficiently, and the multiplication 
+ can be computed efficiently (
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "cor:mutiplyingG2N1"
+
+\end_inset
+
+), and the multiplication 
 \begin_inset Formula $\mathbf{N}_{1}\mathbf{N}_{2}$
 \end_inset
 
- can also be done efficiently.
+ can also be done efficiently (
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "cor:mutiplyingG2N1"
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Standard
@@ -684,7 +719,7 @@ In summary, this gives a way to compute a
 \end_layout
 
 \begin_layout Subsection
-Proof of some of the claims
+Some proofs
 \end_layout
 
 \begin_layout Standard
@@ -837,7 +872,13 @@ Let
 .
 \end_layout
 
-\begin_layout Claim
+\begin_layout Lemma
+\begin_inset CommandInset label
+LatexCommand label
+name "lem:partialNullspaceBasis"
+
+\end_inset
+
 Let 
 \begin_inset Formula $\mathbf{F}\in\mathbb{K}[x]^{n/3\times n}$
 \end_inset
@@ -1103,11 +1144,7 @@ Given
 \begin_inset Formula $\mathbf{B}\in\mathbb{K}\left[x\right]^{n\times k}$
 \end_inset
 
- be 
-\begin_inset Formula $\vec{s}$
-\end_inset
-
--column reduced and the sum of 
+ and the sum of 
 \begin_inset Formula $\vec{s}$
 \end_inset
 
@@ -1435,6 +1472,12 @@ Continue doing this, it cost
 \end_layout
 
 \begin_layout Corollary
+\begin_inset CommandInset label
+LatexCommand label
+name "cor:multiplyingFP2"
+
+\end_inset
+
 The multiplication of 
 \begin_inset Formula $\mathbf{F}$
 \end_inset
@@ -1484,7 +1527,7 @@ reference "lem:multiplyUnbalancedMatrices"
 \begin_layout Corollary
 \begin_inset CommandInset label
 LatexCommand label
-name "cla:mutiplyingG2N1"
+name "cor:mutiplyingG2N1"
 
 \end_inset
 
@@ -1503,7 +1546,23 @@ The multiplication of
 .
 \end_layout
 
-\begin_layout Claim
+\begin_layout Proof
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:multiplyUnbalancedMatrices"
+
+\end_inset
+
+ applies directly here.
+\end_layout
+
+\begin_layout Corollary
+\begin_inset CommandInset label
+LatexCommand label
+name "cor:multiplyingN1N2"
+
+\end_inset
+
 The multiplication of 
 \begin_inset Formula $\mathbf{N}_{1}$
 \end_inset
@@ -1526,7 +1585,7 @@ reference "lem:multiplyUnbalancedMatrices"
 
 \end_inset
 
- can be applied because the sum of the column degrees of 
+ applies because the sum of the column degrees of 
 \begin_inset Formula $\mathbf{N}_{1}$
 \end_inset
 
