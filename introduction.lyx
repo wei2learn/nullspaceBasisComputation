@@ -1,0 +1,288 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass elsart
+\options amsthm,seceqn,secthm
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding latin9
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 2
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine natbib_authoryear
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 2
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\mathbf{F}\in\mathbb{K}\left[x\right]^{m\times n}$
+\end_inset
+
+ be a matrix of polynomials over a field 
+\begin_inset Formula $\mathbb{K}$
+\end_inset
+
+ with 
+\begin_inset Formula $m\le n$
+\end_inset
+
+.
+ A (right) nullspace basis 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ is said to be minimal if it has the minimal possible column degrees among
+ all right nullspace bases.
+ More generally, for a shift 
+\begin_inset Formula $\vec{s}=[s_{1},\dots,s_{n}]\in\mathbb{Z}^{n}$
+\end_inset
+
+, a nullspace basis 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+ is said to be 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-minimal if it has the minimal possible 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column degrees among all nullspace bases, or equivalently, the column degrees
+ of 
+\begin_inset Formula 
+\[
+x^{\vec{s}}\mathbf{N}=\begin{bmatrix}s_{1}\\
+ & \ddots\\
+ &  & s_{n}
+\end{bmatrix}\mathbf{N}
+\]
+
+\end_inset
+
+ are the minimal possible among all nullspace bases of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In this paper we present an algorithm for the computation of minimal nullspace
+ bases.
+ A key ingredient of this algorithm is another algorithm for computing a
+ 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-minimal shifted nullspace basis of an input matrix with row dimension 
+\begin_inset Formula $m$
+\end_inset
+
+ and column dimension 
+\begin_inset Formula $n$
+\end_inset
+
+ satisfy 
+\begin_inset Formula $n\in\Theta(m)$
+\end_inset
+
+, where the entries of the shift 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+ bound the column degrees of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ component-wise, that is, each entry 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+ is greater than or equal to the degree of the 
+\begin_inset Formula $i$
+\end_inset
+
+-th column of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+.
+ For example, we can set 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+ to be the column degree of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+, or we can set each entry of 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+ to be the maximum column degree of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\xi$
+\end_inset
+
+ is the sum of the entries of 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+, the algorithm we present computes a 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-minimal nullspace basis with a cost of 
+\begin_inset Formula $O^{\sim}(n^{\omega-1}\xi)$
+\end_inset
+
+ field operations.
+ If we ignore the non-uniformness of the column degrees of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ by setting each entry of 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+ to the maximum column degree 
+\begin_inset Formula $d$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+, then this cost specializes to 
+\begin_inset Formula $O^{\sim}(n^{\omega-1}md)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+A key component of the algorithm is order basis (also known as minimal approxima
+nt basis) computation, which are done using the algorithms from 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Giorgi2003"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "za2009"
+
+\end_inset
+
+.
+ We use order basis computation to compute a partial nullspace basis, which
+ also reduces the column dimension of the problem.
+ The problem can then be separated to two subproblems of smaller row dimensions,
+ which can then be handled in the same way as the original problem.
+ 
+\end_layout
+
+\begin_layout Standard
+The remaining paper is structured as follows.
+ Basic definitions and properties of nullspace bases and order bases are
+ given in the next section.
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "sec:transform"
+
+\end_inset
+
+ provides an extension to Storjohann's transformation to allow higher degree
+ basis elements to be computed.
+ Based on this new transformation, 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "sec:Order-Basis-Computation"
+
+\end_inset
+
+ establishes a link between two Storjohann transformed problems of different
+ degrees, from which an recursive method and then an iterative algorithm
+ are derived.
+ The time complexity is analyzed in the next section.
+ After this, 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "sec:Unbalanced-Shift"
+
+\end_inset
+
+ describes an algorithm which handles problems with a type of unbalanced
+ shift.
+ This is followed by a conclusion along with a description for topics for
+ future research.
+ 
+\end_layout
+
+\end_body
+\end_document
