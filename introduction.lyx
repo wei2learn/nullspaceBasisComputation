@@ -125,10 +125,14 @@ x^{\vec{s}}\mathbf{N}=\begin{bmatrix}s_{1}\\
 \end_layout
 
 \begin_layout Standard
-In this paper we present an algorithm for the computation of minimal nullspace
- bases.
- A key ingredient of this algorithm is another algorithm for computing a
- 
+In this paper we present an algorithm for computing a minimal nullspace
+ basis with a cost of 
+\begin_inset Formula $O^{\sim}\left(n^{\omega}d\right)$
+\end_inset
+
+.
+ A key ingredient of this algorithm is another algorithm, also presented
+ in this paper, for computing a 
 \begin_inset Formula $\vec{s}$
 \end_inset
 
@@ -165,19 +169,11 @@ In this paper we present an algorithm for the computation of minimal nullspace
 \end_inset
 
 .
- For example, we can set 
+ For example, the shift 
 \begin_inset Formula $\vec{s}$
 \end_inset
 
- to be the column degree of 
-\begin_inset Formula $\mathbf{F}$
-\end_inset
-
-, or we can set each entry of 
-\begin_inset Formula $\vec{s}$
-\end_inset
-
- to be the maximum column degree of 
+ can be simply the column degrees of 
 \begin_inset Formula $\mathbf{F}$
 \end_inset
 
@@ -190,36 +186,15 @@ In this paper we present an algorithm for the computation of minimal nullspace
 \begin_inset Formula $\vec{s}$
 \end_inset
 
-, the algorithm we present computes a 
+, a 
 \begin_inset Formula $\vec{s}$
 \end_inset
 
--minimal nullspace basis with a cost of 
+-minimal nullspace basis can be computed with a cost of 
 \begin_inset Formula $O^{\sim}(n^{\omega-1}\xi)$
 \end_inset
 
  field operations.
- If we ignore the non-uniformness of the column degrees of 
-\begin_inset Formula $\mathbf{F}$
-\end_inset
-
- by setting each entry of 
-\begin_inset Formula $\vec{s}$
-\end_inset
-
- to the maximum column degree 
-\begin_inset Formula $d$
-\end_inset
-
- of 
-\begin_inset Formula $\mathbf{F}$
-\end_inset
-
-, then this cost specializes to 
-\begin_inset Formula $O^{\sim}(n^{\omega-1}md)$
-\end_inset
-
-.
 \end_layout
 
 \begin_layout Standard
