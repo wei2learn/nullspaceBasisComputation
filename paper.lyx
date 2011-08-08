@@ -159,7 +159,6 @@ status collapsed
 
 \begin_layout Author Email
 
-
 \backslash
 {w2zhou,glabahn
 \backslash
@@ -168,11 +167,11 @@ status collapsed
 
 \begin_layout Abstract
 In this paper we present a deterministic algorithm for the computation of
- a minimal nullspace basis of an 
+ a shifted minimal nullspace basis of an 
 \begin_inset Formula $m\times n$
 \end_inset
 
- input matrix of univariate polynomials over a field 
+ input matrix of polynomials over a field 
 \begin_inset Formula $\mathbb{K}$
 \end_inset
 
@@ -181,43 +180,20 @@ In this paper we present a deterministic algorithm for the computation of
 \end_inset
 
 .
- The computational cost of this algorithm is 
-\begin_inset Formula $O^{\sim}(n^{\omega}d)$
-\end_inset
-
- field operations for a degree 
-\begin_inset Formula $d$
-\end_inset
-
- input matrix.
- 
-\end_layout
-
-\begin_layout Abstract
-This algorithm relies on another algorithm that computes a minimal shifted
- nullspace basis for a given degree shift 
+ For a given degree shift 
 \begin_inset Formula $\vec{s}\in\mathbb{Z}^{n}$
 \end_inset
 
  with entries bound the corresponding column degrees of the input matrix,
- and the row dimension 
-\begin_inset Formula $m$
-\end_inset
-
- and column dimension 
-\begin_inset Formula $n$
-\end_inset
-
- satisfy 
-\begin_inset Formula $n\in\Theta(m)$
-\end_inset
-
-.
- If 
+ if 
 \begin_inset Formula $\xi$
 \end_inset
 
- is the sum of the entries of 
+ is the sum of 
+\begin_inset Formula $m$
+\end_inset
+
+ largest entries of 
 \begin_inset Formula $\vec{s}$
 \end_inset
 
@@ -230,6 +206,15 @@ This algorithm relies on another algorithm that computes a minimal shifted
 \end_inset
 
  field operations.
+ As a special case, this gives a cost of 
+\begin_inset Formula $O^{\sim}(n^{\omega-1}md)$
+\end_inset
+
+ for an input matrix of degree 
+\begin_inset Formula $d$
+\end_inset
+
+ if we ignore the non-uniformness of the column degrees.
  
 \end_layout
 
