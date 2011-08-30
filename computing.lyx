@@ -76,33 +76,33 @@ name "sec:Nullspace-Basis-Computation"
 \end_layout
 
 \begin_layout Standard
-In this section, we first describe the algorithm for computing a minimal
+In this section, we describe an algorithm for computing a shifted minimal
  nullspace basis, and then analyze its correctness and cost.
  The algorithm uses two computation process recursively.
- The first process uses an order basis computation to compute a subset of
- nullspace basis elements of lower degree, and results in a new problem
- of lower column dimension.
- The second process reduces the row dimension of the problem by computing
- a nullspace basis of a subset of rows of the input matrix.
-\end_layout
-
-\begin_layout Subsection
-\begin_inset CommandInset label
-LatexCommand label
-name "sub:computingShiftedNullspaceBasis"
+ The first process described in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:continueComputingNullspaceBasisByColumns"
 
 \end_inset
 
-The Algorithm
-\end_layout
+ uses an order basis computation to compute a subset of nullspace basis
+ elements of lower degree, and results in a new problem of lower column
+ dimension.
+ The second process described in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "sub:continueComputingNullspaceBasisByRows"
 
-\begin_layout Standard
-In this subsection we present an algorithm that computes a shifted minimal
- nullspace basis, where the shift 
+\end_inset
+
+ reduces the row dimension of the problem by computing a nullspace basis
+ of a subset of rows of the input matrix.
+ We require the shift 
 \begin_inset Formula $\vec{s}$
 \end_inset
 
- is required to bound the column degrees of 
+ to bound the column degrees of 
 \begin_inset Formula $\mathbf{F}$
 \end_inset
 
@@ -433,10 +433,10 @@ For simplicity, we also assume without loss of generality that the columns
 \end_inset
 
  and the corresponding entries of 
-\begin_inset Formula $\vec{s}$
+\begin_inset Formula $\vec{s}=\left[s_{1},\dots,s_{n}\right]$
 \end_inset
 
- are arranged to make the entries of 
+ are arranged so that the entries of 
 \begin_inset Formula $\vec{s}$
 \end_inset
 
@@ -450,6 +450,11 @@ For simplicity, we also assume without loss of generality that the columns
 \end_inset
 
 .
+ It provides a convenient bound throughout the computation.
+\begin_inset Note Comment
+status collapsed
+
+\begin_layout Plain Layout
  The algorithm we present in this section computes a 
 \begin_inset Formula $\vec{s}$
 \end_inset
@@ -463,10 +468,68 @@ For simplicity, we also assume without loss of generality that the columns
 \end_inset
 
 .
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\rho=\sum_{n-m+1}^{n}s_{i}$
+\end_inset
+
+ be the sum of 
+\begin_inset Formula $m$
+\end_inset
+
+ largest entries of 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+, and 
+\begin_inset Formula $s=\rho/m$
+\end_inset
+
+ be their average.
+ The algorithm we present in this section computes a 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-minimal null space basis 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+ with a cost of 
+\begin_inset Formula $g(n,\rho)=O^{\sim}(n^{\omega}s)$
+\end_inset
+
+.
+ For uniform shift 
+\begin_inset Formula $\vec{s}=\left[s,\dots,s\right]$
+\end_inset
+
+, we improve this later to 
+\begin_inset Formula $O^{\sim}\left(n^{\omega-1}ms\right)=O^{\sim}\left(n^{\omega-1}\rho\right)=O^{\sim}\left(n^{\omega-2}m\xi\right)$
+\end_inset
+
+.
  
+\begin_inset Note Comment
+status collapsed
+
+\begin_layout Plain Layout
+For general unbalanced shifts, the cost improvement requires the ability
+ to efficiently compute order basis with general shifts.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
+\begin_inset Note Comment
+status collapsed
+
+\begin_layout Plain Layout
 Let us first assume 
 \begin_inset Formula $m\le n\le3m$
 \end_inset
@@ -484,6 +547,11 @@ Let us first assume
  
 \end_layout
 
+\end_inset
+
+ 
+\end_layout
+
 \begin_layout Subsection
 \begin_inset CommandInset label
 LatexCommand label
@@ -496,15 +564,36 @@ Reducing the column dimension via order basis computation
 
 \begin_layout Standard
 First, we compute an 
-\begin_inset Formula $\left(\mathbf{F},4s,\vec{s}\right)$
+\begin_inset Formula $\left(\mathbf{F},3s,\vec{s}\right)$
 \end_inset
 
 -basis 
 \begin_inset Formula $\mathbf{P}$
 \end_inset
 
-, which can be done efficiently.
- We claim that 
+, which can be done with a cost 
+\begin_inset Formula $O^{\sim}\left(n^{\omega}s\right)$
+\end_inset
+
+.
+ Note that if 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+ is balanced, then we can compute with a cost 
+\begin_inset Formula $O^{\sim}\left(n^{\omega}\left\lceil \rho/n\right\rceil \right)$
+\end_inset
+
+ using the algorithm from 
+\series bold
+!!!!!!!!!!!!!!!!!!!!!!!!
+\series default
+.
+ We claim at most 
+\begin_inset Formula $3m/2$
+\end_inset
+
+ columns of 
 \series bold
 
 \begin_inset Formula $\mathbf{P}$
@@ -512,11 +601,11 @@ First, we compute an
 
 
 \series default
- contains at least 
-\begin_inset Formula $2n/5$
+ are not nullspace basis elements of 
+\begin_inset Formula $\mathbf{F}$
 \end_inset
 
- null space basis elements.
+.
 \end_layout
 
 \begin_layout Lemma
@@ -526,159 +615,12 @@ name "lem:dimensionOfPartialNullspaceBasisBasedOnOrder"
 
 \end_inset
 
-Let 
-\begin_inset Formula $\mathbf{F}\in\mathbb{K}[x]^{n/3\times n}$
-\end_inset
-
-.
- Let 
-\begin_inset Formula $\vec{s}$
-\end_inset
-
- be a shift with entries bound the corresponding column degrees of 
-\begin_inset Formula $\mathbf{F}$
-\end_inset
-
-, and 
-\begin_inset Formula $s=\sum\vec{s}/n$
-\end_inset
-
- be the average of the entries of 
-\begin_inset Formula $\vec{s}$
-\end_inset
-
-.
- Then an 
-\begin_inset Formula $(\mathbf{F},4s,\vec{s})$
-\end_inset
-
--basis contains at least 
-\begin_inset Formula $2n/5$
-\end_inset
-
- null space basis elements.
-\end_layout
-
-\begin_layout Proof
-From 
-\begin_inset CommandInset ref
-LatexCommand formatted
-reference "lem:boundOfSumOfShiftedDegreesOfNullspaceBasis"
-
-\end_inset
-
-, the sum of 
-\begin_inset Formula $\vec{s}$
-\end_inset
-
--column degrees of any 
-\begin_inset Formula $\vec{s}$
-\end_inset
-
--minimal nullspace basis of 
-\begin_inset Formula $\mathbf{F}$
-\end_inset
-
- is bounded by 
-\begin_inset Formula $\xi=\sum\vec{s}$
-\end_inset
-
-.
- Also, such a nullspace basis has at least 
-\begin_inset Formula $2n/3$
-\end_inset
-
- columns so the average 
-\begin_inset Formula $\vec{s}$
-\end_inset
-
--column degree is bounded by 
-\begin_inset Formula $\xi/(2n/3)=3s/2$
-\end_inset
-
-.
- Therefore, at least 
-\begin_inset Formula $3/5$
-\end_inset
-
- of the columns of such nullspace basis, that is, at least 
-\begin_inset Formula $2n/5$
-\end_inset
-
- columns have 
-\begin_inset Formula $\vec{s}$
-\end_inset
-
--column degrees bounded by 
-\begin_inset Formula $15s/4$
-\end_inset
-
-.
- Since by 
-\begin_inset CommandInset ref
-LatexCommand formatted
-reference "lem:boundOnDegreesOfFA"
-
-\end_inset
-
- 
-\begin_inset Formula $\mathbf{F}$
-\end_inset
-
- multiplied by these columns has the column degrees bounded component-wise
- by the 
-\begin_inset Formula $\vec{s}$
-\end_inset
-
--column degrees of these columns, which are bounded by 
-\begin_inset Formula $15s/4$
-\end_inset
-
-, an 
-\begin_inset Formula $(\mathbf{F},15s/4,\vec{s})$
-\end_inset
-
--basis must contain at least 
-\begin_inset Formula $2n/5$
-\end_inset
-
- such columns.
- We can just take the order to be 
-\begin_inset Formula $4s$
-\end_inset
-
- instead of 
-\begin_inset Formula $15s/4$
-\end_inset
-
- for simplicity.
-\end_layout
-
-\begin_layout Lemma
-Let 
-\begin_inset Formula $\rho=\sum_{i=n-m+1}^{n}s_{i}$
-\end_inset
-
- be the sum of the highest 
-\begin_inset Formula $m$
-\end_inset
-
- entries of 
-\begin_inset Formula $\vec{s}=\left[s_{1},\dots,s_{n}\right]$
-\end_inset
-
-.
- Let 
-\begin_inset Formula $\sigma=3\rho/2m$
-\end_inset
-
-.
  Let 
 \begin_inset Formula $\mathbf{P}=[\mathbf{P}_{1},\mathbf{P}_{2}]$
 \end_inset
 
  be a 
-\begin_inset Formula $(\mathbf{F},\sigma,\vec{s})$
+\begin_inset Formula $(\mathbf{F},3s,\vec{s})$
 \end_inset
 
 -basis with 
@@ -697,7 +639,7 @@ Let
 \begin_inset Formula $\mathbf{F}\mathbf{n}=0$
 \end_inset
 
-..
+.
  Then the column dimension 
 \begin_inset Formula $\kappa$
 \end_inset
@@ -707,7 +649,7 @@ Let
 \end_inset
 
  is less than 
-\begin_inset Formula $3m.$
+\begin_inset Formula $3m/2.$
 \end_inset
 
 
@@ -879,24 +821,24 @@ occurs when
 
  after rearrangement.
  Combining this with the fact that 
-\begin_inset Formula $\sum\vec{s}-\sum_{i=1}^{n-\kappa}s_{i}\le\kappa\rho/m$
+\begin_inset Formula $\sum\vec{s}-\sum_{i=1}^{n-\kappa}s_{i}\le\kappa s$
 \end_inset
 
 , we get 
-\begin_inset Formula $m\sigma\ge\kappa\sigma-\kappa\rho/m$
+\begin_inset Formula $m\sigma\ge\kappa\sigma-\kappa s$
 \end_inset
 
 , which gives 
-\begin_inset Formula $\kappa\le m\sigma/(\sigma-\rho/m)$
+\begin_inset Formula $\kappa\le m\sigma/(\sigma-s)$
 \end_inset
 
 .
  If we set 
-\begin_inset Formula $\sigma=3\rho/2m$
+\begin_inset Formula $\sigma=3s$
 \end_inset
 
 , we get 
-\begin_inset Formula $\kappa\le3m$
+\begin_inset Formula $\kappa\le3m/2$
 \end_inset
 
 .
@@ -923,8 +865,9 @@ Let
 \end_inset
 
  can be done efficiently.
- This is a consequence of the following more general result, which is later
- used in a few other scenarios as well.
+ This is a consequence of the following more general result on multiplying
+ matrices with nonuniform degrees.
+ It is later used for multiplying other matrices as well.
 \end_layout
 
 \begin_layout Lemma
@@ -948,7 +891,11 @@ Given
 
 .
  Let 
-\begin_inset Formula $\xi=\sum\vec{s}$
+\begin_inset Formula $\xi$
+\end_inset
+
+ be the sum of the entries of 
+\begin_inset Formula $\vec{s}$
 \end_inset
 
 .
@@ -956,20 +903,20 @@ Given
 \begin_inset Formula $\mathbf{B}\in\mathbb{K}\left[x\right]^{n\times k}$
 \end_inset
 
- with the sum of its
+ with 
+\begin_inset Formula $k\in O\left(m\right)$
+\end_inset
+
+ and the sum 
+\begin_inset Formula $\theta$
+\end_inset
+
+ of its 
 \begin_inset Formula $\vec{s}$
 \end_inset
 
--column degrees bounded by 
-\begin_inset Formula $\xi$
-\end_inset
-
-, where 
-\begin_inset Formula $k$
-\end_inset
-
- is an integer between 0 and 
-\begin_inset Formula $n$
+-column degrees satisfies 
+\begin_inset Formula $\theta\in O\left(\xi\right)$
 \end_inset
 
 .
@@ -982,14 +929,15 @@ Given
 \end_inset
 
  with a cost of 
-\begin_inset Formula $O^{\sim}(n^{\omega-2}m\xi)$
+\begin_inset Formula $O^{\sim}(nm^{\omega-2}\xi)$
 \end_inset
 
 .
+ 
 \end_layout
 
 \begin_layout Proof
-We divide the matrices 
+See We divide the matrices 
 \begin_inset Formula $\mathbf{A}$
 \end_inset
 
@@ -1001,15 +949,15 @@ We divide the matrices
 \begin_inset Formula 
 \begin{align*}
 \mathbf{A} & =\left[\begin{array}{cccc}
-\mathbf{A}_{\log n} & \mathbf{A}_{\log n-1} & \cdots & \mathbf{A}_{1}\end{array}\right]\\
+\mathbf{A}_{\log m} & \mathbf{A}_{\log m-1} & \cdots & \mathbf{A}_{1}\end{array}\right]\\
 \mathbf{B} & =\left[\begin{array}{cccc}
-\mathbf{B}^{\left(\log n\right)} & \mathbf{B}^{\left(\log n-1\right)} & \cdots & \mathbf{B}^{\left(1\right)}\end{array}\right]
+\mathbf{B}^{\left(\log m\right)} & \mathbf{B}^{\left(\log m-1\right)} & \cdots & \mathbf{B}^{\left(1\right)}\end{array}\right]
 \end{align*}
 
 \end_inset
 
 with 
-\begin_inset Formula $\mathbf{A}_{\log n},$
+\begin_inset Formula $\mathbf{A}_{\log m},$
 \end_inset
 
  
@@ -1025,11 +973,11 @@ with
 \noun off
 \color none
 
-\begin_inset Formula $\mathbf{A}_{\log n-1},$
+\begin_inset Formula $\mathbf{A}_{\log m-1},$
 \end_inset
 
  
-\begin_inset Formula $\mathbf{A}_{\log n-2}$
+\begin_inset Formula $\mathbf{A}_{\log m-2}$
 \end_inset
 
 , ...
@@ -1050,15 +998,15 @@ with
 \noun default
 \color inherit
  having degrees in the range 
-\begin_inset Formula $\left[0,2\xi/n\right]$
+\begin_inset Formula $\left[0,2\xi/m\right]$
 \end_inset
 
 , 
-\begin_inset Formula $(2\xi/n,4\xi/n]$
+\begin_inset Formula $(2\xi/m,4\xi/m]$
 \end_inset
 
 , 
-\begin_inset Formula $(4\xi/n,8\xi/n]$
+\begin_inset Formula $(4\xi/m,8\xi/m]$
 \end_inset
 
 , ..., 
@@ -1071,10 +1019,10 @@ with
 \end_inset
 
  from 1 to 
-\begin_inset Formula $\log n-1$
+\begin_inset Formula $\log m-1$
 \end_inset
 
- 
+, 
 \begin_inset Formula $\mathbf{A}_{j}$
 \end_inset
 
@@ -1099,11 +1047,11 @@ with
 \end_inset
 
 , and 
-\begin_inset Formula $\mathbf{A}_{\log n}$
+\begin_inset Formula $\mathbf{A}_{\log m}$
 \end_inset
 
  contains the remaining columns whose degrees are in the range 
-\begin_inset Formula $\left[0,2\xi/n\right]$
+\begin_inset Formula $\left[0,2\xi/m\right]$
 \end_inset
 
 .
@@ -1124,10 +1072,10 @@ with
 \noun default
 \color inherit
 
-\begin_inset Formula $\mathbf{B}_{\log n},$
+\begin_inset Formula $\mathbf{B}^{\left(\log m\right)}$
 \end_inset
 
- 
+, 
 \family roman
 \series medium
 \shape up
@@ -1140,16 +1088,16 @@ with
 \noun off
 \color none
 
-\begin_inset Formula $\mathbf{B}_{\log n-1},$
+\begin_inset Formula $\mathbf{B}^{\left(\log m-1\right)},$
 \end_inset
 
  
-\begin_inset Formula $\mathbf{B}_{\log n-2}$
+\begin_inset Formula $\mathbf{B}^{\left(\log m-2\right)}$
 \end_inset
 
 , ...
  , 
-\begin_inset Formula $\mathbf{B}_{1}$
+\begin_inset Formula $\mathbf{B}^{\left(1\right)}$
 \end_inset
 
 
@@ -1169,19 +1117,19 @@ with
 \end_inset
 
 -column degrees in the range 
-\begin_inset Formula $\left[0,2\xi/n\right]$
+\begin_inset Formula $\left[0,2\xi/m\right]$
 \end_inset
 
 , 
-\begin_inset Formula $(2\xi/n,4\xi/n]$
+\begin_inset Formula $(2\xi/m,4\xi/m]$
 \end_inset
 
 , 
-\begin_inset Formula $(4\xi/n,8\xi/n]$
+\begin_inset Formula $(4\xi/m,8\xi/m]$
 \end_inset
 
 , ..., 
-\begin_inset Formula $(\xi/2,\xi]$
+\begin_inset Formula $(\xi/2,\theta]$
 \end_inset
 
  respectively.
@@ -1192,9 +1140,9 @@ First consider the multiplication
 \begin_inset Formula 
 \[
 \mathbf{A}\mathbf{B}^{\left(1\right)}=\left[\begin{array}{cccc}
-\mathbf{A}_{\log n} & \mathbf{A}_{\log n-1} & \cdots & \mathbf{A}_{1}\end{array}\right]\left[\begin{array}{l}
-\mathbf{B}_{\log n}^{\left(1\right)}\\
-\mathbf{B}_{\log n-1}^{\left(1\right)}\\
+\mathbf{A}_{\log m} & \mathbf{A}_{\log m-1} & \cdots & \mathbf{A}_{1}\end{array}\right]\left[\begin{array}{l}
+\mathbf{B}_{\log m}^{\left(1\right)}\\
+\mathbf{B}_{\log m-1}^{\left(1\right)}\\
 \vdots\\
 \mathbf{B}_{1}^{\left(1\right)}
 \end{array}\right].
@@ -1202,13 +1150,21 @@ First consider the multiplication
 
 \end_inset
 
-Note that there are most one column in 
+Note that there are 
+\begin_inset Formula $O\left(1\right)$
+\end_inset
+
+ columns in 
 \begin_inset Formula $\mathbf{B}^{(1)}$
+\end_inset
+
+ since 
+\begin_inset Formula $\theta\in O\left(\xi\right)$
 \end_inset
 
 .
  We do this in 
-\begin_inset Formula $\log n$
+\begin_inset Formula $\log m$
 \end_inset
 
  steps.
@@ -1225,7 +1181,7 @@ Note that there are most one column in
 \end_inset
 
  to 
-\begin_inset Formula $\log n$
+\begin_inset Formula $\log m$
 \end_inset
 
  we multiply 
@@ -1258,8 +1214,8 @@ Note that there are most one column in
 \begin_inset Formula $\mathbf{B}_{j}^{(1)}$
 \end_inset
 
- is less than 
-\begin_inset Formula $\xi$
+ is 
+\begin_inset Formula $O\left(\xi\right)$
 \end_inset
 
 .
@@ -1271,7 +1227,7 @@ Note that there are most one column in
 \begin_inset Formula $\bar{\mathbf{B}}_{j}^{(1)}$
 \end_inset
 
- with degree 
+ with degree less than 
 \begin_inset Formula $\delta\in\Theta(\xi/2^{j})$
 \end_inset
 
@@ -1309,6 +1265,10 @@ Note that there are most one column in
 \begin_inset Formula $m\times O(2^{j})$
 \end_inset
 
+ for 
+\begin_inset Formula $j<\log m$
+\end_inset
+
 , and 
 \begin_inset Formula $\bar{\mathbf{B}}_{j}^{(1)}$
 \end_inset
@@ -1317,8 +1277,42 @@ Note that there are most one column in
 \begin_inset Formula $O(2^{j})\times O(2^{j})$
 \end_inset
 
+ for 
+\begin_inset Formula $j<\log m$
+\end_inset
+
 , with a cost of 
-\begin_inset Formula $O^{\sim}\left((m/2^{j})\left(2^{j}\right)^{\omega}\xi/2^{j}\right)=O^{\sim}\left(\left(2^{j}\right)^{\omega-2}m\xi\right)$
+\begin_inset Formula $O^{\sim}\left((m/2^{j})\left(2^{j}\right)^{\omega}\xi/2^{j}\right)=O^{\sim}\left(\left(2^{j}\right)^{\omega-2}m\xi\right)\subset O^{\sim}\left(m^{\omega-1}\xi\right)\subset O^{\sim}(nm^{\omega-2}\xi)$
+\end_inset
+
+.
+ For 
+\begin_inset Formula $j=\log m$
+\end_inset
+
+, 
+\begin_inset Formula $\mathbf{A}_{j}$
+\end_inset
+
+ has dimension 
+\begin_inset Formula $m\times O\left(n\right)$
+\end_inset
+
+, 
+\begin_inset Formula $\bar{\mathbf{B}}_{j}^{\left(1\right)}$
+\end_inset
+
+ has dimension 
+\begin_inset Formula $O\left(n\right)\times m$
+\end_inset
+
+, and their degrees are 
+\begin_inset Formula $O\left(\xi/m\right)$
+\end_inset
+
+.
+ Hence they can be multiplied with a cost of 
+\begin_inset Formula $O^{\sim}\left((n/m)m^{\omega}(\xi/m)\right)=O^{\sim}\left(nm^{\omega-2}\xi\right)$
 \end_inset
 
 .
@@ -1348,10 +1342,11 @@ Note that there are most one column in
 \end_inset
 
  steps cost 
-\begin_inset Formula $O^{\sim}(n^{\omega-2}m\xi)$
+\begin_inset Formula $O^{\sim}\left(nm^{\omega-2}\xi\right)$
 \end_inset
 
 .
+ 
 \end_layout
 
 \begin_layout Proof
@@ -1398,7 +1393,7 @@ Next we multiply
 \end_inset
 
  also cost 
-\begin_inset Formula $O^{\sim}(n^{\omega-2}m\xi)$
+\begin_inset Formula $O^{\sim}\left(nm^{\omega-2}\xi\right)$
 \end_inset
 
 .
@@ -1406,9 +1401,10 @@ Next we multiply
 
 \begin_layout Proof
 Continue doing this, it cost 
-\begin_inset Formula $O^{\sim}(n^{\omega-2}m\xi)$
+\begin_inset Formula $O^{\sim}\left(nm^{\omega-2}\xi\right)$
 \end_inset
 
+.
  to multiply 
 \begin_inset Formula $\mathbf{A}$
 \end_inset
@@ -1426,12 +1422,11 @@ Continue doing this, it cost
 \end_inset
 
  to 
-\begin_inset Formula $\log n$
+\begin_inset Formula $\log m$
 \end_inset
 
 .
- .
- As before, notice that the columns of 
+  As before, notice that the columns of 
 \begin_inset Formula $\mathbf{A}$
 \end_inset
 
@@ -1457,11 +1452,11 @@ Continue doing this, it cost
 \end_inset
 
  from 1 to 
-\begin_inset Formula $\log n$
+\begin_inset Formula $\log m$
 \end_inset
 
  is 
-\begin_inset Formula $O^{\sim}(n^{\omega-2}m\xi)$
+\begin_inset Formula $O^{\sim}\left(nm^{\omega-2}\xi\right)$
 \end_inset
 
  to multiply 
@@ -1507,14 +1502,22 @@ The multiplication of
 \end_inset
 
  can be done with a cost of 
-\begin_inset Formula $O^{\sim}(n^{\omega-1}\xi)$
+\begin_inset Formula $O^{\sim}\left(nm^{\omega-2}\xi\right)$
 \end_inset
 
 .
 \end_layout
 
 \begin_layout Proof
-The sum of the 
+Since 
+\begin_inset Formula $\mathbf{P}=[\mathbf{P}_{1},\mathbf{P}_{2}]$
+\end_inset
+
+ is a 
+\begin_inset Formula $(\mathbf{F},3s,\vec{s})$
+\end_inset
+
+-basis, the sum of the 
 \begin_inset Formula $\vec{s}$
 \end_inset
 
@@ -1523,7 +1526,7 @@ The sum of the
 \end_inset
 
  satisfies 
-\begin_inset Formula $\sum\deg_{\vec{s}}\mathbf{P}_{2}\le4sn+\xi=5\xi$
+\begin_inset Formula $\sum\deg_{\vec{s}}\mathbf{P}_{2}\le3sn+\xi=4\xi$
 \end_inset
 
  by 
@@ -1534,98 +1537,30 @@ reference "lem:boundOfSumOfShiftedDegreesOfOrderBasis"
 \end_inset
 
 .
- This bound is higher than the bound 
-\begin_inset Formula $\xi$
-\end_inset
-
- required by 
+ Hence 
 \begin_inset CommandInset ref
 LatexCommand formatted
 reference "lem:multiplyUnbalancedMatrices"
 
 \end_inset
 
-.
- We can easily extend 
-\begin_inset CommandInset ref
-LatexCommand formatted
-reference "lem:multiplyUnbalancedMatrices"
+ applies.
+\begin_inset Note Note
+status collapsed
 
-\end_inset
-
- to handle a bound of 
-\begin_inset Formula $O(\xi)$
-\end_inset
-
-.
- A simpler alternative is to do the multiplication using 
-\begin_inset Formula $\mathbf{F}'=\left[\mathbf{F},\mathbf{0}\right]$
-\end_inset
-
-, 
-\begin_inset Formula $\mathbf{P}'_{2}=\left[\mathbf{P}_{2}^{T},\mathbf{0}\right]^{T},$
-\end_inset
-
- and a new shift 
-\begin_inset Formula $\vec{s}'=\left[\vec{s},4\xi\right]$
-\end_inset
-
-, that is, a zero column is added to 
-\begin_inset Formula $\mathbf{F}$
-\end_inset
-
-, a zero row added to 
-\begin_inset Formula $\mathbf{P}_{2}$
-\end_inset
-
-, and a new entry 
-\begin_inset Formula $4\xi$
-\end_inset
-
- is added to 
-\begin_inset Formula $\vec{s}$
-\end_inset
-
-.
- Now 
-\begin_inset CommandInset ref
-LatexCommand formatted
-reference "lem:multiplyUnbalancedMatrices"
-
-\end_inset
-
- applies, since 
-\begin_inset Formula $\vec{s}'$
-\end_inset
-
- still bounds the column degrees of 
-\begin_inset Formula $\mathbf{F}'$
-\end_inset
-
-, and the 
-\begin_inset Formula $\vec{s}'$
-\end_inset
-
--column degrees of 
-\begin_inset Formula $\mathbf{P}'_{2}$
-\end_inset
-
- satisfies 
-\begin_inset Formula $\sum\deg_{\vec{s}}\mathbf{P}'_{2}\le\sum\vec{s}'=5\xi$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Remark
+\begin_layout Plain Layout
 We know the lower degree terms of 
 \begin_inset Formula $\mathbf{F}\mathbf{P}_{2}$
 \end_inset
 
  are 0.
- So a better way to multiply them is to reverse their coefficients and just
- multiply the lower degree terms.
- But it does not change the complexity so we omit its discussion for simplicity.
+ So a possibly better way to multiply them is to reverse their coefficients
+ and just multiply the lower degree terms.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1916,7 +1851,7 @@ Let
 \end_inset
 
  be a 
-\begin_inset Formula $\left(\mathbf{F},4\xi,\vec{s}\right)$
+\begin_inset Formula $\left(\mathbf{F},3s,\vec{s}\right)$
 \end_inset
 
 -basis with 
@@ -1927,7 +1862,7 @@ Let
 \begin_inset Formula $\vec{b}$
 \end_inset
 
- with 
+ and 
 \begin_inset Formula $\mathbf{P}_{1}$
 \end_inset
 
@@ -1958,7 +1893,7 @@ Let
 \end_inset
 
  is at least 
-\begin_inset Formula $4\xi$
+\begin_inset Formula $3s$
 \end_inset
 
  and is large enough for 
@@ -2062,7 +1997,7 @@ reference "lem:continueComputingNullspaceBasisByColumns"
 .
  We still need to show it can be done efficiently.
  Before discussing the computation of a 
-\begin_inset Formula $\vec{b}$
+\begin_inset Formula $\vec{b}'$
 \end_inset
 
 -minimal nullspace basis 
@@ -2103,7 +2038,7 @@ The multiplication of
 \end_inset
 
  can be done with a cost of 
-\begin_inset Formula $O^{\sim}(n^{\omega-1}\xi)$
+\begin_inset Formula $O^{\sim}(m^{\omega-1}\xi)$
 \end_inset
 
 .
@@ -2119,7 +2054,7 @@ Note that the column degrees of
 \end_inset
 
 -column degrees 
-\begin_inset Formula $\vec{b}$
+\begin_inset Formula $\vec{b}'$
 \end_inset
 
  of 
@@ -2147,7 +2082,7 @@ reference "lem:boundOnDegreesOfFA"
 \end_inset
 
 -column degrees 
-\begin_inset Formula $\vec{b}$
+\begin_inset Formula $\vec{b}'$
 \end_inset
 
  of 
@@ -2163,7 +2098,7 @@ reference "lem:boundOfSumOfShiftedDegreesOfNullspaceBasis"
 \end_inset
 
 , the sum of the 
-\begin_inset Formula $\vec{b}$
+\begin_inset Formula $\vec{b}'$
 \end_inset
 
 -column degrees of 
@@ -2175,13 +2110,13 @@ reference "lem:boundOfSumOfShiftedDegreesOfNullspaceBasis"
 \end_inset
 
 , which is bounded by 
-\begin_inset Formula $\sum\vec{b}\le5\xi$
+\begin_inset Formula $\sum\vec{b}'\le4\xi$
 \end_inset
 
  from 
 \begin_inset CommandInset ref
 LatexCommand formatted
-reference "lem:boundOfSumOfShiftedDegreesOfNullspaceBasis"
+reference "cor:multiplyingFP2"
 
 \end_inset
 
@@ -2202,7 +2137,7 @@ Reducing the degrees
 
 \begin_layout Standard
 Our next task is computing a 
-\begin_inset Formula $\vec{b}$
+\begin_inset Formula $\vec{b}'$
 \end_inset
 
 -minimal nullspace basis of the residual 
@@ -2220,7 +2155,7 @@ Our next task is computing a
 
 .
  Hence we can use 
-\begin_inset Formula $\mathbf{G}=\mathbf{F}\mathbf{P}_{2}/x^{4s}$
+\begin_inset Formula $\mathbf{G}=\mathbf{F}\mathbf{P}_{2}/x^{3s}$
 \end_inset
 
  instead to compute the remaining basis elements.
@@ -2406,7 +2341,13 @@ reference "lem:boundOnShiftedDegrees"
 \end_layout
 
 \begin_layout Subsection
-Reducing the row dimension via recursive nullspace basis computation
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:continueComputingNullspaceBasisByRows"
+
+\end_inset
+
+Reducing the row dimension 
 \end_layout
 
 \begin_layout Standard
@@ -2415,7 +2356,7 @@ At this point, the problem is reduced to computing a
 \end_inset
 
 -minimal nullspace basis of 
-\begin_inset Formula $\mathbf{G}=\mathbf{F}\mathbf{P}_{2}/x^{4s}$
+\begin_inset Formula $\mathbf{G}=\mathbf{F}\mathbf{P}_{2}/x^{3s}$
 \end_inset
 
 , which still has row dimension 
@@ -2423,7 +2364,7 @@ At this point, the problem is reduced to computing a
 \end_inset
 
 , but column dimension bounded by 
-\begin_inset Formula $3n/5$
+\begin_inset Formula $3m/2$
 \end_inset
 
  and column degrees bounded by 
@@ -2457,8 +2398,8 @@ Let
 \begin_inset Formula $\mathbf{G}_{1}$
 \end_inset
 
-having 
-\begin_inset Formula $\left\lfloor n/5\right\rfloor $
+ having 
+\begin_inset Formula $\left\lfloor m/2\right\rfloor $
 \end_inset
 
  rows and 
@@ -2466,7 +2407,7 @@ having
 \end_inset
 
  having 
-\begin_inset Formula $\left\lceil 2n/15\right\rceil $
+\begin_inset Formula $\left\lceil m/2\right\rceil $
 \end_inset
 
  rows.
@@ -2904,7 +2845,7 @@ The multiplication of
 \end_inset
 
  can be done with a cost of 
-\begin_inset Formula $O^{\sim}(n^{\omega-1}\xi)$
+\begin_inset Formula $O^{\sim}(m^{\omega-1}\xi)$
 \end_inset
 
 .
@@ -2936,7 +2877,7 @@ The multiplication of
 \end_inset
 
  can be done with a cost of 
-\begin_inset Formula $O^{\sim}(n^{\omega-1}\xi)$
+\begin_inset Formula $O^{\sim}(m^{\omega-1}\xi)$
 \end_inset
 
 .
@@ -2994,6 +2935,10 @@ reference "lem:boundOfSumOfShiftedDegreesOfNullspaceBasis"
 .
 \end_layout
 
+\begin_layout Subsection
+Recursive computation
+\end_layout
+
 \begin_layout Standard
 The computation of 
 \begin_inset Formula $\mathbf{N}_{1}$
@@ -3013,7 +2958,7 @@ The computation of
 \end_inset
 
  is bounded by 
-\begin_inset Formula $\left\lfloor n/5\right\rfloor \times\left(3n/5\right)$
+\begin_inset Formula $\left\lfloor m/2\right\rfloor \times\left(3m/2\right)$
 \end_inset
 
 .
@@ -3025,8 +2970,8 @@ The computation of
 \begin_inset Formula $\mathbf{G}_{2}\mathbf{N}_{1}$
 \end_inset
 
- is bounded by
-\begin_inset Formula $\left\lceil 2n/15\right\rceil \times\left(2n/5\right)$
+ is bounded by 
+\begin_inset Formula $\left\lceil m/2\right\rceil \times m$
 \end_inset
 
 .
@@ -3043,6 +2988,24 @@ The computation of
 \end_inset
 
  still.
+ Hence, the same computation process can be repeated on these two smaller
+ problems.
+ This gives as a recursive algorithm, shown in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "alg:minimalNullspaceBasis"
+
+\end_inset
+
+.
+ 
+\begin_inset CommandInset include
+LatexCommand include
+filename "algorithmNullspaceBasis.lyx"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -3050,9 +3013,110 @@ Overall cost
 \end_layout
 
 \begin_layout Standard
-The problem is now reduced to the computation to two smaller sub-problems
- of lower dimension, after intermediate computations that cost 
-\begin_inset Formula $O^{\sim}(n^{\omega-1}\xi)$
+In this section, we analyze the cost of the algorithm.
+ First we consider the case where the column dimension 
+\begin_inset Formula $n$
+\end_inset
+
+ is not much bigger than the row dimension 
+\begin_inset Formula $m$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Lemma
+\begin_inset CommandInset label
+LatexCommand label
+name "lem:costLowColDimension"
+
+\end_inset
+
+If 
+\begin_inset Formula $n\in O\left(m\right)$
+\end_inset
+
+, then 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "alg:minimalNullspaceBasis"
+
+\end_inset
+
+ uses 
+\begin_inset Formula $O^{\sim}\left(m^{\omega-1}\xi\right)=O^{\sim}\left(m^{\omega-1}\rho\right)$
+\end_inset
+
+ field operations to compute a 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-minimal nullspace basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+We may assume 
+\begin_inset Formula $m$
+\end_inset
+
+ is a power of 2, which can be achieved by appending zero rows to 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $\rho\in\Theta\left(\xi\right)$
+\end_inset
+
+ when 
+\begin_inset Formula $n\in O\left(m\right)$
+\end_inset
+
+.
+ Then 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "line:orderBasis"
+
+\end_inset
+
+ cost 
+\begin_inset Formula $O^{\sim}\left(n^{\omega}s\right)=O^{\sim}\left(m^{\omega-1}\rho\right)$
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "line:multiplyFP2"
+
+\end_inset
+
+ cost 
+\begin_inset Formula $O^{\sim}\left(nm^{\omega-2}\xi\right)=O^{\sim}\left(m^{\omega-1}\xi\right)$
+\end_inset
+
+.
+ The remaining operations including multiplications on 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "line:multiplyG2N1"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "line:multiplyP2N1N2"
+
+\end_inset
+
+ cost 
+\begin_inset Formula $O^{\sim}\left(m^{\omega-1}\xi\right)$
 \end_inset
 
 .
@@ -3064,7 +3128,7 @@ The problem is now reduced to the computation to two smaller sub-problems
  relation 
 \begin_inset Formula 
 \[
-g(m,\xi)\in O^{\sim}(m^{\omega-1}\xi)+g(\left\lfloor m/5\right\rfloor ,\xi)+g\left\lceil (2n/15\right\rceil ,\xi),
+g(m,\xi)\in O^{\sim}(m^{\omega-1}\xi)+g(m/2,\xi)+g(m/2,\xi),
 \]
 
 \end_inset
@@ -3074,821 +3138,344 @@ g(m,\xi)\in O^{\sim}(m^{\omega-1}\xi)+g(\left\lfloor m/5\right\rfloor ,\xi)+g\le
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Lemma
-If 
-\begin_inset Formula $g(m,\xi)\in O^{\sim}(m^{\omega-1}\xi)+g(\left\lfloor m/5\right\rfloor ,\xi)+g\left\lceil (2n/15\right\rceil ,\xi),$
+ Note that 
+\begin_inset Formula $O^{\sim}\left(m^{\omega-1}\xi\right)=O^{\sim}\left(m^{\omega-1}\rho\right)$
 \end_inset
 
- then 
-\begin_inset Formula $g(m,\xi)\in O^{\sim}(m^{\omega-1}\xi)$
+ since 
+\begin_inset Formula $\rho\in\Theta\left(\xi\right)$
+\end_inset
+
+ when 
+\begin_inset Formula $n\in O\left(m\right)$
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Proof
-The number of levels of recursion is at most 
-\begin_inset Formula $\log_{5/3}m$
-\end_inset
-
-, with a cost of 
-\begin_inset Formula $O^{\sim}(m^{\omega-1}\xi)$
-\end_inset
-
- on each level.
 \end_layout
 
 \begin_layout Standard
-In the case 
-\begin_inset Formula $m\le n\le3m$
+We now consider the general case where the column dimension 
+\begin_inset Formula $n$
 \end_inset
 
- we are considering, the cost 
-\begin_inset Formula $O^{\sim}(m^{\omega-1}\xi)=O^{\sim}(n^{\omega-1}\xi)$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Subsection
-Extensions
-\end_layout
-
-\begin_layout Standard
-We now have an efficient way to compute a 
-\begin_inset Formula $\vec{s}$
-\end_inset
-
--minimal nullspace basis for input matrix with dimension 
-\begin_inset Formula $n\le3m$
+ can be much bigger than the row dimension 
+\begin_inset Formula $m$
 \end_inset
 
 .
- If 
-\begin_inset Formula $n>3m$
-\end_inset
-
-, we can do a order basis computation to compute a partial nullspace basis
- as in 
-\begin_inset CommandInset ref
-LatexCommand formatted
-reference "sub:continueComputingNullspaceBasisByColumns"
-
-\end_inset
-
- that reduces the column dimension to no more than 
-\begin_inset Formula $3m.$
-\end_inset
-
- 
 \end_layout
 
 \begin_layout Lemma
 \begin_inset CommandInset label
 LatexCommand label
-name "lem:dimensionOfPartialNullspaceBasisBasedOnOrder2"
+name "lem:costGeneral"
 
 \end_inset
 
-Let 
-\begin_inset Formula $\rho=\sum_{i=n-m+1}^{n}s_{i}$
+
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "alg:minimalNullspaceBasis"
+
 \end_inset
 
- be the sum of the highest 
-\begin_inset Formula $m$
+ cost 
+\begin_inset Formula $O^{\sim}\left(n^{\omega}s\right)$
 \end_inset
 
- entries of 
-\begin_inset Formula $\vec{s}=\left[s_{1},\dots,s_{n}\right]$
-\end_inset
-
-.
- Let 
-\begin_inset Formula $\sigma=3\rho/2m$
-\end_inset
-
-.
- Let 
-\begin_inset Formula $\mathbf{P}=[\mathbf{P}_{1},\mathbf{P}_{2}]$
-\end_inset
-
- be a 
-\begin_inset Formula $(\mathbf{F},\sigma,\vec{s})$
-\end_inset
-
--basis with 
-\begin_inset Formula $\mathbf{P}_{1}$
-\end_inset
-
- containing all columns 
-\begin_inset Formula $\mathbf{n}$
-\end_inset
-
- of 
-\begin_inset Formula $\mathbf{P}$
-\end_inset
-
- satisfying 
-\begin_inset Formula $\mathbf{F}\mathbf{n}=0$
-\end_inset
-
-..
- Then the column dimension 
-\begin_inset Formula $\kappa$
-\end_inset
-
- of 
-\begin_inset Formula $\mathbf{P}_{2}$
-\end_inset
-
- is less than 
-\begin_inset Formula $3m.$
-\end_inset
-
-
+ field operations in general.
 \end_layout
 
 \begin_layout Proof
-Any column 
-\begin_inset Formula $\mathbf{p}$
-\end_inset
-
- of 
-\begin_inset Formula $\mathbf{P}_{2}$
-\end_inset
-
- must have 
-\begin_inset Formula $\vec{s}$
-\end_inset
-
--column degree at least 
-\begin_inset Formula $\sigma$
-\end_inset
-
-, so their sum must satisfy 
-\begin_inset Formula $\sum\deg_{\vec{s}}\mathbf{P}_{2}\ge\kappa\sigma$
-\end_inset
-
-.
- 
-\begin_inset Note Comment
-status collapsed
-
-\begin_layout Plain Layout
-\begin_inset Formula $\sum_{i=n-k+1}^{n}s_{i}$
-\end_inset
-
- must be at least 
-\begin_inset Formula $k\sigma$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
- Recall from 
+The order basis computation on 
 \begin_inset CommandInset ref
 LatexCommand formatted
-reference "lem:boundOfSumOfShiftedDegreesOfOrderBasis"
+reference "line:orderBasis"
 
 \end_inset
 
- that the sum of 
-\begin_inset Formula $\vec{s}$
+ cost 
+\begin_inset Formula $O^{\sim}\left(n^{\omega}s\right)$
 \end_inset
 
--column degrees of the columns of 
-\begin_inset Formula $\mathbf{P}$
+ in general, which dominates the cost of other operations.
+ The problem is then reduced to have column dimension 
+\begin_inset Formula $O\left(m\right)$
 \end_inset
 
- 
-\begin_inset Note Comment
-status collapsed
-
-\begin_layout Plain Layout
-is at most 
-\end_layout
-
-\end_inset
-
- satisfies 
-\begin_inset Formula $\sum\deg_{\vec{s}}\mathbf{P}\le\sum\vec{s}+m\sigma$
-\end_inset
-
-, so the sum of 
-\begin_inset Formula $\vec{s}$
-\end_inset
-
--column degrees of the columns of 
-\begin_inset Formula $\mathbf{P}_{1}$
-\end_inset
-
- must 
-\begin_inset Note Comment
-status collapsed
-
-\begin_layout Plain Layout
-be at most
-\end_layout
-
-\end_inset
-
- satisfy 
-\begin_inset Formula $\sum\deg_{\vec{s}}\mathbf{P}_{1}\le\sum\vec{s}+m\sigma-\kappa\sigma$
-\end_inset
-
-.
- On the other hand, the lowest possible value of 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\begin_inset Formula $\sum\deg_{\vec{s}}\mathbf{P}_{1}$
-\end_inset
-
- is 
-\begin_inset Formula $\sum_{i=1}^{n-\kappa}s_{i}$
-\end_inset
-
- (which 
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-occurs when 
-\begin_inset Formula $\mathbf{P}_{1}=\left[\mathbf{I},0\right]^{T}$
-\end_inset
-
-)
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
- based on the assumption that the entries of 
-\begin_inset Formula $\vec{s}=\left[s_{1},\dots,s_{n}\right]$
-\end_inset
-
- are arranged in increasing order.
- It follows that 
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-
-\begin_inset Formula $\sum\vec{s}+m\sigma-\kappa\sigma\ge\sum_{i=1}^{n-\kappa}s_{i}$
-\end_inset
-
-, or 
-\begin_inset Formula $m\sigma\ge\kappa\sigma-\left(\sum\vec{s}-\sum_{i=1}^{n-\kappa}s_{i}\right)$
-\end_inset
-
- after rearrangement.
- Combining this with the fact that 
-\begin_inset Formula $\sum\vec{s}-\sum_{i=1}^{n-\kappa}s_{i}\le\kappa\rho/m$
-\end_inset
-
-, we get 
-\begin_inset Formula $m\sigma\ge\kappa\sigma-\kappa\rho/m$
-\end_inset
-
-, which gives 
-\begin_inset Formula $\kappa\le m\sigma/(\sigma-\rho/m)$
-\end_inset
-
-.
- If we set 
-\begin_inset Formula $\sigma=3\rho/2m$
-\end_inset
-
-, we get 
-\begin_inset Formula $\kappa\le3m$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Remark
-Note that the proof of 
+, which is handled by 
 \begin_inset CommandInset ref
 LatexCommand formatted
-reference "lem:dimensionOfPartialNullspaceBasisBasedOnOrder2"
+reference "lem:costLowColDimension"
 
-\end_inset
-
- gives an alternative for 
-\begin_inset CommandInset ref
-LatexCommand formatted
-reference "lem:dimensionOfPartialNullspaceBasisBasedOnOrder"
-
-\end_inset
-
-.
- If we set 
-\begin_inset Formula $\sigma=9\rho/4m$
-\end_inset
-
- instead of 
-\begin_inset Formula $3\xi/2n$
-\end_inset
-
- at the end of the proof of 
-\begin_inset CommandInset ref
-LatexCommand formatted
-reference "lem:dimensionOfPartialNullspaceBasisBasedOnOrder2"
-
-\end_inset
-
-, we also get 
-\begin_inset Formula $\kappa\le9m/5=3n/5$
-\end_inset
-
-, so the number of nullspace basis elements is at least 
-\begin_inset Formula $2n/5$
-\end_inset
-
- as in 
-\begin_inset CommandInset ref
-LatexCommand formatted
-reference "lem:dimensionOfPartialNullspaceBasisBasedOnOrder"
-
-\end_inset
-
-.
- Also note that either 
-\begin_inset Formula $9\rho/4m$
-\end_inset
-
- or 
-\begin_inset Formula $15\xi/3n$
-\end_inset
-
- may be the smaller one, depending on the entries of 
-\begin_inset Formula $\vec{s}$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Proof
-we also have 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\begin_inset Formula $\sum\deg_{\vec{s}}\mathbf{P}_{1}\ge\sum_{i=1}^{n-k}s_{i}$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Proof
-Since the sum of the 
-\begin_inset Formula $\vec{s}$
-\end_inset
-
--column degrees of the columns of 
-\begin_inset Formula $\mathbf{P}_{1}$
-\end_inset
-
- is at least 
-\begin_inset Formula $\sum_{i=1}^{n-k}s_{i}$
-\end_inset
-
- (which occurs when 
-\begin_inset Formula $\mathbf{P}_{1}=\left[\mathbf{I},0\right]^{T}$
-\end_inset
-
-), we have 
-\begin_inset Formula $\sum\vec{s}+m\sigma-k\sigma>\sum_{i=1}^{n-k}s_{i}$
-\end_inset
-
-, which gives 
-\begin_inset Formula $m\sigma>k\sigma-\left(\sum\vec{s}-\sum_{i=1}^{n-k}s_{i}\right)$
-\end_inset
-
-.
- Since 
-\begin_inset Formula $\sum\vec{s}-\sum_{i=1}^{n-k}s_{i}\le k\xi/m$
-\end_inset
-
-, we get 
-\begin_inset Formula $m\sigma>k\sigma-k\xi/m$
-\end_inset
-
-, which gives 
-\begin_inset Formula $k<m\sigma/(\sigma-\xi/m)$
-\end_inset
-
-.
- If we set 
-\begin_inset Formula $\sigma=3\xi/2m$
-\end_inset
-
-, we get 
-\begin_inset Formula $k<3m$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-Ideally, we would like to achieve a cost of 
-\begin_inset Formula $O^{\sim}\left(n^{\omega-1}\xi\right)$
-\end_inset
-
-, However, we currently do not know how to do this with a cost of 
-\begin_inset Formula $O^{\sim}(n^{\omega-2}\xi)$
-\end_inset
-
-, mainly because we still do not know how to compute order bases efficiently
- for general unbalanced shifts.
- The existing method has a cost of t 
-\begin_inset Formula $O^{\sim}(n^{\omega-1}\xi)$
-\end_inset
-
-, which could be higher than 
-\begin_inset Formula $O^{\sim}(m^{\omega-1}\xi)$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-In the important case of uniform shift 
-\begin_inset Formula $\vec{s}=\left[s,\dots,s\right]$
-\end_inset
-
- that is set to the maximum degree of 
-\begin_inset Formula $\mathbf{F}$
-\end_inset
-
-, we do know 
-\end_layout
-
-\begin_layout Standard
-In this case, we can simply take 
-\begin_inset Formula $\xi$
-\end_inset
-
- as the sum of the column degrees of the 
-\begin_inset Formula $3m$
-\end_inset
-
- columns with the largest column degrees.
-\end_layout
-
-\begin_layout Standard
-In summary, this gives a way to compute a 
-\begin_inset Formula $\vec{s}$
-\end_inset
-
--minimal nullspace basis of 
-\begin_inset Formula $\mathbf{F}$
 \end_inset
 
  with a cost of 
-\begin_inset Formula $O^{\sim}(n^{\omega-1}\xi)$
+\begin_inset Formula $O^{\sim}\left(m^{\omega-1}\xi\right)\in O^{\sim}\left(n^{\omega}s\right)$
 \end_inset
 
-, where 
-\begin_inset Formula $n$
+.
+\end_layout
+
+\begin_layout Standard
+We now consider the important special case where the shift 
+\begin_inset Formula $\vec{s}=\left[s,\dots,s\right]$
 \end_inset
 
- is the column dimension of 
+ is uniform.
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "alg:minimalNullspaceBasis"
+
+\end_inset
+
+ has a lower cost in this case.
+\end_layout
+
+\begin_layout Standard
+First notice that 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "line:orderBasis"
+
+\end_inset
+
+ cost 
+\begin_inset Formula $O^{\sim}\left(n^{\omega}\left\lceil ms/n\right\rceil \right)$
+\end_inset
+
+ using the algorithm from 
+\series bold
+!!!!!!!!!!!!!!!!!
+\series default
+.
+ In addition, the multiplication at 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "line:multiplyFP2"
+
+\end_inset
+
+ cost 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $O^{\sim}\left(nm^{\omega-1}s\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Lemma
+If 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ has degree 
+\begin_inset Formula $s$
+\end_inset
+
+, then multiplication of 
 \begin_inset Formula $\mathbf{F}$
 \end_inset
 
  and 
-\begin_inset Formula $\xi$
+\begin_inset Formula $\mathbf{P}_{2}$
 \end_inset
 
- is the sum of t he column degrees of the 
-\begin_inset Formula $3m$
+ at 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "line:multiplyFP2"
+
 \end_inset
 
- columns with the largest column degrees.
- Of course, a small simplification for the computational complexity is that
- we can just take the sum 
-\begin_inset Formula $\lambda$
-\end_inset
+ cost 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
 
- of just 
-\begin_inset Formula $m$
-\end_inset
-
- instead of 
-\begin_inset Formula $3m$
-\end_inset
-
- columns with the largest column degrees, since 
-\begin_inset Formula $O^{\sim}(n^{\omega-1}\xi)=O^{\sim}(n^{\omega-1}\lambda)$
+\begin_inset Formula $O^{\sim}\left(nm^{\omega-1}s\right)$
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Subsection
-Some proofs
-\end_layout
-
-\begin_layout Standard
-Now we give the proofs of some of the claims:
-\end_layout
-
-\begin_layout Standard
-present our algorithm.
- 
-\begin_inset CommandInset ref
-LatexCommand formatted
-reference "alg:mnb"
-
-\end_inset
-
- uses a subroutine 
-\begin_inset Formula $\mab$
-\end_inset
-
-, the algorithm from 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "za2009"
-
-\end_inset
-
-, for computing order bases with balanced input.
- Specifically, 
-\begin_inset Formula $\left[\mathbf{Q},\vec{a}\right]=\mab(\mathbf{G},\sigma,\vec{b})$
-\end_inset
-
- computes a 
-\begin_inset Formula $(\mathbf{G},\sigma,\vec{b})$
-\end_inset
-
--basis and also returns its 
-\begin_inset Formula $\vec{b}$
-\end_inset
-
--column degrees 
-\begin_inset Formula $\vec{a}$
-\end_inset
-
-.
- Note that if 
-\begin_inset Formula $m\in\Theta(n)$
-\end_inset
-
-, then the algorithm from 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "Giorgi2003"
-
-\end_inset
-
- can also be used.
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset ref
-LatexCommand formatted
-reference "alg:mnb"
-
-\end_inset
-
- takes a input matrix 
-\begin_inset Formula $\mathbf{F}\in\mathbb{K}\left[x\right]^{m\times n}$
-\end_inset
-
- and a shift 
-\begin_inset Formula $\vec{s}\in\mathbb{Z}^{n}$
-\end_inset
-
- with entries that bound the column degrees of 
-\begin_inset Formula $\mathbf{F}$
-\end_inset
-
-, and output a 
-\begin_inset Formula $\vec{s}$
-\end_inset
-
--minimal nullspace basis and its 
-\begin_inset Formula $\vec{s}$
-\end_inset
-
--column degrees.
-\end_layout
-
-\begin_layout Standard
-proceeds as follows.
- In the first iteration, which is the base case of the recursive approach,
- we set the degree parameter 
-\begin_inset Formula $\delta^{\left(1\right)}$
-\end_inset
-
- to be twice the average degree 
-\begin_inset Formula $d$
-\end_inset
-
- and apply Storjohann's transformation to produce a new input matrix 
-\begin_inset Formula $\bar{\mathbf{F}}^{\left(1\right)}$
-\end_inset
-
-, which has 
-\begin_inset Formula $l^{\left(1\right)}$
-\end_inset
-
- block rows.
- Then a 
-\begin_inset Formula $(\bar{\mathbf{F}}^{\left(1\right)},2\delta^{\left(1\right)},\vec{s}^{\left(1\right)})$
-\end_inset
-
--basis 
-\begin_inset Formula $\bar{\mathbf{P}}^{\left(1\right)}$
-\end_inset
-
- is computed.
- Note this is in fact the first subproblem of computing a 
-\begin_inset Formula $(\bar{\mathbf{F}}^{\left(2\right)},2\delta^{\left(2\right)},\vec{s}^{\left(2\right)})$
-\end_inset
-
--basis, which is another Storjohann transformed problem and also the problem
- of the second iteration.
- At the second iteration, we work on a new Storjohann transformed problem
- with the degree doubled and the number of block rows 
-\begin_inset Formula $l^{\left(2\right)}=(l^{\left(1\right)}-1)/2$
-\end_inset
-
- reduced by over a half.
- The column dimension is reduced by using the result from the previous iteration.
- More specifically, we know that the basis 
-\begin_inset Formula $\bar{\mathbf{P}}^{\left(1\right)}$
-\end_inset
-
- already provides a 
-\begin_inset Formula $(\bar{\mathbf{F}}^{\left(2\right)},2\delta^{\left(2\right)},\vec{s}^{\left(2\right)})_{\delta^{\left(1\right)}-1}$
-\end_inset
-
--basis 
-\begin_inset Formula $\hat{\mathbf{P}}_{1}^{\left(1\right)}$
-\end_inset
-
-, which can be disregarded in the remaining computation.
- The remaining work in the second iteration is to compute a 
-\begin_inset Formula $(\bar{\mathbf{F}}^{\left(2\right)}\hat{\mathbf{P}}_{2}^{\left(1\right)},2\delta^{\left(2\right)},\vec{b}^{\left(1\right)})$
-\end_inset
-
--basis 
-\begin_inset Formula $\bar{\mathbf{Q}}^{\left(2\right)}$
-\end_inset
-
-, where 
-\begin_inset Formula $\vec{b}^{\left(1\right)}=\deg_{\vec{s}^{\left(1\right)}}\bar{\mathbf{P}}_{2}^{\left(1\right)}$
-\end_inset
-
-, and then to combine it with the result from the previous iteration to
- form a matrix 
-\begin_inset Formula $[\hat{\mathbf{P}}_{1}^{\left(1\right)},\hat{\mathbf{P}}_{2}^{\left(1\right)}\bar{\mathbf{Q}}^{\left(2\right)}]$
-\end_inset
-
- in order to extract a 
-\begin_inset Formula $(\bar{\mathbf{F}}^{\left(2\right)},2\delta^{\left(2\right)},\vec{s}^{\left(2\right)})$
-\end_inset
-
--basis 
-\begin_inset Formula $\bar{\mathbf{P}}^{\left(2\right)}$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-With a 
-\begin_inset Formula $(\bar{\mathbf{F}}^{\left(2\right)},2\delta^{\left(2\right)},\vec{s}^{\left(2\right)})$
-\end_inset
-
--basis computed, we can repeat the same process to use it for computing
- a 
-\begin_inset Formula $(\bar{\mathbf{F}}^{\left(3\right)},2\delta^{\left(3\right)},\vec{s}^{\left(3\right)})$
-\end_inset
-
--basis.
- Continue, using the computed 
-\begin_inset Formula $(\bar{\mathbf{F}}^{\left(i-1\right)},2\delta^{\left(i-1\right)},\vec{s}^{\left(i-1\right)})$
-\end_inset
-
--basis to compute a 
-\begin_inset Formula $(\bar{\mathbf{F}}^{\left(i\right)},2\delta^{\left(i\right)},\vec{s}^{\left(i\right)})$
-\end_inset
-
--basis, until all 
-\begin_inset Formula $n$
-\end_inset
-
- elements of a 
-\begin_inset Formula $\left(\mathbf{F},\sigma,\vec{s}\right)$
-\end_inset
-
--basis have been determined.
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset include
-LatexCommand input
-filename "algorithm1.lyx"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Comment
-status open
-
-\begin_layout Theorem
-Algorithm 
-\begin_inset CommandInset ref
-LatexCommand formatted
-reference "alg:mnb"
-
-\end_inset
-
- computes a 
-\begin_inset Formula $\left(\mathbf{F},\sigma,\vec{s}\right)$
-\end_inset
-
--basis correctly.
 \end_layout
 
 \begin_layout Proof
-This follows from 
 \begin_inset CommandInset ref
 LatexCommand formatted
-reference "lem:simplifySecondSubproblem"
+reference "lem:multiplyUnbalancedMatrices"
 
 \end_inset
 
-, 
-\begin_inset CommandInset ref
-LatexCommand formatted
-reference "lem:disregardComputedBasisElements"
-
+ and its proof still work.
+ The current situation is even simpler as we do not need to subdivide 
+\begin_inset Formula $\mathbf{F}$
 \end_inset
 
-, and 
-\begin_inset CommandInset ref
-LatexCommand formatted
-reference "lem:computationAtTopLevel"
+.
+ We just need to separate the columns of 
+\begin_inset Formula $\mathbf{P}_{2}$
+\end_inset
 
+ to 
+\begin_inset Formula $O\left(\log m\right)$
+\end_inset
+
+ groups with degree ranges 
+\begin_inset Formula $\left[0,\dots,2s\right],(2s,4s],\dots,(3ms/2,3ms]$
+\end_inset
+
+ , and multiply 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ with each group in the same way as before, with each of these 
+\begin_inset Formula $O\left(\log m\right)$
+\end_inset
+
+ multiplications cost 
+\begin_inset Formula $O^{\sim}\left(nm^{\omega-1}s\right)$
+\end_inset
+
+.
+ Note that the sum of the column degrees of 
+\begin_inset Formula $\mathbf{P}_{2}$
+\end_inset
+
+ is bounded by 
+\begin_inset Formula $3ms$
+\end_inset
+
+ since the sum of the column degree of a 
+\begin_inset Formula $\left(\mathbf{F},3s\right)$
+\end_inset
+
+-basis is increased from zero 
+\begin_inset Formula $3s$
+\end_inset
+
+ times, each time increase by at most 
+\begin_inset Formula $m$
 \end_inset
 
 .
  
 \end_layout
 
+\begin_layout Lemma
+If 
+\begin_inset Formula $\vec{s}=\left[s,\dots,s\right]$
 \end_inset
 
+ is uniform, then 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "alg:minimalNullspaceBasis"
+
+\end_inset
+
+ cost 
+\begin_inset Formula $O^{\sim}\left(n^{\omega}\left\lceil ms/n\right\rceil \right)$
+\end_inset
+
+.
  
+\end_layout
+
+\begin_layout Proof
+After the initial order basis computation, which cost 
+\begin_inset Formula $O^{\sim}\left(n^{\omega}\left\lceil ms/n\right\rceil \right),$
+\end_inset
+
+ and the multiplication of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{P}_{2}$
+\end_inset
+
+, which cost 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $O^{\sim}\left(nm^{\omega-1}s\right)$
+\end_inset
+
+, the column dimension is reduced to 
+\begin_inset Formula $O\left(m\right)$
+\end_inset
+
+, allowing 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:costLowColDimension"
+
+\end_inset
+
+ to apply.
+ Hence the remaining work costs 
+\begin_inset Formula $O^{\sim}\left(m^{\omega}s\right)$
+\end_inset
+
+.
+ The overall cost is therefore dominated by the cost 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $O^{\sim}\left(n^{\omega}\left\lceil ms/n\right\rceil \right)$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ of the initial order basis computation.
 \end_layout
 
 \end_body
