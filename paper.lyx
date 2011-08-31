@@ -8,7 +8,8 @@
 
 \renewcommand{\algorithmicrequire}{\textbf{Input:}}\renewcommand{\algorithmicensure}{\textbf{Output:}}\renewcommand{\algorithmicensure}{\textbf{if}}\renewcommand{\algorithmicensure}{\textbf{Uses:}}
 
-\def\diag{\mbox{diag}}\def\cdeg{\qopname\relax n{cdeg}}\keycomment{\{\{}{\}\}}\def\MM{\qopname\relax n{MM}}\def\M{\qopname\relax n{M}}\def\ord{\qopname\relax n{ord}}
+\def\diag{\mbox{diag}}\def\cdeg{\qopname\relax n{cdeg}}
+\def\MM{\qopname\relax n{MM}}\def\M{\qopname\relax n{M}}\def\ord{\qopname\relax n{ord}}
 
 \def\StorjohannTransform{\qopname\relax n{StorjohannTransform}}\def\TransformUnbalanced{\qopname\relax n{TransformUnbalanced}}\def\rowDimension{\qopname\relax n{rowDimension}}\def\columnDimension{\qopname\relax n{columnDimension}}\DeclareMathOperator{\re}{rem}\DeclareMathOperator{\coeff}{coeff}\DeclareMathOperator{\lcoeff}{lcoeff}\def\mab{\qopname\relax n{orderBasis}}\def\mmab{\qopname\relax n{FastBasis}}\def\umab{\qopname\relax n{UnbalancedFastBasis}}\newcommand{\bb}{\\}
 \def\mnb{\qopname\relax n{minNullspaceBasis}}
@@ -16,6 +17,9 @@
 \end_preamble
 \options amsthm,seceqn,secthm
 \use_default_options false
+\begin_modules
+algorithmics
+\end_modules
 \maintain_unincluded_children false
 \language english
 \language_package default
@@ -159,6 +163,7 @@ status collapsed
 
 \begin_layout Author Email
 
+
 \backslash
 {w2zhou,glabahn
 \backslash
@@ -167,7 +172,7 @@ status collapsed
 
 \begin_layout Abstract
 In this paper we present a deterministic algorithm for the computation of
- a shifted minimal nullspace basis of an 
+ a minimal nullspace basis of an 
 \begin_inset Formula $m\times n$
 \end_inset
 
@@ -180,13 +185,27 @@ In this paper we present a deterministic algorithm for the computation of
 \end_inset
 
 .
- For a given degree shift 
+ This algorithm computes a minimal nullspace basis of a degree 
+\begin_inset Formula $s$
+\end_inset
+
+ input matrix with a cost of 
+\begin_inset Formula $O^{\sim}\left(n^{\omega}\left\lceil ms/n\right\rceil \right)$
+\end_inset
+
+ field operations in 
+\begin_inset Formula $\mathbb{K}$
+\end_inset
+
+.
+ The same algorithm also works in the more general situation on computing
+ a shifted minimal nullspace basis, with a given degree shift 
 \begin_inset Formula $\vec{s}\in\mathbb{Z}^{n}$
 \end_inset
 
- with entries bound the corresponding column degrees of the input matrix,
- if 
-\begin_inset Formula $\xi$
+ whose entries bound the corresponding column degrees of the input matrix.
+ If 
+\begin_inset Formula $\rho$
 \end_inset
 
  is the sum of 
@@ -202,19 +221,10 @@ In this paper we present a deterministic algorithm for the computation of
 \end_inset
 
 -minimal right nullspace basis can be computed with a cost of 
-\begin_inset Formula $O^{\sim}(n^{\omega-1}\xi)$
+\begin_inset Formula $O^{\sim}(n^{\omega}\rho/m)$
 \end_inset
 
  field operations.
- As a special case, this gives a cost of 
-\begin_inset Formula $O^{\sim}(n^{\omega-1}md)$
-\end_inset
-
- for an input matrix of degree 
-\begin_inset Formula $d$
-\end_inset
-
- if we ignore the non-uniformness of the column degrees.
  
 \end_layout
 
@@ -239,10 +249,7 @@ filename "preliminaries.lyx"
 \end_layout
 
 \begin_layout Standard
-\begin_inset CommandInset include
-LatexCommand input
-filename "transform.lyx"
-
+\begin_inset Newpage newpage
 \end_inset
 
 
@@ -259,33 +266,10 @@ filename "computing.lyx"
 \end_layout
 
 \begin_layout Standard
-\begin_inset CommandInset include
-LatexCommand input
-filename "complexity.lyx"
-
+\begin_inset Newpage newpage
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset include
-LatexCommand input
-filename "generalCase.lyx"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset include
-LatexCommand input
-filename "conclusion.lyx"
-
-\end_inset
-
- 
 \end_layout
 
 \begin_layout Standard

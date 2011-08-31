@@ -82,7 +82,7 @@ In this section, we describe an algorithm for computing a shifted minimal
  The first process described in 
 \begin_inset CommandInset ref
 LatexCommand formatted
-reference "lem:continueComputingNullspaceBasisByColumns"
+reference "sub:continueComputingNullspaceBasisByColumns"
 
 \end_inset
 
@@ -575,6 +575,13 @@ First, we compute an
 \begin_inset Formula $O^{\sim}\left(n^{\omega}s\right)$
 \end_inset
 
+ using the algorithm from 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Giorgi2003"
+
+\end_inset
+
 .
  Note that if 
 \begin_inset Formula $\vec{s}$
@@ -586,7 +593,14 @@ First, we compute an
 
  using the algorithm from 
 \series bold
-!!!!!!!!!!!!!!!!!!!!!!!!
+
+\begin_inset CommandInset citation
+LatexCommand citet
+key "za2009"
+
+\end_inset
+
+
 \series default
 .
  We claim at most 
@@ -1584,9 +1598,23 @@ reference "lem:continueComputingOrderBasis"
 
 , a special case of Theorem 5.1 in 
 \series bold
-!!!!!!!!!!(Beckermann and Labahn, 1997)!!!!!!!!!!!!!, 
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "BL1997"
+
+\end_inset
+
+ 
 \series default
-also used in !!!!!!!!1jkhkkjh!!!!!!.
+also used in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "za2009"
+
+\end_inset
+
+.
  We include a proof here for completeness.
 \end_layout
 
@@ -2166,7 +2194,7 @@ Our next task is computing a
  is small enough to allow efficient computation of the remaining basis elements.
  
 \begin_inset CommandInset ref
-LatexCommand ref
+LatexCommand formatted
 reference "lem:boundOnShiftedDegrees"
 
 \end_inset
@@ -2185,7 +2213,7 @@ reference "lem:boundOnShiftedDegrees"
 
  by 
 \begin_inset CommandInset ref
-LatexCommand ref
+LatexCommand formatted
 reference "lem:boundOnDegreesOfFA"
 
 \end_inset
@@ -3246,9 +3274,12 @@ reference "line:orderBasis"
 \end_inset
 
  using the algorithm from 
-\series bold
-!!!!!!!!!!!!!!!!!
-\series default
+\begin_inset CommandInset citation
+LatexCommand citet
+key "za2009"
+
+\end_inset
+
 .
  In addition, the multiplication at 
 \begin_inset CommandInset ref

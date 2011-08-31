@@ -417,20 +417,7 @@ key "BL1997"
 \begin_inset Formula $x^{\vec{s}}\cdot\mathbf{P}$
 \end_inset
 
- is column reduced.
- Similarly, 
-\begin_inset Formula $\mathbf{P}$
-\end_inset
-
- is in 
-\begin_inset Formula $\vec{s}$
-\end_inset
-
--Popov form if 
-\begin_inset Formula $x^{\vec{s}}\cdot\mathbf{P}$
-\end_inset
-
- is in Popov form 
+ is column reduced
 \begin_inset CommandInset citation
 LatexCommand citep
 key "BLV:1999,BLV:jsc06"
@@ -544,7 +531,7 @@ A polynomial matrix
 \begin_inset Formula $\mathbf{P}$
 \end_inset
 
- is a nonsigular matrix of dimension 
+ is a nonsingular matrix of dimension 
 \begin_inset Formula $n$
 \end_inset
 
