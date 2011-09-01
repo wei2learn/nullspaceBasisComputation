@@ -6,7 +6,8 @@
 \begin_preamble
 \usepackage{yjsco}\journal{JournalofSymbolicComputation}
 
-\renewcommand{\algorithmicrequire}{\textbf{Input:}}\renewcommand{\algorithmicensure}{\textbf{Output:}}\renewcommand{\algorithmicensure}{\textbf{if}}\renewcommand{\algorithmicensure}{\textbf{Uses:}}
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}\renewcommand{\algorithmicensure}{\textbf{Output:}}
+%\renewcommand{\algorithmicensure}{\textbf{if}}\renewcommand{\algorithmicensure}{\textbf{Uses:}}
 
 \def\diag{\mbox{diag}}\def\cdeg{\qopname\relax n{cdeg}}
 \def\MM{\qopname\relax n{MM}}\def\M{\qopname\relax n{M}}\def\ord{\qopname\relax n{ord}}
@@ -162,7 +163,6 @@ status collapsed
 \end_layout
 
 \begin_layout Author Email
-
 
 \backslash
 {w2zhou,glabahn

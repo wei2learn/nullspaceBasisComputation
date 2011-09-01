@@ -5,6 +5,9 @@
 \textclass elsart
 \options amsthm,seceqn,secthm
 \use_default_options false
+\begin_modules
+algorithmics
+\end_modules
 \maintain_unincluded_children false
 \language english
 \language_package default
@@ -77,7 +80,7 @@ name "sec:Nullspace-Basis-Computation"
 
 \begin_layout Standard
 In this section, we describe an algorithm for computing a shifted minimal
- nullspace basis, and then analyze its correctness and cost.
+ nullspace basis, and then analyze its cost.
  The algorithm uses two computation process recursively.
  The first process described in 
 \begin_inset CommandInset ref
@@ -97,7 +100,7 @@ reference "sub:continueComputingNullspaceBasisByRows"
 \end_inset
 
  reduces the row dimension of the problem by computing a nullspace basis
- of a subset of rows of the input matrix.
+ of a submatrix formed by a subset of the rows of the input matrix.
  We require the shift 
 \begin_inset Formula $\vec{s}$
 \end_inset
@@ -183,7 +186,7 @@ In addition, it also provides a bound on the sum of the
 
 -minimal nullspace bases as shown in 
 \begin_inset CommandInset ref
-LatexCommand ref
+LatexCommand formatted
 reference "lem:boundOfSumOfShiftedDegreesOfNullspaceBasis"
 
 \end_inset
@@ -194,7 +197,7 @@ reference "lem:boundOfSumOfShiftedDegreesOfNullspaceBasis"
 
 -column degrees of order bases as shown in 
 \begin_inset CommandInset ref
-LatexCommand ref
+LatexCommand formatted
 reference "lem:boundOfSumOfShiftedDegreesOfOrderBasis"
 
 \end_inset
@@ -339,7 +342,7 @@ Let
 .
  By 
 \begin_inset CommandInset ref
-LatexCommand ref
+LatexCommand formatted
 reference "lem:boundOfSumOfShiftedDegreesOfOrderBasis"
 
 \end_inset
@@ -844,6 +847,10 @@ occurs when
 
 , which gives 
 \begin_inset Formula $\kappa\le m\sigma/(\sigma-s)$
+\end_inset
+
+ for 
+\begin_inset Formula $\sigma>s$
 \end_inset
 
 .
@@ -1578,7 +1585,7 @@ We know the lower degree terms of
 \end_layout
 
 \begin_layout Standard
-We show that that the residual 
+It remains to show that the residual 
 \begin_inset Formula $\mathbf{F}\mathbf{P}_{2}$
 \end_inset
 
@@ -3041,7 +3048,7 @@ Overall cost
 \end_layout
 
 \begin_layout Standard
-In this section, we analyze the cost of the algorithm.
+In this subsection, we analyze the cost of the algorithm.
  First we consider the case where the column dimension 
 \begin_inset Formula $n$
 \end_inset
@@ -3113,7 +3120,7 @@ reference "line:orderBasis"
 
 \end_inset
 
- cost 
+ costs 
 \begin_inset Formula $O^{\sim}\left(n^{\omega}s\right)=O^{\sim}\left(m^{\omega-1}\rho\right)$
 \end_inset
 
@@ -3143,7 +3150,7 @@ reference "line:multiplyP2N1N2"
 
 \end_inset
 
- cost 
+ costs 
 \begin_inset Formula $O^{\sim}\left(m^{\omega-1}\xi\right)$
 \end_inset
 
@@ -3308,6 +3315,12 @@ reference "line:multiplyFP2"
 \end_layout
 
 \begin_layout Lemma
+\begin_inset CommandInset label
+LatexCommand label
+name "lem:multiplyFP2WithUniformShift"
+
+\end_inset
+
 If 
 \begin_inset Formula $\mathbf{F}$
 \end_inset
@@ -3316,7 +3329,15 @@ If
 \begin_inset Formula $s$
 \end_inset
 
-, then multiplication of 
+, then the sum of the column degrees of 
+\begin_inset Formula $\mathbf{P}_{2}$
+\end_inset
+
+ is bounded by 
+\begin_inset Formula $3ms$
+\end_inset
+
+, and the multiplication of 
 \begin_inset Formula $\mathbf{F}$
 \end_inset
 
@@ -3351,6 +3372,37 @@ reference "line:multiplyFP2"
 \end_layout
 
 \begin_layout Proof
+Too see that the sum of the column degrees of 
+\begin_inset Formula $\mathbf{P}_{2}$
+\end_inset
+
+ is bounded by 
+\begin_inset Formula $3ms$
+\end_inset
+
+, notice that during the order basis computation, the sum of the column
+ degree of a 
+\begin_inset Formula $\left(\mathbf{F},3s\right)$
+\end_inset
+
+-basis is increased from zero 
+\begin_inset Formula $3s$
+\end_inset
+
+ times, each time increase by at most 
+\begin_inset Formula $m$
+\end_inset
+
+.
+ For multiplying 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{P}_{2}$
+\end_inset
+
+, 
 \begin_inset CommandInset ref
 LatexCommand formatted
 reference "lem:multiplyUnbalancedMatrices"
@@ -3388,31 +3440,16 @@ reference "lem:multiplyUnbalancedMatrices"
 \end_inset
 
 .
- Note that the sum of the column degrees of 
-\begin_inset Formula $\mathbf{P}_{2}$
-\end_inset
-
- is bounded by 
-\begin_inset Formula $3ms$
-\end_inset
-
- since the sum of the column degree of a 
-\begin_inset Formula $\left(\mathbf{F},3s\right)$
-\end_inset
-
--basis is increased from zero 
-\begin_inset Formula $3s$
-\end_inset
-
- times, each time increase by at most 
-\begin_inset Formula $m$
-\end_inset
-
-.
  
 \end_layout
 
 \begin_layout Lemma
+\begin_inset CommandInset label
+LatexCommand label
+name "lem:costOfMinimalNullspaceBasisWithUniformShift"
+
+\end_inset
+
 If 
 \begin_inset Formula $\vec{s}=\left[s,\dots,s\right]$
 \end_inset
@@ -3424,7 +3461,7 @@ reference "alg:minimalNullspaceBasis"
 
 \end_inset
 
- cost 
+ costs 
 \begin_inset Formula $O^{\sim}\left(n^{\omega}\left\lceil ms/n\right\rceil \right)$
 \end_inset
 
@@ -3433,7 +3470,7 @@ reference "alg:minimalNullspaceBasis"
 \end_layout
 
 \begin_layout Proof
-After the initial order basis computation, which cost 
+After the initial order basis computation, which costs 
 \begin_inset Formula $O^{\sim}\left(n^{\omega}\left\lceil ms/n\right\rceil \right),$
 \end_inset
 
@@ -3445,7 +3482,7 @@ After the initial order basis computation, which cost
 \begin_inset Formula $\mathbf{P}_{2}$
 \end_inset
 
-, which cost 
+, which costs 
 \family roman
 \series medium
 \shape up
@@ -3459,6 +3496,13 @@ After the initial order basis computation, which cost
 \color none
 
 \begin_inset Formula $O^{\sim}\left(nm^{\omega-1}s\right)$
+\end_inset
+
+ from 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:multiplyFP2WithUniformShift"
+
 \end_inset
 
 , the column dimension is reduced to 
@@ -3507,6 +3551,52 @@ reference "lem:costLowColDimension"
 \noun off
 \color none
  of the initial order basis computation.
+\end_layout
+
+\begin_layout Corollary
+\begin_inset CommandInset label
+LatexCommand label
+name "cor:costOfMinimalNullspaceBasis"
+
+\end_inset
+
+If the input matrix 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ has degree 
+\begin_inset Formula $s$
+\end_inset
+
+, then a minimal nullspace basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ can be computed with a cost of 
+\begin_inset Formula $O^{\sim}\left(n^{\omega}\left\lceil ms/n\right\rceil \right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Proof
+We can just set the shift 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+ to 
+\begin_inset Formula $\left[s,\dots,s\right]$
+\end_inset
+
+ and apply 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:costOfMinimalNullspaceBasisWithUniformShift"
+
+\end_inset
+
+.
 \end_layout
 
 \end_body

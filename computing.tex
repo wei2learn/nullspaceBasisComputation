@@ -1,0 +1,559 @@
+
+\section{Computation of Minimal Nullspace Basis}
+
+\label{sec:Nullspace-Basis-Computation}
+
+In this section, we describe an algorithm for computing a shifted
+minimal nullspace basis, and then analyze its cost. The algorithm
+uses two computation process recursively. The first process described
+in \prettyref{sub:continueComputingNullspaceBasisByColumns} uses
+an order basis computation to compute a subset of nullspace basis
+elements of lower degree, and results in a new problem of lower column
+dimension. The second process described in \prettyref{sub:continueComputingNullspaceBasisByRows}
+reduces the row dimension of the problem by computing a nullspace
+basis of a submatrix formed by a subset of the rows of the input matrix.
+We require the shift $\vec{s}$ to bound the column degrees of $\mathbf{F}$
+component-wise. For example, we can set each entry of $\vec{s}$ to
+be the corresponding column degree of $\mathbf{F}$, or we can simply
+set each entry of $\vec{s}$ to be the maximum column degree of $\mathbf{F}$.
+As it may become evident later in this section, this condition on
+the shift is very useful, as it provides a simple bound on the column
+degrees of $\mathbf{F}\mathbf{A}$ for any polynomial matrix $\mathbf{A}$.
+\begin{lem}
+\label{lem:boundOnDegreesOfFA}Let $\vec{s}$ be a shift with entries
+bound the corresponding column degrees of $\mathbf{F}$ component-wise.
+Then for any polynomial matrix $\mathbf{A}$, the column degrees of
+$\mathbf{FA}$ are bounded component-wise by the $\vec{s}$-column
+degrees of $\mathbf{A}$.
+\end{lem}
+In addition, it also provides a bound on the sum of the $\vec{s}$-column
+degrees of $\vec{s}$-minimal nullspace bases as shown in \prettyref{lem:boundOfSumOfShiftedDegreesOfNullspaceBasis},
+which uses an intermediate result on a bound of the sum of $\vec{s}$-column
+degrees of order bases as shown in \prettyref{lem:boundOfSumOfShiftedDegreesOfOrderBasis}.
+\begin{lem}
+\label{lem:boundOfSumOfShiftedDegreesOfOrderBasis}The sum of $\vec{s}$-column
+degrees of an $(\mathbf{F},\vec{s},\sigma)$-basis $\mathbf{P}$ is
+at most $\sum\vec{s}+k\sigma=\xi+k\sigma$, where $k$ is the rank
+of $\mathbf{F}$.\end{lem}
+\begin{pf}
+The sum is $\xi$ at order 0 and increases by at most $k$ for each
+order increase.\end{pf}
+\begin{lem}
+\label{lem:boundOfSumOfShiftedDegreesOfNullspaceBasis}Given an $\mathbf{F}\in\mathbb{K}\left[x\right]^{m\times n}$,
+and a shift $\vec{s}\in\mathbb{Z}_{\ge0}$ with entries bounding the
+corresponding column degrees of $\mathbf{F}$. The sum of the $\vec{s}$-column
+degrees of any $\vec{s}$-minimal nullspace basis of $\mathbf{F}$
+is bounded by $\xi=\sum\vec{s}$.\end{lem}
+\begin{pf}
+Let $\mathbf{P}$ be a $(\mathbf{F},\vec{s},\sigma)$-basis with high
+enough order $\sigma$ so $\mathbf{P}=\left[\mathbf{N},\bar{\mathbf{N}}\right]$
+contains a complete null space basis $\mathbf{N}$ of $\mathbf{F}$.
+Let $k$ be the column dimension of $\bar{\mathbf{N}}$ or equivalently,
+the rank of $\mathbf{F}$. By \prettyref{lem:boundOfSumOfShiftedDegreesOfOrderBasis}
+the sum of the $\vec{s}$-column degrees of $\mathbf{P}$ is at most
+$\xi+k\sigma$. Also by \prettyref{lem:boundOnDegreesOfFA} the sum
+of the $\vec{s}$-column degrees of $\bar{\mathbf{N}}$ is greater
+than or equal to the sum of the column degrees of $\mathbf{F}\bar{\mathbf{N}}$,
+which is at least $k\sigma$, since every column of $\mathbf{F}\bar{\mathbf{N}}$
+is nonzero and has order $\sigma$. So the sum of the $\vec{s}$-column
+degrees of $\mathbf{N}$ is bounded by $\xi+k\sigma-k\sigma=\xi$.
+\end{pf}
+\begin{comment}
+This allows the initial bound on the shift to propagate on both the
+intermediate results $\mathbf{A}$ and the residual $\mathbf{FA}$
+to propagate throughout the computation, hence the complexity 
+\end{comment}
+
+
+For simplicity, we also assume without loss of generality that the
+columns of $\mathbf{F}$ and the corresponding entries of $\vec{s}=\left[s_{1},\dots,s_{n}\right]$
+are arranged so that the entries of $\vec{s}$ in increasing orders.
+Let $\xi=\sum\vec{s}$ be the sum of the entries of $\vec{s}$. It
+provides a convenient bound throughout the computation.%
+\begin{comment}
+ The algorithm we present in this section computes a $\vec{s}$-minimal
+null space basis $\mathbf{N}$ with a cost of $h(n,\xi)=O^{\sim}(n^{\omega-1}\xi)$.
+\end{comment}
+{} Let $\rho=\sum_{n-m+1}^{n}s_{i}$ be the sum of $m$ largest entries
+of $\vec{s}$, and $s=\rho/m$ be their average. The algorithm we
+present in this section computes a $\vec{s}$-minimal null space basis
+$\mathbf{N}$ with a cost of $g(n,\rho)=O^{\sim}(n^{\omega}s)$. For
+uniform shift $\vec{s}=\left[s,\dots,s\right]$, we improve this later
+to $O^{\sim}\left(n^{\omega-1}ms\right)=O^{\sim}\left(n^{\omega-1}\rho\right)=O^{\sim}\left(n^{\omega-2}m\xi\right)$.
+\begin{comment}
+For general unbalanced shifts, the cost improvement requires the ability
+to efficiently compute order basis with general shifts.
+\end{comment}
+
+
+\begin{comment}
+Let us first assume $m\le n\le3m$. Let $s=\xi/n$ be the average
+of the entries of $\vec{s}$. 
+\end{comment}
+{} 
+
+
+\subsection{\label{sub:continueComputingNullspaceBasisByColumns}Reducing the
+column dimension via order basis computation}
+
+First, we compute an $\left(\mathbf{F},3s,\vec{s}\right)$-basis $\mathbf{P}$,
+which can be done with a cost $O^{\sim}\left(n^{\omega}s\right)$
+using the algorithm from \citet{Giorgi2003}. Note that if $\vec{s}$
+is balanced, then we can compute with a cost $O^{\sim}\left(n^{\omega}\left\lceil \rho/n\right\rceil \right)$
+using the algorithm from \textbf{\citet{za2009}}. We claim at most
+$3m/2$ columns of \textbf{$\mathbf{P}$} are not nullspace basis
+elements of $\mathbf{F}$.
+\begin{lem}
+\label{lem:dimensionOfPartialNullspaceBasisBasedOnOrder} Let $\mathbf{P}=[\mathbf{P}_{1},\mathbf{P}_{2}]$
+be a $(\mathbf{F},3s,\vec{s})$-basis with $\mathbf{P}_{1}$ containing
+all columns $\mathbf{n}$ of $\mathbf{P}$ satisfying $\mathbf{F}\mathbf{n}=0$.
+Then the column dimension $\kappa$ of $\mathbf{P}_{2}$ is less than
+$3m/2.$\end{lem}
+\begin{pf}
+Any column $\mathbf{p}$ of $\mathbf{P}_{2}$ must have $\vec{s}$-column
+degree at least $\sigma$, so their sum must satisfy $\sum\deg_{\vec{s}}\mathbf{P}_{2}\ge\kappa\sigma$.
+\begin{comment}
+$\sum_{i=n-k+1}^{n}s_{i}$ must be at least $k\sigma$
+\end{comment}
+{} Recall from \prettyref{lem:boundOfSumOfShiftedDegreesOfOrderBasis}
+that the sum of $\vec{s}$-column degrees of the columns of $\mathbf{P}$
+\begin{comment}
+is at most 
+\end{comment}
+{} satisfies $\sum\deg_{\vec{s}}\mathbf{P}\le\sum\vec{s}+m\sigma$,
+so the sum of $\vec{s}$-column degrees of the columns of $\mathbf{P}_{1}$
+must %
+\begin{comment}
+be at most
+\end{comment}
+{} satisfy $\sum\deg_{\vec{s}}\mathbf{P}_{1}\le\sum\vec{s}+m\sigma-\kappa\sigma$.
+On the other hand, the lowest possible value of $\sum\deg_{\vec{s}}\mathbf{P}_{1}$
+is $\sum_{i=1}^{n-\kappa}s_{i}$ (which occurs when $\mathbf{P}_{1}=\left[\mathbf{I},0\right]^{T}$)
+based on the assumption that the entries of $\vec{s}=\left[s_{1},\dots,s_{n}\right]$
+are arranged in increasing order. It follows that $\sum\vec{s}+m\sigma-\kappa\sigma\ge\sum_{i=1}^{n-\kappa}s_{i}$,
+or $m\sigma\ge\kappa\sigma-\left(\sum\vec{s}-\sum_{i=1}^{n-\kappa}s_{i}\right)$
+after rearrangement. Combining this with the fact that $\sum\vec{s}-\sum_{i=1}^{n-\kappa}s_{i}\le\kappa s$,
+we get $m\sigma\ge\kappa\sigma-\kappa s$, which gives $\kappa\le m\sigma/(\sigma-s)$
+for $\sigma>s$. If we set $\sigma=3s$, we get $\kappa\le3m/2$.
+\end{pf}
+Let $\left[\mathbf{P}_{1},\mathbf{P}_{2}\right]=\mathbf{P}$ with
+$\mathbf{P}_{1}$ consists of the nullspace basis elements computed.
+Then the residual $\mathbf{F}\mathbf{P}=\left[\mathbf{0},\mathbf{F}\mathbf{P}_{2}\right]$
+can be used to compute the remaining nullspace basis elements. Before
+showing the remaining nullspace basis elements can be computed this
+way, we first need to ensure that the matrix multiplication $\mathbf{F}\mathbf{P}_{2}$
+can be done efficiently. This is a consequence of the following more
+general result on multiplying matrices with nonuniform degrees. It
+is later used for multiplying other matrices as well.
+\begin{lem}
+\label{lem:multiplyUnbalancedMatrices}Given $\mathbf{A}\in\mathbb{K}\left[x\right]^{m\times n}$,
+and a shift $\vec{s}$ with entries bound the column degrees of $\mathbf{A}$.
+Let $\xi$ be the sum of the entries of $\vec{s}$. Let $\mathbf{B}\in\mathbb{K}\left[x\right]^{n\times k}$
+with $k\in O\left(m\right)$ and the sum $\theta$ of its $\vec{s}$-column
+degrees satisfies $\theta\in O\left(\xi\right)$. Then we can multiply
+$\mathbf{A}$ and $\mathbf{B}$ with a cost of $O^{\sim}(nm^{\omega-2}\xi)$. \end{lem}
+\begin{pf}
+See We divide the matrices $\mathbf{A}$ and $\mathbf{B}$ to column
+blocks according to the degree of the entries 
+\begin{align*}
+\mathbf{A} & =\left[\begin{array}{cccc}
+\mathbf{A}_{\log m} & \mathbf{A}_{\log m-1} & \cdots & \mathbf{A}_{1}\end{array}\right]\\
+\mathbf{B} & =\left[\begin{array}{cccc}
+\mathbf{B}^{\left(\log m\right)} & \mathbf{B}^{\left(\log m-1\right)} & \cdots & \mathbf{B}^{\left(1\right)}\end{array}\right]
+\end{align*}
+with $\mathbf{A}_{\log m},$ $\mathbf{A}_{\log m-1},$ $\mathbf{A}_{\log m-2}$,
+... , $\mathbf{A}_{1}$ having degrees in the range $\left[0,2\xi/m\right]$,
+$(2\xi/m,4\xi/m]$, $(4\xi/m,8\xi/m]$, ..., $(\xi/2,\xi]$ respectively.
+That is, for $j$ from 1 to $\log m-1$, $\mathbf{A}_{j}$ contains
+columns of $\mathbf{A}$ whose degrees are in the range $(\xi/2^{j},\xi/2^{j-1}]$,
+and $\mathbf{A}_{\log m}$ contains the remaining columns whose degrees
+are in the range $\left[0,2\xi/m\right]$. The matrix $\mathbf{B}$
+is divided in the same way, with $\mathbf{B}^{\left(\log m\right)}$,
+$\mathbf{B}^{\left(\log m-1\right)},$ $\mathbf{B}^{\left(\log m-2\right)}$,
+... , $\mathbf{B}^{\left(1\right)}$ having $\vec{s}$-column degrees
+in the range $\left[0,2\xi/m\right]$, $(2\xi/m,4\xi/m]$, $(4\xi/m,8\xi/m]$,
+..., $(\xi/2,\theta]$ respectively.
+
+First consider the multiplication 
+\[
+\mathbf{A}\mathbf{B}^{\left(1\right)}=\left[\begin{array}{cccc}
+\mathbf{A}_{\log m} & \mathbf{A}_{\log m-1} & \cdots & \mathbf{A}_{1}\end{array}\right]\left[\begin{array}{l}
+\mathbf{B}_{\log m}^{\left(1\right)}\\
+\mathbf{B}_{\log m-1}^{\left(1\right)}\\
+\vdots\\
+\mathbf{B}_{1}^{\left(1\right)}
+\end{array}\right].
+\]
+Note that there are $O\left(1\right)$ columns in $\mathbf{B}^{(1)}$
+since $\theta\in O\left(\xi\right)$. We do this in $\log m$ steps.
+At step $j$ for $j$ from $1$ to $\log m$ we multiply $\mathbf{A}_{j}$
+and the corresponding rows $\mathbf{B}_{j}^{(1)}$ in $\mathbf{B}^{(1)}$.
+The column dimension of $\mathbf{A}_{j}$, which is the same as the
+row dimension of $\mathbf{B}_{j}^{(1)}$, is less than $2^{j}$. The
+degree of $\mathbf{B}_{j}^{(1)}$ is $O\left(\xi\right)$. To use
+fast multiplication, we expand $\mathbf{B}_{j}^{(1)}$ to a matrix
+$\bar{\mathbf{B}}_{j}^{(1)}$ with degree less than $\delta\in\Theta(\xi/2^{j})$
+and column dimension $q\in O(2^{j})$ as follows. Write 
+\[
+\mathbf{B}_{j}^{(1)}=\mathbf{B}_{j,0}^{(1)}+\mathbf{B}_{j,1}^{(1)}x^{\delta}+\dots+\mathbf{B}_{j,q-1}^{(1)}x^{\delta(q-1)}=\sum_{k=0}^{q-1}\mathbf{B}_{j,k}^{(1)}x^{\delta k}
+\]
+ with each $\mathbf{B}_{j,k}^{(1)}$ having degree less than $\delta.$
+Set $\bar{\mathbf{B}}_{j}^{(1)}=\left[\mathbf{B}_{j,0}^{(1)},\mathbf{B}_{j,1}^{(1)},\dots,\mathbf{B}_{j,q-1}^{(1)}\right]$.
+We can then multiply $\mathbf{A}_{j}$, which has dimension $m\times O(2^{j})$
+for $j<\log m$, and $\bar{\mathbf{B}}_{j}^{(1)}$, which has dimension
+$O(2^{j})\times O(2^{j})$ for $j<\log m$, with a cost of $O^{\sim}\left((m/2^{j})\left(2^{j}\right)^{\omega}\xi/2^{j}\right)=O^{\sim}\left(\left(2^{j}\right)^{\omega-2}m\xi\right)\subset O^{\sim}\left(m^{\omega-1}\xi\right)\subset O^{\sim}(nm^{\omega-2}\xi)$.
+For $j=\log m$, $\mathbf{A}_{j}$ has dimension $m\times O\left(n\right)$,
+$\bar{\mathbf{B}}_{j}^{\left(1\right)}$ has dimension $O\left(n\right)\times m$,
+and their degrees are $O\left(\xi/m\right)$. Hence they can be multiplied
+with a cost of $O^{\sim}\left((n/m)m^{\omega}(\xi/m)\right)=O^{\sim}\left(nm^{\omega-2}\xi\right)$.
+Adding up the columns of $\mathbf{A}_{j}\bar{\mathbf{B}}_{j}^{(1)}$
+gives $\mathbf{A}_{j}\mathbf{B}_{j}^{(1)}$ and cost $O(m\xi)$. Therefore,
+multiplying $\mathbf{A}$ and $\mathbf{B}^{(1)}$ over $\log(n)$
+steps cost $O^{\sim}\left(nm^{\omega-2}\xi\right)$. 
+
+Next we multiply $\mathbf{A}$ with $\mathbf{B}^{(2)}$. We proceed
+in the same way as before, but notice that the columns of $\mathbf{A}$
+whose degrees are higher than $\xi/2$ are no longer needed since
+the corresponding rows in $\mathbf{B}^{(2)}$ must be 0, as the $\vec{s}$-column
+degree of $\mathbf{B}^{(2)}$ is bounded by $\xi/2$. Multiplying
+$\mathbf{A}$ and $\mathbf{B}^{(2)}$ also cost $O^{\sim}\left(nm^{\omega-2}\xi\right)$.
+
+Continue doing this, it cost $O^{\sim}\left(nm^{\omega-2}\xi\right)$.
+to multiply $\mathbf{A}$ with the columns $\mathbf{B}^{(i)}$ for
+$i$ from $1$ to $\log m$.  As before, notice that the columns of
+$\mathbf{A}$ whose degrees are higher than $\xi/2^{i-1}$ are not
+needed, as $\vec{s}$-column degrees of $\mathbf{B}^{(i)}$ is bounded
+by $\xi/2^{i-1}$. The overall cost for $i$ from 1 to $\log m$ is
+$O^{\sim}\left(nm^{\omega-2}\xi\right)$ to multiply $\mathbf{A}$
+and $\mathbf{B}$. 
+\end{pf}
+With \prettyref{lem:multiplyUnbalancedMatrices}, we can now do the
+multiplication $\mathbf{F}\mathbf{P}_{2}$ efficiently.
+\begin{cor}
+\label{cor:multiplyingFP2}The multiplication of $\mathbf{F}$ and
+$\mathbf{P}_{2}$ can be done with a cost of $O^{\sim}\left(nm^{\omega-2}\xi\right)$.\end{cor}
+\begin{pf}
+Since $\mathbf{P}=[\mathbf{P}_{1},\mathbf{P}_{2}]$ is a $(\mathbf{F},3s,\vec{s})$-basis,
+the sum of the $\vec{s}$-column degrees of $\mathbf{P}_{2}$ satisfies
+$\sum\deg_{\vec{s}}\mathbf{P}_{2}\le3sn+\xi=4\xi$ by \ref{lem:boundOfSumOfShiftedDegreesOfOrderBasis}.
+Hence \prettyref{lem:multiplyUnbalancedMatrices} applies.
+\end{pf}
+It remains to show that the residual $\mathbf{F}\mathbf{P}_{2}$ can
+be used to compute the remaining nullspace basis elements in \prettyref{lem:continueComputingNullspaceBasisByColumns},
+which is based on \prettyref{lem:continueComputingOrderBasis}, a
+special case of Theorem 5.1 in \textbf{\citep{BL1997} }also used
+in \citep{za2009}. We include a proof here for completeness.
+\begin{lem}
+\label{lem:continueComputingOrderBasis}For an input matrix $\mathbf{F}\in\mathbb{K}\left[x\right]^{m\times n}$,
+an order vector $\vec{\sigma}$, and a shift vector $\vec{s}$, if
+$\mathbf{P}$ is a $\left(\mathbf{F},\vec{\sigma},\vec{s}\right)$-basis
+with $\vec{s}$-column degrees $\vec{s}'$, and $\mathbf{P}'$ is
+a $(\mathbf{F}\mathbf{P},\vec{\tau},\vec{s}')$ -basis with $\vec{s}'$-column
+degrees $\vec{s}"$, where $\vec{\tau}\ge\vec{\sigma}$ component-wise,
+then $\mathbf{P}\mathbf{P}'$ is a $(\mathbf{F},\vec{\tau},\vec{s})$-basis
+with $\vec{s}$-column degrees $\vec{s}"$.\end{lem}
+\begin{pf}
+It is clear that $\mathbf{P}\mathbf{P}'$ has order $(\mathbf{F},\vec{\tau})$.
+We now show that $\mathbf{P}\mathbf{P}'$ is $\vec{s}$-column reduced
+and has $\vec{s}$-column degrees $\vec{s}"$, or equivalently, $x^{\vec{s}}\mathbf{P}\mathbf{P}'$
+is column reduced and has column degrees $\vec{s}"$. Notice that
+$x^{\vec{s}}\mathbf{P}$ has column degrees $\vec{s}'$ and a full
+rank leading column coefficient matrix $P$. Hence $x^{\vec{s}}\mathbf{P}x^{-\vec{s}'}$
+has column degrees $\left[0,\dots0\right]$. (If one is concerned
+about the entries not being polynomials, one can simply multiply it
+by $x^{\xi}$ to shift the degrees up.) Similarly, $x^{\vec{s}'}\mathbf{P}'x^{-\vec{s}"}$
+has column degrees $[0,\dots,0]$ and a full rank leading column coefficient
+matrix $P'$. Putting them together, $x^{\vec{s}}\mathbf{P}x^{-\vec{s}'}x^{\vec{s}'}\mathbf{P}'x^{-\vec{s}"}=x^{\vec{s}}\mathbf{P}\mathbf{P}'x^{-\vec{s}"}$
+has column degrees $[0,\dots,0]$ and a full rank leading column coefficient
+matrix $PP'$. It follows that $x^{\vec{s}}\mathbf{P}\mathbf{P}'$
+has column degrees $\vec{s}"$, or equivalently, the $\vec{s}$-column
+degrees of $\mathbf{PP}'$ is $\vec{s}"$.
+
+It remains to show that any $\mathbf{t}\in\left\langle \left(\mathbf{F},\vec{\tau}\right)\right\rangle $
+is generated by the columns of $\mathbf{PP}'$. Since $\mathbf{t}\in\left\langle \left(\mathbf{F},\vec{\sigma}\right)\right\rangle $,
+it is generated by the $\left(\mathbf{F},\vec{\sigma}\right)$-basis
+$\mathbf{P}$, that is, $\mathbf{t}=\mathbf{P}\mathbf{a}$ for $\mathbf{a}=\mathbf{P}^{-1}\mathbf{t}\in\mathbb{K}\left[x\right]^{n}$.
+Also, $\mathbf{t}\in\left\langle \left(\mathbf{F},\vec{\tau}\right)\right\rangle $
+implies that $\mathbf{a}\in\left\langle \left(\mathbf{FP},\vec{\tau}\right)\right\rangle $
+since $\mathbf{F}\mathbf{P}\mathbf{a}=\mathbf{F}\mathbf{t}\equiv0\mod x^{\vec{\tau}}$.
+It follows that $\mathbf{a}=\mathbf{P}'\mathbf{b}$ for $\mathbf{b}=\mathbf{P}'^{-1}\mathbf{a}\in\mathbb{K}\left[x\right]^{n}$.
+Therefore, $\mathbf{a}=\mathbf{P}^{-1}\mathbf{t}=\mathbf{P}'\mathbf{b}$,
+which gives $\mathbf{t}=\mathbf{P}\mathbf{P}'\mathbf{b}$.\end{pf}
+\begin{lem}
+\label{lem:continueComputingNullspaceBasisByColumns}Let $\mathbf{P}=\left[\mathbf{P}_{1},\mathbf{P}_{2}\right]$
+be a $\left(\mathbf{F},3s,\vec{s}\right)$-basis with $\vec{s}$-column
+degrees $\vec{b}$ and $\mathbf{P}_{1}$ consists of the nullspace
+basis elements computed. Let $\vec{b}'$ be the $\vec{s}$-column
+degrees of$\mathbf{P}_{2}$. Let $\mathbf{Q}'$ be a $\left(\mathbf{F}\mathbf{P}_{2},\sigma,\vec{b}'\right)$-basis,
+where $\sigma$ is at least $3s$ and is large enough for $\mathbf{Q}'=\left[\mathbf{Q},\mathbf{Q}_{2}\right]$
+to contain a complete nullspace basis $\mathbf{Q}$ of $\mathbf{F}\mathbf{P}_{2}$,
+then $\left[\mathbf{P}_{1},\mathbf{P}_{2}\mathbf{Q}\right]$ is a
+$\vec{s}$-minimal nullspace basis of $\mathbf{F}$.\end{lem}
+\begin{pf}
+Note that 
+\[
+\mathbf{P}'=\begin{bmatrix}\mathbf{I}\\
+ & \mathbf{Q}'
+\end{bmatrix}
+\]
+ is an $\left(\mathbf{F}\mathbf{P},\sigma,\vec{b}\right)$-basis since
+$\mathbf{F}\mathbf{P}=\left[\mathbf{0},\mathbf{F}\mathbf{P}_{2}\right]$
+and $\mathbf{Q}'$ is an $\left(\mathbf{F}\mathbf{P}_{2},\sigma,\vec{b}'\right)$-basis.
+It follows that $\mathbf{P}\mathbf{P}'=\left[\mathbf{P}_{1},\mathbf{P}_{2}\mathbf{Q}'\right]=\left[\mathbf{P}_{1},\mathbf{P}_{2}\mathbf{Q},\mathbf{P}_{2}\mathbf{Q}_{2}\right]$
+is a $\left(\mathbf{F},\sigma,\vec{s}\right)$-basis. Hence $\left[\mathbf{P}_{1},\mathbf{P}_{2}\mathbf{Q}\right]$
+is a complete $\vec{s}$-minimal nullspace basis of $\mathbf{F}$.
+\end{pf}
+\prettyref{lem:continueComputingNullspaceBasisByColumns} shows that
+the remaining $\vec{s}$-minimal nullspace basis elements $\mathbf{P}_{2}\mathbf{Q}$
+can be correctly computed from the residual $\mathbf{F}\mathbf{P}_{2}$.
+We still need to show it can be done efficiently. Before discussing
+the computation of a $\vec{b}'$-minimal nullspace basis $\mathbf{Q}$
+of $\mathbf{F}\mathbf{P}_{2}$, let us first show that the multiplication
+$\mathbf{P}_{2}\mathbf{Q}$ can be done efficiently, which is again
+a corollary of \prettyref{lem:multiplyUnbalancedMatrices}.
+\begin{cor}
+\label{cor:multiplyingP2Q}The multiplication of $\mathbf{P}_{2}$
+and $\mathbf{Q}$ can be done with a cost of $O^{\sim}(m^{\omega-1}\xi)$.\end{cor}
+\begin{pf}
+Note that the column degrees of $\mathbf{P}_{2}$ are bounded by the
+$\vec{s}$-column degrees $\vec{b}'$ of $\mathbf{P}_{2}$ since $\vec{s}$
+is non-negative. By \prettyref{lem:boundOnDegreesOfFA} the column
+degrees of $\mathbf{F}\mathbf{P}_{2}$ are bounded by the $\vec{s}$-column
+degrees $\vec{b}'$ of $\mathbf{P}_{2}$ . By \prettyref{lem:boundOfSumOfShiftedDegreesOfNullspaceBasis},
+the sum of the $\vec{b}'$-column degrees of $\mathbf{Q}$ is bounded
+by the sum of the column degrees of $\mathbf{F}\mathbf{P}_{2}$, which
+is bounded by $\sum\vec{b}'\le4\xi$ from \prettyref{cor:multiplyingFP2}.
+Now \prettyref{lem:multiplyUnbalancedMatrices} applies.
+\end{pf}
+
+\subsection{Reducing the degrees}
+
+Our next task is computing a $\vec{b}'$-minimal nullspace basis of
+the residual $\mathbf{F}\mathbf{P}_{2}$. It is useful to note that
+the lower degree terms of $\mathbf{F}\mathbf{P}_{2}$ are zero since
+it has order $\sigma$. Hence we can use $\mathbf{G}=\mathbf{F}\mathbf{P}_{2}/x^{3s}$
+instead to compute the remaining basis elements. But we still need
+verify that the size of $\mathbf{G}$ is small enough to allow efficient
+computation of the remaining basis elements. \prettyref{lem:boundOnShiftedDegrees}
+shows that the $\left(\vec{b}-\sigma\right)$-column degrees of an
+$(\mathbf{F},\sigma,\vec{s})$-basis, which bound the column degrees
+of $\mathbf{F}\mathbf{P}/x^{\sigma}$ by \prettyref{lem:boundOnDegreesOfFA},
+are bounded by the corresponding entries of $\vec{s}$.
+\begin{lem}
+\label{lem:boundOnShiftedDegrees}Let $\vec{s}$, $\mathbf{F}$ be
+as before. If an $(\mathbf{F},\sigma,\vec{s})$-basis has columns
+arranged in increasing $\vec{s}$-column degrees with $\vec{s}$-column
+degrees $\vec{b}$, then the $(\vec{b}-\sigma)$-column degrees of
+the basis are bounded component-wise by $\vec{s}$.\end{lem}
+\begin{pf}
+An $(\mathbf{F},0,\vec{s})$-basis has $\vec{s}$-column degrees $\vec{s}$.
+Then for each order increase, any column of the basis has its $\vec{s}$-column
+degree increases by at most one, hence at order $\sigma$, the $\vec{s}$-column
+degree increase for each column is at most $\sigma$.
+\end{pf}
+Since the column degrees of $\mathbf{F}\mathbf{P}/x^{\sigma}$ are
+bounded by the corresponding entries of $\vec{s}$, the column degrees
+of $\mathbf{F}\mathbf{P}_{2}/x^{\sigma}$ are bounded by the entries
+of a corresponding subset $\vec{t}$ of $\vec{s}$.
+
+\begin{comment}
+Note the difference between \prettyref{lem:boundOfSumOfShiftedDegreesOfNullspaceBasis}
+and \prettyref{lem:boundOnShiftedDegrees}. In \prettyref{lem:boundOfSumOfShiftedDegreesOfNullspaceBasis},
+we consider only the shifted degree of a nullspace basis, where as
+in \prettyref{lem:boundOnShiftedDegrees} applies to a order basis
+but the order is subtracted from the degrees.
+\end{comment}
+
+
+
+\subsection{\label{sub:continueComputingNullspaceBasisByRows}Reducing the row
+dimension }
+
+At this point, the problem is reduced to computing a $\vec{t}$-minimal
+nullspace basis of $\mathbf{G}=\mathbf{F}\mathbf{P}_{2}/x^{3s}$,
+which still has row dimension $m$, but column dimension bounded by
+$3m/2$ and column degrees bounded by $\vec{t}$, with $\sum\vec{t}$
+bounded by $\xi$.
+
+Let 
+\[
+\left[\begin{array}{c}
+\mathbf{G}_{1}\\
+\mathbf{G}_{2}
+\end{array}\right]=\mathbf{G}
+\]
+ with $\mathbf{G}_{1}$ having $\left\lfloor m/2\right\rfloor $ rows
+and $\mathbf{G}_{2}$ having $\left\lceil m/2\right\rceil $ rows.
+If we compute a $\vec{t}$-minimal nullspace basis $\mathbf{N}_{1}$
+of $\mathbf{G}_{1}$, where $\mathbf{N}_{1}$ has $\vec{t}$-column
+degrees $\vec{u}$, then compute a $\vec{u}$-minimal nullspace basis
+$\mathbf{N}_{2}$ of $\mathbf{G}_{2}\mathbf{N}_{1}$, then \prettyref{lem:continueComputingNullspaceBasisByRows}
+shows that $\mathbf{N}_{1}\mathbf{N}_{2}$ is a $\vec{t}$-minimal
+nullspace basis of $\mathbf{G}$. 
+\begin{lem}
+\label{lem:continueComputingNullspaceBasisByRows}For an input matrix
+$\mathbf{G}=\left[\mathbf{G}_{1}^{T},\mathbf{G}_{2}^{T}\right]^{T}\in\mathbb{K}\left[x\right]^{m\times n}$
+and a shift vector $\vec{t}$, if $\mathbf{N}_{1}$ is a $\vec{t}$-minimal
+nullspace basis of $\mathbf{G}_{1}$ with $\vec{t}$-column degrees
+$\vec{u}$, and $\mathbf{N}_{2}$ is a $\vec{u}$-minimal nullspace
+basis of $\mathbf{G}_{2}\mathbf{N}_{1}$ with $\vec{u}$-column degrees
+$\vec{v}$, then $\mathbf{N}_{1}\mathbf{N}_{2}$ is a $\vec{t}$-minimal
+nullspace basis of $\mathbf{G}$ with $\vec{t}$-column degrees $\vec{v}$.\end{lem}
+\begin{pf}
+The proof is very similar to the proof of \prettyref{lem:continueComputingOrderBasis}.
+It is clear that $\mathbf{G}\mathbf{N}_{1}\mathbf{N}_{2}=0$ hence
+$\mathbf{N}_{1}\mathbf{N}_{2}$ is a nullspace basis of $\mathbf{G}$.
+We now show that $\mathbf{N}_{1}\mathbf{N}_{2}$ is $\vec{t}$-column
+reduced and has $\vec{t}$-column degrees $\vec{v}$, or equivalently,
+$x^{\vec{t}}\mathbf{N}_{1}\mathbf{N}_{2}$ is column reduced. Notice
+that $x^{\vec{t}}\mathbf{N}_{1}$ has column degrees $\vec{u}$ and
+a full rank leading column coefficient matrix $N_{1}$. Hence $x^{\vec{t}}\mathbf{N}_{1}x^{-\vec{u}}$
+has column degrees $\left[0,\dots,0\right]$. (If one is concerned
+about the entries not being polynomials, one can simply multiply it
+by $x^{\xi}$ to shift the degrees up.) Similarly, $x^{\vec{u}}\mathbf{N}_{2}x^{\vec{v}}$
+has column degrees $\left[0,\dots,0\right]$ and a full rank leading
+column coefficient matrix $N_{2}$. Putting them together, $x^{\vec{t}}\mathbf{N}_{1}x^{-\vec{u}}x^{\vec{u}}\mathbf{N}_{2}x^{-\vec{v}}=x^{\vec{t}}\mathbf{N}_{1}\mathbf{N}_{2}x^{-\vec{v}}$
+has column degrees $[0,\dots,0]$ and a full rank leading column coefficient
+matrix $N_{1}N_{2}$. It follows that $x^{\vec{t}}\mathbf{N}_{1}\mathbf{N}_{2}$
+has column degrees $\vec{v}$, or equivalently, the $\vec{t}$-column
+degrees of $\mathbf{N}_{1}\mathbf{N}_{2}$ is $\vec{v}$.
+
+It remains to show that any $\mathbf{n}$ satisfying $\mathbf{G}\mathbf{n}=0$
+must be a linear combination of the columns of $\mathbf{N}_{1}\mathbf{N}_{2}$.
+First notice that $\mathbf{n}=\mathbf{N}_{1}\mathbf{a}$ for some
+polynomial vector $\mathbf{a}$ since $\mathbf{N}_{1}$ is a nullspace
+basis of $\mathbf{G}$. Also, $\mathbf{G}\mathbf{n}=0$ implies that
+$\mathbf{G}_{2}\mathbf{N}_{1}\mathbf{a}=0$, hence $\mathbf{a}=\mathbf{N}_{2}\mathbf{b}$
+for some vector $\mathbf{b}$ as $\mathbf{N}_{2}$ is a nullspace
+basis of $\mathbf{G}_{2}\mathbf{N}_{1}$. We now have $\mathbf{n}=\mathbf{N}_{1}\mathbf{N}_{2}\mathbf{b}$
+as required.
+\end{pf}
+While \prettyref{lem:continueComputingNullspaceBasisByColumns} allows
+us to compute nullspace basis by columns and then reduce the column
+dimensions, \prettyref{lem:continueComputingNullspaceBasisByRows}
+shows that that the nullspace basis can also be computed by rows and
+then reduce the row dimensions. Again, we need to check these computations
+can be done efficiently. \prettyref{lem:sizeOfG2N1} shows that the
+size of $\mathbf{G}_{2}\mathbf{N}_{1}$ is within a required bound.
+Then \prettyref{lem:mutiplyingG2N1} and \prettyref{lem:multiplyingN1N2}
+show that the multiplication $\mathbf{G}_{2}\mathbf{N}_{1}$ and the
+multiplication $\mathbf{N}_{1}\mathbf{N}_{2}$ can be done efficiently,
+which are again consequences of \prettyref{lem:multiplyUnbalancedMatrices}.
+\begin{lem}
+\label{lem:sizeOfG2N1}The sum of the column degrees of $\mathbf{G}_{2}\mathbf{N}_{1}$
+is bounded by $\xi$.\end{lem}
+\begin{pf}
+This follows from \prettyref{lem:boundOfSumOfShiftedDegreesOfNullspaceBasis}
+and \prettyref{lem:boundOnDegreesOfFA}.\end{pf}
+\begin{lem}
+\label{lem:mutiplyingG2N1}The multiplication of $\mathbf{G}_{2}$
+and $\mathbf{N}_{1}$ can be done with a cost of $O^{\sim}(m^{\omega-1}\xi)$.\end{lem}
+\begin{pf}
+\prettyref{lem:multiplyUnbalancedMatrices} applies directly here.\end{pf}
+\begin{lem}
+\label{lem:multiplyingN1N2}The multiplication of $\mathbf{N}_{1}$
+and $\mathbf{N}_{2}$ can be done with a cost of $O^{\sim}(m^{\omega-1}\xi)$.\end{lem}
+\begin{pf}
+\prettyref{lem:multiplyUnbalancedMatrices} applies because the sum
+of the column degrees of $\mathbf{N}_{1}$ is bounded by the sum of
+the $\vec{t}$-column degrees of $\mathbf{N}_{1}$, which is $\sum\vec{u}\le\xi$,
+and by \prettyref{lem:sizeOfG2N1} and \prettyref{lem:boundOfSumOfShiftedDegreesOfNullspaceBasis}
+the sum of $\vec{u}$-column degrees of $\mathbf{N}_{2}$ is also
+bounded by $\xi$.
+\end{pf}
+
+\subsection{Recursive computation}
+
+The computation of $\mathbf{N}_{1}$ and $\mathbf{N}_{2}$ is identical
+to the original problem, only the dimension has decreased. For computing
+$\mathbf{N}_{1}$, the dimension of the input matrix $\mathbf{G}_{1}$
+is bounded by $\left\lfloor m/2\right\rfloor \times\left(3m/2\right)$.
+For computing $\mathbf{N}_{2}$ , the dimension of in put matrix $\mathbf{G}_{2}\mathbf{N}_{1}$
+is bounded by $\left\lceil m/2\right\rceil \times m$. The sum of
+column degrees of $\mathbf{G}_{1}$ and that of $\mathbf{G}_{2}\mathbf{N}_{1}$
+are both bounded by $\xi$ still. Hence, the same computation process
+can be repeated on these two smaller problems. This gives as a recursive
+algorithm, shown in \prettyref{alg:minimalNullspaceBasis}. \include{algorithmNullspaceBasis}
+
+
+\subsection{Overall cost}
+
+In this subsection, we analyze the cost of the algorithm. First we
+consider the case where the column dimension $n$ is not much bigger
+than the row dimension $m$. 
+\begin{lem}
+\label{lem:costLowColDimension}If $n\in O\left(m\right)$, then \prettyref{alg:minimalNullspaceBasis}
+uses $O^{\sim}\left(m^{\omega-1}\xi\right)=O^{\sim}\left(m^{\omega-1}\rho\right)$
+field operations to compute a $\vec{s}$-minimal nullspace basis of
+$\mathbf{F}$.\end{lem}
+\begin{pf}
+We may assume $m$ is a power of 2, which can be achieved by appending
+zero rows to $\mathbf{F}$. Note that $\rho\in\Theta\left(\xi\right)$
+when $n\in O\left(m\right)$. Then \prettyref{line:orderBasis} costs
+$O^{\sim}\left(n^{\omega}s\right)=O^{\sim}\left(m^{\omega-1}\rho\right)$
+and \prettyref{line:multiplyFP2} cost $O^{\sim}\left(nm^{\omega-2}\xi\right)=O^{\sim}\left(m^{\omega-1}\xi\right)$.
+The remaining operations including multiplications on \prettyref{line:multiplyG2N1}
+and \prettyref{line:multiplyP2N1N2} costs $O^{\sim}\left(m^{\omega-1}\xi\right)$.
+Let $g(m,\xi)$ be the computational cost of the original problem,
+then we have the recurrence relation 
+\[
+g(m,\xi)\in O^{\sim}(m^{\omega-1}\xi)+g(m/2,\xi)+g(m/2,\xi),
+\]
+ which gives $g(m,\xi)\in O^{\sim}(m^{\omega-1}\xi)$. Note that $O^{\sim}\left(m^{\omega-1}\xi\right)=O^{\sim}\left(m^{\omega-1}\rho\right)$
+since $\rho\in\Theta\left(\xi\right)$ when $n\in O\left(m\right)$.
+\end{pf}
+We now consider the general case where the column dimension $n$ can
+be much bigger than the row dimension $m$.
+\begin{lem}
+\label{lem:costGeneral}\prettyref{alg:minimalNullspaceBasis} cost
+$O^{\sim}\left(n^{\omega}s\right)$ field operations in general.\end{lem}
+\begin{pf}
+The order basis computation on \prettyref{line:orderBasis} cost $O^{\sim}\left(n^{\omega}s\right)$
+in general, which dominates the cost of other operations. The problem
+is then reduced to have column dimension $O\left(m\right)$, which
+is handled by \prettyref{lem:costLowColDimension} with a cost of
+$O^{\sim}\left(m^{\omega-1}\xi\right)\in O^{\sim}\left(n^{\omega}s\right)$.
+\end{pf}
+We now consider the important special case where the shift $\vec{s}=\left[s,\dots,s\right]$
+is uniform. \prettyref{alg:minimalNullspaceBasis} has a lower cost
+in this case.
+
+First notice that \prettyref{line:orderBasis} cost $O^{\sim}\left(n^{\omega}\left\lceil ms/n\right\rceil \right)$
+using the algorithm from \citet{za2009}. In addition, the multiplication
+at \prettyref{line:multiplyFP2} cost $O^{\sim}\left(nm^{\omega-1}s\right)$.
+\begin{lem}
+\label{lem:multiplyFP2WithUniformShift}If $\mathbf{F}$ has degree
+$s$, then the sum of the column degrees of $\mathbf{P}_{2}$ is bounded
+by $3ms$, and the multiplication of $\mathbf{F}$ and $\mathbf{P}_{2}$
+at \prettyref{line:multiplyFP2} cost \textup{$O^{\sim}\left(nm^{\omega-1}s\right)$.}\end{lem}
+\begin{pf}
+Too see that the sum of the column degrees of $\mathbf{P}_{2}$ is
+bounded by $3ms$, notice that during the order basis computation,
+the sum of the column degree of a $\left(\mathbf{F},3s\right)$-basis
+is increased from zero $3s$ times, each time increase by at most
+$m$. For multiplying $\mathbf{F}$ and $\mathbf{P}_{2}$, \prettyref{lem:multiplyUnbalancedMatrices}
+and its proof still work. The current situation is even simpler as
+we do not need to subdivide $\mathbf{F}$. We just need to separate
+the columns of $\mathbf{P}_{2}$ to $O\left(\log m\right)$ groups
+with degree ranges $\left[0,\dots,2s\right],(2s,4s],\dots,(3ms/2,3ms]$
+, and multiply $\mathbf{F}$ with each group in the same way as before,
+with each of these $O\left(\log m\right)$ multiplications cost $O^{\sim}\left(nm^{\omega-1}s\right)$. \end{pf}
+\begin{lem}
+\label{lem:costOfMinimalNullspaceBasisWithUniformShift}If $\vec{s}=\left[s,\dots,s\right]$
+is uniform, then \prettyref{alg:minimalNullspaceBasis} costs $O^{\sim}\left(n^{\omega}\left\lceil ms/n\right\rceil \right)$. \end{lem}
+\begin{pf}
+After the initial order basis computation, which costs $O^{\sim}\left(n^{\omega}\left\lceil ms/n\right\rceil \right),$
+and the multiplication of $\mathbf{F}$ and $\mathbf{P}_{2}$, which
+costs $O^{\sim}\left(nm^{\omega-1}s\right)$ from \prettyref{lem:multiplyFP2WithUniformShift},
+the column dimension is reduced to $O\left(m\right)$, allowing \prettyref{lem:costLowColDimension}
+to apply. Hence the remaining work costs $O^{\sim}\left(m^{\omega}s\right)$.
+The overall cost is therefore dominated by the cost $O^{\sim}\left(n^{\omega}\left\lceil ms/n\right\rceil \right)$
+of the initial order basis computation.\end{pf}
+\begin{cor}
+\label{cor:costOfMinimalNullspaceBasis}If the input matrix $\mathbf{F}$
+has degree $s$, then a minimal nullspace basis of $\mathbf{F}$ can
+be computed with a cost of $O^{\sim}\left(n^{\omega}\left\lceil ms/n\right\rceil \right)$. \end{cor}
+\begin{pf}
+We can just set the shift $\vec{s}$ to $\left[s,\dots,s\right]$
+and apply \prettyref{lem:costOfMinimalNullspaceBasisWithUniformShift}.\end{pf}
+

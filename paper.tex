@@ -1,0 +1,96 @@
+%% LyX 2.0.0 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english,amsthm,seceqn,secthm]{elsart}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{color}
+\usepackage{verbatim}
+\usepackage{prettyref}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[authoryear]{natbib}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+\floatstyle{ruled}
+\newfloat{algorithm}{tbp}{loa}
+\providecommand{\algorithmname}{Algorithm}
+\floatname{algorithm}{\protect\algorithmname}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+ \let\AND\relax 
+ \usepackage{algorithmic}
+\floatstyle{ruled}
+\newfloat{algorithm}{tbp}{loa}
+\floatname{algorithm}{Algorithm}
+\usepackage{algorithmic}
+\newcommand{\forbody}[1]{ #1 \ENDFOR }
+\newcommand{\ifbody}[1]{ #1  \ENDIF}
+\newcommand{\whilebody}[1]{ #1  \ENDWHILE}
+\renewcommand{\algorithmicprint}{\textbf{draw}}
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{yjsco}\journal{JournalofSymbolicComputation}
+
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}\renewcommand{\algorithmicensure}{\textbf{Output:}}
+%\renewcommand{\algorithmicensure}{\textbf{if}}\renewcommand{\algorithmicensure}{\textbf{Uses:}}
+
+\def\diag{\mbox{diag}}\def\cdeg{\qopname\relax n{cdeg}}
+\def\MM{\qopname\relax n{MM}}\def\M{\qopname\relax n{M}}\def\ord{\qopname\relax n{ord}}
+
+\def\StorjohannTransform{\qopname\relax n{StorjohannTransform}}\def\TransformUnbalanced{\qopname\relax n{TransformUnbalanced}}\def\rowDimension{\qopname\relax n{rowDimension}}\def\columnDimension{\qopname\relax n{columnDimension}}\DeclareMathOperator{\re}{rem}\DeclareMathOperator{\coeff}{coeff}\DeclareMathOperator{\lcoeff}{lcoeff}\def\mab{\qopname\relax n{orderBasis}}\def\mmab{\qopname\relax n{FastBasis}}\def\umab{\qopname\relax n{UnbalancedFastBasis}}\newcommand{\bb}{\\}
+\def\mnb{\qopname\relax n{minNullspaceBasis}}
+\makeatother
+
+\makeatother
+
+\usepackage{babel}
+\begin{document}
+\begin{frontmatter}
+
+\title{Computing Minimal Nullspace Bases}
+
+
+\author{Wei Zhou and George Labahn}
+
+
+\address{{Cheriton School of Computer Science}\\
+ {University of Waterloo},\\
+ {Waterloo, Ontario, Canada}}
+
+\ead{\{w2zhou,glabahn\}@uwaterloo.ca }
+
+\begin{abstract}
+In this paper we present a deterministic algorithm for the computation
+of a minimal nullspace basis of an $m\times n$ input matrix of polynomials
+over a field $\mathbb{K}$ with $m\le n$. This algorithm computes
+a minimal nullspace basis of a degree $s$ input matrix with a cost
+of $O^{\sim}\left(n^{\omega}\left\lceil ms/n\right\rceil \right)$
+field operations in $\mathbb{K}$. The same algorithm also works in
+the more general situation on computing a shifted minimal nullspace
+basis, with a given degree shift $\vec{s}\in\mathbb{Z}^{n}$ whose
+entries bound the corresponding column degrees of the input matrix.
+If $\rho$ is the sum of $m$ largest entries of $\vec{s}$, then
+a $\vec{s}$-minimal right nullspace basis can be computed with a
+cost of $O^{\sim}(n^{\omega}\rho/m)$ field operations. 
+\end{abstract}
+\end{frontmatter}
+\input{introduction.tex}
+
+\input{preliminaries.tex}
+
+\newpage{}
+
+\input{computing.tex}
+
+\newpage{}
+
+\bibliographystyle{plainnat}
+\bibliography{paper}
+
+\end{document}
