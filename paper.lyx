@@ -164,6 +164,7 @@ status collapsed
 
 \begin_layout Author Email
 
+
 \backslash
 {w2zhou,glabahn
 \backslash
@@ -259,6 +260,12 @@ filename "computing.lyx"
 \end_layout
 
 \begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "conclusion.lyx"
+
+\end_inset
+
 
 \end_layout
 

@@ -628,10 +628,10 @@ the column dimension is reduced to $O\left(m\right)$, allowing \prettyref{lem:co
 to apply for computing a . Hence the remaining work costs $O^{\sim}\left(m^{\omega}s\right)$.
 The overall cost is therefore dominated by the cost $O^{\sim}\left(n^{\omega}\left\lceil ms/n\right\rceil \right)$
 of the initial order basis computation.\end{pf}
-\begin{cor}
+\begin{thm}
 \label{cor:costOfMinimalNullspaceBasis}If the input matrix $\mathbf{F}$
 has degree $d$, then a minimal nullspace basis of $\mathbf{F}$ can
-be computed with a cost of $O^{\sim}\left(n^{\omega}\left\lceil md/n\right\rceil \right)$. \end{cor}
+be computed with a cost of $O^{\sim}\left(n^{\omega}\left\lceil md/n\right\rceil \right)$. \end{thm}
 \begin{pf}
 We can just set the shift $\vec{s}$ to $\left[d,\dots,d\right]$
 and apply \prettyref{lem:costOfMinimalNullspaceBasisWithUniformShift}.\end{pf}

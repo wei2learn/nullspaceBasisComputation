@@ -4143,7 +4143,7 @@ reference "lem:costLowColDimension"
  of the initial order basis computation.
 \end_layout
 
-\begin_layout Corollary
+\begin_layout Theorem
 \begin_inset CommandInset label
 LatexCommand label
 name "cor:costOfMinimalNullspaceBasis"
