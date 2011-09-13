@@ -25,7 +25,7 @@ $\mathbf{F}\mathbf{p}=0$;}
 
 \STATE{ $\vec{t}=\deg_{\vec{s}}\mathbf{P}_{2}-\left[3s,3s,\dots,3s\right];$}
 
-\label{line:multiplyFP2}\STATE{$\mathbf{G}:=\mathbf{F}\mathbf{P}_{2}$;}
+\label{line:multiplyFP2}\STATE{$\mathbf{G}:=\mathbf{F}\mathbf{P}_{2}/x^{3s}$;}
 
 \STATE{$\left[\mathbf{G}_{1}^{T},\mathbf{G}_{2}^{T}\right]^{T}:=\mathbf{G}$,
 with $\mathbf{G}_{1}$ having $\left\lfloor m/2\right\rfloor $ rows
@@ -35,7 +35,9 @@ and $\mathbf{G}_{2}$ having $\left\lceil m/2\right\rceil $ rows;}
 
 \label{line:multiplyG2N1}\STATE{$\left[\mathbf{N}_{2},\vec{v}\right]:=\mnb\left(\mathbf{G}_{2}\mathbf{N}_{1},\vec{u}\right);$}
 
-\label{line:multiplyP2N1N2}\RETURN $\left[\mathbf{P}_{1},\mathbf{P}_{2}\mathbf{N}_{1}\mathbf{N}_{2}\right],\left[\deg_{\vec{s}}\mathbf{P}_{1},\vec{v}\right]$
+\label{line:multiplyN1N2}\STATE{$\mathbf{Q}:=\mathbf{N}_{1}\mathbf{N}_{2}$;}
+
+\label{line:multiplyP2Q}\RETURN $\left[\mathbf{P}_{1},\mathbf{P}_{2}\mathbf{Q}\right],\left[\deg_{\vec{s}}\mathbf{P}_{1},\vec{v}\right]$
 \end{algorithmic}
 \end{algorithm}
 

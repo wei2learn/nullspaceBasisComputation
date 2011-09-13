@@ -331,7 +331,7 @@ name "line:multiplyFP2"
 status open
 
 \begin_layout Plain Layout
-\begin_inset Formula $\mathbf{G}:=\mathbf{F}\mathbf{P}_{2}$
+\begin_inset Formula $\mathbf{G}:=\mathbf{F}\mathbf{P}_{2}/x^{3s}$
 \end_inset
 
 ;
@@ -416,7 +416,30 @@ status open
 \begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
-name "line:multiplyP2N1N2"
+name "line:multiplyN1N2"
+
+\end_inset
+
+
+\begin_inset Flex STATE
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula $\mathbf{Q}:=\mathbf{N}_{1}\mathbf{N}_{2}$
+\end_inset
+
+;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "line:multiplyP2Q"
 
 \end_inset
 
@@ -434,7 +457,7 @@ RETURN
 \end_inset
 
  
-\begin_inset Formula $\left[\mathbf{P}_{1},\mathbf{P}_{2}\mathbf{N}_{1}\mathbf{N}_{2}\right],\left[\deg_{\vec{s}}\mathbf{P}_{1},\vec{v}\right]$
+\begin_inset Formula $\left[\mathbf{P}_{1},\mathbf{P}_{2}\mathbf{Q}\right],\left[\deg_{\vec{s}}\mathbf{P}_{1},\vec{v}\right]$
 \end_inset
 
 

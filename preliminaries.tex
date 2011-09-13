@@ -28,31 +28,25 @@ ingredient in our computation.
 \subsection{Order Basis}
 
 Let $\mathbb{K}$ be a field, $\mathbf{F}\in\mathbb{K}\left[\left[x\right]\right]^{m\times n}$
-a matrix of power series and $\vec{\sigma}=\left[\sigma_{1},\dots,\sigma_{m}\right]$
-a vector of non-negative integers. 
+a matrix of power series and $x^{\sigma}$ a non-negative integers. 
 \begin{defn}
 A vector of polynomials $\mathbf{p}\in\mathbb{K}\left[x\right]^{n\times1}$
-has \emph{order} $\left(\mathbf{F},\vec{\sigma}\right)$ (or \emph{order}
-$\vec{\sigma}$ with respect to $\mathbf{F}$) if $\mathbf{F}\cdot\mathbf{p}\equiv\mathbf{0}\mod x^{\vec{\sigma}}$,
+has \emph{order} $\left(\mathbf{F},\sigma\right)$ (or \emph{order}
+$\sigma$ with respect to $\mathbf{F}$) if $\mathbf{F}\cdot\mathbf{p}\equiv\mathbf{0}\mod x^{\sigma}$,
 that is, 
 \[
-\mathbf{F}\cdot\mathbf{p}=x^{\vec{\sigma}}\mathbf{r}=\begin{bmatrix}x^{\sigma_{1}}\\
- & \ddots\\
- &  & x^{\sigma_{m}}
-\end{bmatrix}\mathbf{r}
+\mathbf{F}\cdot\mathbf{p}=x^{\sigma}\mathbf{r}
 \]
  for some $\mathbf{r}\in\mathbb{K}\left[\left[x\right]\right]^{m\times1}$.
-If $\vec{\sigma}=\left[\sigma,\dots,\sigma\right]$ is uniform, then
-we say that $\mathbf{p}$ has order $\left(\mathbf{F},\sigma\right).$
 \begin{comment}
 The vector of power series $\mathbf{r}$ is called the order $\left(\mathbf{F},\sigma\right)$-residual
 of \textbf{$\mathbf{p}$}. 
 \end{comment}
-{} The set of all order $\left(\mathbf{F},\vec{\sigma}\right)$ vectors
-is a $\mathbb{K}\left[x\right]$-module denoted by $\left\langle \left(\mathbf{F},\vec{\sigma}\right)\right\rangle $. 
+{} The set of all order $\left(\mathbf{F},\sigma\right)$ vectors is
+a $\mathbb{K}\left[x\right]$-module denoted by $\left\langle \left(\mathbf{F},\sigma\right)\right\rangle $. 
 \end{defn}
-An order basis for $\mathbf{F}$ and $\vec{\sigma}$ is simply a basis
-for the module $\left\langle \left(\mathbf{F},\vec{\sigma}\right)\right\rangle $.
+An order basis for $\mathbf{F}$ and $\sigma$ is simply a basis for
+the module $\left\langle \left(\mathbf{F},\sigma\right)\right\rangle $.
 In this paper we compute those order bases having a type of minimality
 degree condition (also referred to as a reduced order basis in \citep{BL1997}).
 While minimality is often given in terms of the degrees alone it is
@@ -80,31 +74,40 @@ $\mathbf{P}$ is $\vec{s}$-column reduced if and only if $x^{\vec{s}}\cdot\mathbf
 is column reduced\citep{BLV:1999,BLV:jsc06}. 
 
 An \emph{order basis} \citep{BeLa94,BL1997} $\mathbf{P}$ of $\mathbf{F}$
-with order $\vec{\sigma}$ and shift $\vec{s}$, or simply an $\left(\mathbf{F},\vec{\sigma},\vec{s}\right)$-basis,
-is a basis for the module $\left\langle \left(\mathbf{F},\vec{\sigma}\right)\right\rangle $
+with order $\sigma$ and shift $\vec{s}$, or simply an $\left(\mathbf{F},\sigma,\vec{s}\right)$-basis,
+is a basis for the module $\left\langle \left(\mathbf{F},\sigma\right)\right\rangle $
 \begin{comment}
 \[
 \left\langle \left(\mathbf{F},\vec{\sigma}\right)\right\rangle =\{\mathbf{p}\in\mathbb{K}\left[x\right]^{n\times1}\|\mathbf{F}\cdot\mathbf{p}=x^{\vec{\sigma}}\mathbf{r},\mathbf{r}\in\mathbb{K}[[x]]^{m\times1}\}
 \]
 \end{comment}
-{} having minimal $\vec{s}$-column degrees. If $\vec{\sigma}=\left[\sigma,\dots,\sigma\right]$
-are constant vectors then we simply write $\left(\mathbf{F},\sigma,\vec{s}\right)$-basis.
+{} having minimal $\vec{s}$-column degrees.%
+\begin{comment}
+ If $\vec{\sigma}=\left[\sigma,\dots,\sigma\right]$ are constant
+vectors then we simply write $\left(\mathbf{F},\sigma,\vec{s}\right)$-basis.
 The precise definition of an $\left(\mathbf{F},\vec{\sigma},\vec{s}\right)$-basis
 is as follows.
+\end{comment}
+
 \begin{defn}
 A polynomial matrix $\mathbf{P}$ is an order basis of $\mathbf{F}$
-of order $\sigma$ and shift $\vec{s}$, denoted by $\left(\mathbf{F},\vec{\sigma},\vec{s}\right)$-basis,
+of order $\sigma$ and shift $\vec{s}$, denoted by $\left(\mathbf{F},\sigma,\vec{s}\right)$-basis,
 if the following properties hold:
 \begin{enumerate}
 \item $\mathbf{P}$ is a nonsingular matrix of dimension $n$.
 \item $\mathbf{P}$ is $\vec{s}$-column reduced. 
-\item $\mathbf{P}$ has order $\left(\mathbf{F},\vec{\sigma}\right)$ (or
-equivalently, each column of $\mathbf{P}$ is in $\left\langle (\mathbf{F},\vec{\sigma})\right\rangle $). 
-\item Any $\mathbf{q}\in\left\langle \left(\mathbf{F},\vec{\sigma}\right)\right\rangle $
+\item $\mathbf{P}$ has order $\left(\mathbf{F},\sigma\right)$ (or equivalently,
+each column of $\mathbf{P}$ is in $\left\langle (\mathbf{F},\sigma)\right\rangle $). 
+\item Any $\mathbf{q}\in\left\langle \left(\mathbf{F},\sigma\right)\right\rangle $
 can be expressed as a linear combination of the columns of $\mathbf{P}$,
 given by $\mathbf{P}^{-1}\mathbf{q}$. 
 \end{enumerate}
 \end{defn}
+Note that the definition of order can be easily extended to having
+a different order for each row of $\mathbf{F}\mathbf{P}$ as in \citep{za2009},
+but a single uniform order is sufficient for our discussion of minimal
+nullspace basis computation in this paper. %
+\begin{comment}
 The following is a special case of the main result from \citep{BL1997},
 a useful result for computing order bases. It can be also easily extended
 to compute nullspace basis. We have included a proof for completeness.
@@ -142,10 +145,32 @@ implies that $\mathbf{a}\in\left\langle \left(\mathbf{FP},\vec{\tau}\right)\righ
 since $\mathbf{F}\mathbf{P}\mathbf{a}=\mathbf{F}\mathbf{t}\equiv0\mod x^{\vec{\tau}}$.
 It follows that $\mathbf{a}=\mathbf{Q}\mathbf{b}$ for $\mathbf{b}=\mathbf{Q}^{-1}\mathbf{a}\in\mathbb{K}\left[x\right]^{n}$.
 Therefore, $\mathbf{a}=\mathbf{P}^{-1}\mathbf{t}=\mathbf{Q}\mathbf{b}$,
-which gives $\mathbf{t}=\mathbf{P}\mathbf{Q}\mathbf{b}$.
-\end{pf}
+which gives $\mathbf{t}=\mathbf{P}\mathbf{Q}\mathbf{b}$.\end{pf}
+\end{comment}
+
+
+From \citep{BL1997} we have the following lemma. 
+\begin{lem}
+\label{lem:orderBasisProperty} 
+
+\label{lem:orderBasisEquivalence}The following are equivalent for
+a polynomial matrix \textbf{$\mathbf{P}$}: 
+\begin{enumerate}
+\item $\mathbf{P}$ is a $\left(\mathbf{F},\vec{\sigma},\vec{s}\right)$-basis. 
+\item $\mathbf{P}$ is comprised of a set of $n$ minimal $\vec{s}$-degree
+polynomial vectors that are linearly independent and each having order
+$\left(\mathbf{F},\vec{\sigma}\right)$. 
+\item \label{enu:reduced+generator}$\mathbf{P}$ does not contain a zero
+column, has order $\left(\mathbf{F},\vec{\sigma}\right)$, is $\vec{s}$-column
+reduced, and any $\mathbf{q}\in\left\langle \left(\mathbf{F},\vec{\sigma}\right)\right\rangle $
+can be expressed as a linear combination of the columns of $\mathbf{P}$. 
+\end{enumerate}
+\end{lem}
 
 \subsection{Nullspace Basis}
+
+Nullspace bases are closely related with order bases, as can be seen
+from the following definition.
 \begin{defn}
 A polynomial matrix $\mathbf{N}$ is a $\vec{s}$-minimal nullspace
 basis of $\mathbf{F}\in\mathbb{K}\left[x\right]^{m\times n}$ if the
@@ -165,67 +190,10 @@ does not depend on the shift $\vec{s}$.
 \end{comment}
 
 
-Although we allow different orders for each row in this definition,
-we focus on order basis computation problems having uniform order.
-However special cases of non-uniform order problems are still needed
-in our analysis. We also assume $m\le n$ for simplicity. The case
-of $m>n$ can be transformed to the case of $m\le n$ by compression
-\citep{storjohann-villard:2005}. We further assume, without any loss
-of generality, that $n/m$ and $\sigma$ are powers of two. This can
-be achieved by padding zero rows to the input matrix and multiplying
-it by some power of $x$.
-
-From \citep{BL1997} we have the following lemma. 
-\begin{lem}
-\label{lem:orderBasisProperty} 
-
-\label{lem:orderBasisEquivalence}The following are equivalent for
-a polynomial matrix \textbf{$\mathbf{P}$}: 
-\begin{enumerate}
-\item $\mathbf{P}$ is a $\left(\mathbf{F},\vec{\sigma},\vec{s}\right)$-basis. 
-\item $\mathbf{P}$ is comprised of a set of $n$ minimal $\vec{s}$-degree
-polynomial vectors that are linearly independent and each having order
-$\left(\mathbf{F},\vec{\sigma}\right)$. 
-\item \label{enu:reduced+generator}$\mathbf{P}$ does not contain a zero
-column, has order $\left(\mathbf{F},\vec{\sigma}\right)$, is $\vec{s}$-column
-reduced, and any $\mathbf{q}\in\left\langle \left(\mathbf{F},\vec{\sigma}\right)\right\rangle $
-can be expressed as a linear combination of the columns of $\mathbf{P}$. 
-\end{enumerate}
-\end{lem}
-In some cases an entire order basis is unnecessary and instead one
-looks for a minimal basis that generates only the elements of $\left\langle \left(\mathbf{F},\vec{\sigma}\right)\right\rangle $
-with $\vec{s}$-degrees bounded by a given $\delta$. Such a minimal
-basis is a partial $\left(\mathbf{F},\vec{\sigma},\vec{s}\right)$-basis
-comprised of elements of a $\left(\mathbf{F},\vec{\sigma},\vec{s}\right)$-basis
-with $\vec{s}$-degrees bounded by $\delta$. This is called a \emph{minbasis}
-in \citet{Storjohann:2006}. 
-\begin{defn}
-\label{def:genset} Let $\left\langle \left(\mathbf{F},\vec{\sigma},\vec{s}\right)\right\rangle _{\delta}\subset\left\langle \left(\mathbf{F},\vec{\sigma}\right)\right\rangle $
-denote the set of order $\left(\mathbf{F},\vec{\sigma}\right)$ polynomial
-vectors with $\vec{s}$-degree bounded by $\delta$. A $\left(\mathbf{F},\vec{\sigma},\vec{s}\right)_{\delta}$-basis
-is a polynomial matrix $\mathbf{P}$ not containing a zero column
-and satisfying: 
-\begin{enumerate}
-\item $\mathbf{P}$ has order $\left(\mathbf{F},\vec{\sigma}\right).$ 
-\item Any element of $\left\langle \left(\mathbf{F},\vec{\sigma},\vec{s}\right)\right\rangle _{\delta}$
-can be expressed as a linear combination of the columns of $\mathbf{P}$. 
-\item $\mathbf{P}$ is $\vec{s}$-column reduced. 
-\end{enumerate}
-\end{defn}
-\begin{comment}
-As before, the linear combination here is in fact unique. 
-\end{comment}
-A $\left(\mathbf{F},\vec{\sigma},\vec{s}\right)_{\delta}$-basis is,
-in general, not square unless $\delta$ is large enough to contain
-all $n$ basis elements in which case it is a complete $\left(\mathbf{F},\vec{\sigma},\vec{s}\right)$-basis.
-
-
-\subsection{Computing Minimal Nullspace Basis Via Order Basis}
-
 Minimal nullspace bases can be directly computed via order basis computation
 using the following fact: If the order $\sigma$ of a $\left(\mathbf{F},\sigma,\vec{s}\right)$-basis
 $\mathbf{P}$ is high enough, then $\mathbf{P}$ contains a $\vec{s}$-minimal
-nullspace basis $\mathbf{N}$. However, this approach usually requires
+nullspace basis $\mathbf{N}$. However, this approach may require
 the order $\sigma$ to be quite high. For example, if $\mathbf{F}$
 has degree $d$ and $\vec{s}$ is uniform, its minimal nullspace bases
 can have degree up to $md$, hence the order $\sigma$ need to be
@@ -235,11 +203,10 @@ cost $O^{\sim}\left(n^{\omega-1}\left\lceil m^{2}d/n\right\rceil \right)$
 using the algorithm from \citep{za2009}. We can see from this cost
 that there is room for improvement when $m$ is large. For example,
 in the worst case when $m\in\Theta\left(n\right)$, this cost would
-be $O^{\sim}\left(n^{\omega+1}d\right)$. We can also locate the root
-cause for this inefficiency in the actual order basis computation.
-Notice that when $m$ is large, the nullspace basis, which can have
-a column dimension of $n-m$, is a much smaller subset of the order
-basis computed. Hence much effort is put in the computation of order
-basis elements that are not part of a nullspace basis. The key to
-reduce the cost is therefore to reduce such computation of unneeded
-order basis elements.
+be $O^{\sim}\left(n^{\omega+1}d\right)$. This points to the root
+cause for the inefficiency in this approach. Notice that when $m$
+is large, the nullspace basis, which can have a column dimension of
+$n-m$, is a much smaller subset of the order basis computed. Hence
+much effort is put in the computation of order basis elements that
+are not part of a nullspace basis. The key to reduce the cost is therefore
+to reduce such computation of unneeded order basis elements.

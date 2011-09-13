@@ -150,10 +150,10 @@ Let
 \end_inset
 
  a matrix of power series and 
-\begin_inset Formula $\vec{\sigma}=\left[\sigma_{1},\dots,\sigma_{m}\right]$
+\begin_inset Formula $x^{\sigma}$
 \end_inset
 
- a vector of non-negative integers.
+ a non-negative integers.
  
 \end_layout
 
@@ -167,7 +167,7 @@ A vector of polynomials
 order
 \emph default
  
-\begin_inset Formula $\left(\mathbf{F},\vec{\sigma}\right)$
+\begin_inset Formula $\left(\mathbf{F},\sigma\right)$
 \end_inset
 
  (or 
@@ -175,7 +175,7 @@ order
 order
 \emph default
  
-\begin_inset Formula $\vec{\sigma}$
+\begin_inset Formula $\sigma$
 \end_inset
 
  with respect to 
@@ -183,16 +183,13 @@ order
 \end_inset
 
 ) if 
-\begin_inset Formula $\mathbf{F}\cdot\mathbf{p}\equiv\mathbf{0}\mod x^{\vec{\sigma}}$
+\begin_inset Formula $\mathbf{F}\cdot\mathbf{p}\equiv\mathbf{0}\mod x^{\sigma}$
 \end_inset
 
 , that is, 
 \begin_inset Formula 
 \[
-\mathbf{F}\cdot\mathbf{p}=x^{\vec{\sigma}}\mathbf{r}=\begin{bmatrix}x^{\sigma_{1}}\\
- & \ddots\\
- &  & x^{\sigma_{m}}
-\end{bmatrix}\mathbf{r}
+\mathbf{F}\cdot\mathbf{p}=x^{\sigma}\mathbf{r}
 \]
 
 \end_inset
@@ -202,18 +199,6 @@ order
 \end_inset
 
 .
- If 
-\begin_inset Formula $\vec{\sigma}=\left[\sigma,\dots,\sigma\right]$
-\end_inset
-
- is uniform, then we say that 
-\begin_inset Formula $\mathbf{p}$
-\end_inset
-
- has order 
-\begin_inset Formula $\left(\mathbf{F},\sigma\right).$
-\end_inset
-
  
 \begin_inset Note Comment
 status collapsed
@@ -242,7 +227,7 @@ The vector of power series
 \end_inset
 
  The set of all order 
-\begin_inset Formula $\left(\mathbf{F},\vec{\sigma}\right)$
+\begin_inset Formula $\left(\mathbf{F},\sigma\right)$
 \end_inset
 
  vectors is a 
@@ -250,7 +235,7 @@ The vector of power series
 \end_inset
 
 -module denoted by 
-\begin_inset Formula $\left\langle \left(\mathbf{F},\vec{\sigma}\right)\right\rangle $
+\begin_inset Formula $\left\langle \left(\mathbf{F},\sigma\right)\right\rangle $
 \end_inset
 
 .
@@ -263,11 +248,11 @@ An order basis for
 \end_inset
 
  and 
-\begin_inset Formula $\vec{\sigma}$
+\begin_inset Formula $\sigma$
 \end_inset
 
  is simply a basis for the module 
-\begin_inset Formula $\left\langle \left(\mathbf{F},\vec{\sigma}\right)\right\rangle $
+\begin_inset Formula $\left\langle \left(\mathbf{F},\sigma\right)\right\rangle $
 \end_inset
 
 .
@@ -449,7 +434,7 @@ key "BeLa94,BL1997"
 \end_inset
 
  with order 
-\begin_inset Formula $\vec{\sigma}$
+\begin_inset Formula $\sigma$
 \end_inset
 
  and shift 
@@ -457,11 +442,11 @@ key "BeLa94,BL1997"
 \end_inset
 
 , or simply an 
-\begin_inset Formula $\left(\mathbf{F},\vec{\sigma},\vec{s}\right)$
+\begin_inset Formula $\left(\mathbf{F},\sigma,\vec{s}\right)$
 \end_inset
 
 -basis, is a basis for the module 
-\begin_inset Formula $\left\langle \left(\mathbf{F},\vec{\sigma}\right)\right\rangle $
+\begin_inset Formula $\left\langle \left(\mathbf{F},\sigma\right)\right\rangle $
 \end_inset
 
  
@@ -486,6 +471,10 @@ status collapsed
 \end_inset
 
 -column degrees.
+\begin_inset Note Comment
+status collapsed
+
+\begin_layout Plain Layout
  If 
 \begin_inset Formula $\vec{\sigma}=\left[\sigma,\dots,\sigma\right]$
 \end_inset
@@ -500,6 +489,11 @@ status collapsed
 \end_inset
 
 -basis is as follows.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Definition
@@ -520,7 +514,7 @@ A polynomial matrix
 \end_inset
 
 , denoted by 
-\begin_inset Formula $\left(\mathbf{F},\vec{\sigma},\vec{s}\right)$
+\begin_inset Formula $\left(\mathbf{F},\sigma,\vec{s}\right)$
 \end_inset
 
 -basis, if the following properties hold:
@@ -555,7 +549,7 @@ A polynomial matrix
 \end_inset
 
  has order 
-\begin_inset Formula $\left(\mathbf{F},\vec{\sigma}\right)$
+\begin_inset Formula $\left(\mathbf{F},\sigma\right)$
 \end_inset
 
  (or equivalently, each column of 
@@ -563,7 +557,7 @@ A polynomial matrix
 \end_inset
 
  is in 
-\begin_inset Formula $\left\langle (\mathbf{F},\vec{\sigma})\right\rangle $
+\begin_inset Formula $\left\langle (\mathbf{F},\sigma)\right\rangle $
 \end_inset
 
 ).
@@ -572,7 +566,7 @@ A polynomial matrix
 
 \begin_layout Enumerate
 Any 
-\begin_inset Formula $\mathbf{q}\in\left\langle \left(\mathbf{F},\vec{\sigma}\right)\right\rangle $
+\begin_inset Formula $\mathbf{q}\in\left\langle \left(\mathbf{F},\sigma\right)\right\rangle $
 \end_inset
 
  can be expressed as a linear combination of the columns of 
@@ -589,6 +583,25 @@ Any
 
 \end_deeper
 \begin_layout Standard
+Note that the definition of order can be easily extended to having a different
+ order for each row of 
+\begin_inset Formula $\mathbf{F}\mathbf{P}$
+\end_inset
+
+ as in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "za2009"
+
+\end_inset
+
+, but a single uniform order is sufficient for our discussion of minimal
+ nullspace basis computation in this paper.
+ 
+\begin_inset Note Comment
+status collapsed
+
+\begin_layout Plain Layout
 The following is a special case of the main result from 
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -842,143 +855,9 @@ It remains to show that any
 .
 \end_layout
 
-\begin_layout Subsection
-Nullspace Basis
-\end_layout
-
-\begin_layout Definition
-A polynomial matrix 
-\begin_inset Formula $\mathbf{N}$
-\end_inset
-
- is a 
-\begin_inset Formula $\vec{s}$
-\end_inset
-
--minimal nullspace basis of 
-\begin_inset Formula $\mathbf{F}\in\mathbb{K}\left[x\right]^{m\times n}$
-\end_inset
-
- if the following properties hold:
-\end_layout
-
-\begin_layout Enumerate
-\begin_inset Formula $\mathbf{N}$
-\end_inset
-
- is full-rank.
-\end_layout
-
-\begin_layout Enumerate
-\begin_inset Formula $\mathbf{N}$
-\end_inset
-
- is 
-\begin_inset Formula $\vec{s}$
-\end_inset
-
--column reduced.
- 
-\end_layout
-
-\begin_layout Enumerate
-\begin_inset Formula $\mathbf{N}$
-\end_inset
-
- satisfies 
-\begin_inset Formula $\mathbf{F}\mathbf{N}=0$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Enumerate
-Any 
-\begin_inset Formula $\mathbf{q}\in\mathbb{K}\left[x\right]^{n}$
-\end_inset
-
- satisfying 
-\begin_inset Formula $\mathbf{F}\mathbf{q}=0$
-\end_inset
-
- can be expressed as a linear combination of the columns of 
-\begin_inset Formula $\mathbf{N}$
-\end_inset
-
-, that is, there exists some polynomial vector 
-\begin_inset Formula $\mathbf{a}$
-\end_inset
-
- such that 
-\begin_inset Formula $\mathbf{q}=\mathbf{N}\mathbf{a}$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Comment
-status collapsed
-
-\begin_layout Plain Layout
-Note that the module 
-\begin_inset Formula $\left\langle \left(\mathbf{F},\vec{\sigma}\right)\right\rangle $
-\end_inset
-
- does not depend on the shift 
-\begin_inset Formula $\vec{s}$
-\end_inset
-
-.
- 
-\end_layout
-
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-Although we allow different orders for each row in this definition, we focus
- on order basis computation problems having uniform order.
- However special cases of non-uniform order problems are still needed in
- our analysis.
- We also assume 
-\begin_inset Formula $m\le n$
-\end_inset
-
- for simplicity.
- The case of 
-\begin_inset Formula $m>n$
-\end_inset
-
- can be transformed to the case of 
-\begin_inset Formula $m\le n$
-\end_inset
-
- by compression 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "storjohann-villard:2005"
-
-\end_inset
-
-.
- We further assume, without any loss of generality, that 
-\begin_inset Formula $n/m$
-\end_inset
-
- and 
-\begin_inset Formula $\sigma$
-\end_inset
-
- are powers of two.
- This can be achieved by padding zero rows to the input matrix and multiplying
- it by some power of 
-\begin_inset Formula $x$
-\end_inset
-
-.
 \end_layout
 
 \begin_layout Standard
@@ -1087,115 +966,40 @@ name "enu:reduced+generator"
 \end_layout
 
 \end_deeper
+\begin_layout Subsection
+Nullspace Basis
+\end_layout
+
 \begin_layout Standard
-In some cases an entire order basis is unnecessary and instead one looks
- for a minimal basis that generates only the elements of 
-\begin_inset Formula $\left\langle \left(\mathbf{F},\vec{\sigma}\right)\right\rangle $
-\end_inset
-
- with 
-\begin_inset Formula $\vec{s}$
-\end_inset
-
--degrees bounded by a given 
-\begin_inset Formula $\delta$
-\end_inset
-
-.
- Such a minimal basis is a partial 
-\begin_inset Formula $\left(\mathbf{F},\vec{\sigma},\vec{s}\right)$
-\end_inset
-
--basis comprised of elements of a 
-\begin_inset Formula $\left(\mathbf{F},\vec{\sigma},\vec{s}\right)$
-\end_inset
-
--basis with 
-\begin_inset Formula $\vec{s}$
-\end_inset
-
--degrees bounded by 
-\begin_inset Formula $\delta$
-\end_inset
-
-.
- This is called a 
-\emph on
-minbasis
-\emph default
- in 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "Storjohann:2006"
-
-\end_inset
-
-.
- 
+Nullspace bases are closely related with order bases, as can be seen from
+ the following definition.
 \end_layout
 
 \begin_layout Definition
-\begin_inset CommandInset label
-LatexCommand label
-name "def:genset"
-
+A polynomial matrix 
+\begin_inset Formula $\mathbf{N}$
 \end_inset
 
- Let 
-\begin_inset Formula $\left\langle \left(\mathbf{F},\vec{\sigma},\vec{s}\right)\right\rangle _{\delta}\subset\left\langle \left(\mathbf{F},\vec{\sigma}\right)\right\rangle $
-\end_inset
-
- denote the set of order 
-\begin_inset Formula $\left(\mathbf{F},\vec{\sigma}\right)$
-\end_inset
-
- polynomial vectors with 
+ is a 
 \begin_inset Formula $\vec{s}$
 \end_inset
 
--degree bounded by 
-\begin_inset Formula $\delta$
+-minimal nullspace basis of 
+\begin_inset Formula $\mathbf{F}\in\mathbb{K}\left[x\right]^{m\times n}$
 \end_inset
 
-.
- A 
-\begin_inset Formula $\left(\mathbf{F},\vec{\sigma},\vec{s}\right)_{\delta}$
-\end_inset
-
--basis is a polynomial matrix 
-\begin_inset Formula $\mathbf{P}$
-\end_inset
-
- not containing a zero column and satisfying: 
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-\begin_inset Formula $\mathbf{P}$
-\end_inset
-
- has order 
-\begin_inset Formula $\left(\mathbf{F},\vec{\sigma}\right).$
-\end_inset
-
- 
+ if the following properties hold:
 \end_layout
 
 \begin_layout Enumerate
-Any element of 
-\begin_inset Formula $\left\langle \left(\mathbf{F},\vec{\sigma},\vec{s}\right)\right\rangle _{\delta}$
+\begin_inset Formula $\mathbf{N}$
 \end_inset
 
- can be expressed as a linear combination of the columns of 
-\begin_inset Formula $\mathbf{P}$
-\end_inset
-
-.
- 
+ is full-rank.
 \end_layout
 
 \begin_layout Enumerate
-\begin_inset Formula $\mathbf{P}$
+\begin_inset Formula $\mathbf{N}$
 \end_inset
 
  is 
@@ -1206,39 +1010,61 @@ Any element of
  
 \end_layout
 
-\end_deeper
+\begin_layout Enumerate
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+ satisfies 
+\begin_inset Formula $\mathbf{F}\mathbf{N}=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Any 
+\begin_inset Formula $\mathbf{q}\in\mathbb{K}\left[x\right]^{n}$
+\end_inset
+
+ satisfying 
+\begin_inset Formula $\mathbf{F}\mathbf{q}=0$
+\end_inset
+
+ can be expressed as a linear combination of the columns of 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+, that is, there exists some polynomial vector 
+\begin_inset Formula $\mathbf{a}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\mathbf{q}=\mathbf{N}\mathbf{a}$
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Standard
 \begin_inset Note Comment
-status open
+status collapsed
 
 \begin_layout Plain Layout
-As before, the linear combination here is in fact unique.
+Note that the module 
+\begin_inset Formula $\left\langle \left(\mathbf{F},\vec{\sigma}\right)\right\rangle $
+\end_inset
+
+ does not depend on the shift 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+.
  
 \end_layout
 
 \end_inset
 
-A 
-\begin_inset Formula $\left(\mathbf{F},\vec{\sigma},\vec{s}\right)_{\delta}$
-\end_inset
 
--basis is, in general, not square unless 
-\begin_inset Formula $\delta$
-\end_inset
-
- is large enough to contain all 
-\begin_inset Formula $n$
-\end_inset
-
- basis elements in which case it is a complete 
-\begin_inset Formula $\left(\mathbf{F},\vec{\sigma},\vec{s}\right)$
-\end_inset
-
--basis.
-\end_layout
-
-\begin_layout Subsection
-Computing Minimal Nullspace Basis Via Order Basis
 \end_layout
 
 \begin_layout Standard
@@ -1268,7 +1094,7 @@ Minimal nullspace bases can be directly computed via order basis computation
 \end_inset
 
 .
- However, this approach usually requires the order 
+ However, this approach may require the order 
 \begin_inset Formula $\sigma$
 \end_inset
 
@@ -1328,8 +1154,7 @@ key "za2009"
 \end_inset
 
 .
- We can also locate the root cause for this inefficiency in the actual order
- basis computation.
+ This points to the root cause for the inefficiency in this approach.
  Notice that when 
 \begin_inset Formula $m$
 \end_inset
