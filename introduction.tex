@@ -18,17 +18,27 @@ x^{\vec{s}}\mathbf{N}=\begin{bmatrix}s_{1}\\
  are the minimal possible among all nullspace bases of $\mathbf{F}$.
 
 In this paper we present an algorithm for computing a minimal nullspace
-basis with a cost of $O^{\sim}\left(n^{\omega}d\right)$. A key ingredient
-of this algorithm is another algorithm, also presented in this paper,
-for computing a $\vec{s}$-minimal shifted nullspace basis of an input
-matrix with row dimension $m$ and column dimension $n$ satisfy $n\in\Theta(m)$,
-where the entries of the shift $\vec{s}$ bound the column degrees
-of $\mathbf{F}$ component-wise, that is, each entry $s_{i}$ is greater
-than or equal to the degree of the $i$-th column of $\mathbf{F}$.
-For example, the shift $\vec{s}$ can be simply the column degrees
-of $\mathbf{F}$. If $\xi$ is the sum of the entries of $\vec{s}$,
-a $\vec{s}$-minimal nullspace basis can be computed with a cost of
-$O^{\sim}(n^{\omega-1}\xi)$ field operations.
+basis with a cost of $O^{\sim}\left(n^{\omega}\left\lceil md/n\right\rceil \right)$
+field operations in $\mathbb{K}$. The same algorithm can also compute
+a $\vec{s}$-minimal nullspace basis of $\mathbf{F}$ with a cost
+of $O^{\sim}(n^{\omega}\rho/m)$ if the entries of $\vec{s}$ bound
+the corresponding column degrees of $\mathbf{F}$, where $\rho$ is
+the sum of the $m$ largest entries of $\vec{s}$.
+
+\begin{comment}
+A key ingredient of this algorithm is another algorithm, also presented
+in this paper, for computing a $\vec{s}$-minimal shifted nullspace
+basis of an input matrix with row dimension $m$ and column dimension
+$n$ satisfy $n\in\Theta(m)$, where the entries of the shift $\vec{s}$
+bound the column degrees of $\mathbf{F}$ component-wise, that is,
+each entry $s_{i}$ is greater than or equal to the degree of the
+$i$-th column of $\mathbf{F}$. For example, the shift $\vec{s}$
+can be simply the column degrees of $\mathbf{F}$. If $\xi$ is the
+sum of the entries of $\vec{s}$, a $\vec{s}$-minimal nullspace basis
+can be computed with a cost of $O^{\sim}(n^{\omega-1}\xi)$ field
+operations.
+\end{comment}
+
 
 A key component of the algorithm is order basis (also known as minimal
 approximant basis) computation, which are done using the algorithms
@@ -39,14 +49,8 @@ subproblems of smaller row dimensions, which can then be handled in
 the same way as the original problem. 
 
 The remaining paper is structured as follows. Basic definitions and
-properties of nullspace bases and order bases are given in the next
-section. \prettyref{sec:transform} provides an extension to Storjohann's
-transformation to allow higher degree basis elements to be computed.
-Based on this new transformation, \prettyref{sec:Order-Basis-Computation}
-establishes a link between two Storjohann transformed problems of
-different degrees, from which an recursive method and then an iterative
-algorithm are derived. The time complexity is analyzed in the next
-section. After this, \prettyref{sec:Unbalanced-Shift} describes an
-algorithm which handles problems with a type of unbalanced shift.
-This is followed by a conclusion along with a description for topics
-for future research. 
+properties of order bases and nullspace bases and order bases are
+given in the next section. \prettyref{sec:Nullspace-Basis-Computation}
+then describe the computation of nullspace bases in detail and analyze
+its cost. This is followed by a conclusion along with a description
+for topics for future research. 

@@ -127,11 +127,55 @@ x^{\vec{s}}\mathbf{N}=\begin{bmatrix}s_{1}\\
 \begin_layout Standard
 In this paper we present an algorithm for computing a minimal nullspace
  basis with a cost of 
-\begin_inset Formula $O^{\sim}\left(n^{\omega}d\right)$
+\begin_inset Formula $O^{\sim}\left(n^{\omega}\left\lceil md/n\right\rceil \right)$
+\end_inset
+
+ field operations in 
+\begin_inset Formula $\mathbb{K}$
 \end_inset
 
 .
- A key ingredient of this algorithm is another algorithm, also presented
+ The same algorithm can also compute a 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-minimal nullspace basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ with a cost of 
+\begin_inset Formula $O^{\sim}(n^{\omega}\rho/m)$
+\end_inset
+
+ if the entries of 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+ bound the corresponding column degrees of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+, where 
+\begin_inset Formula $\rho$
+\end_inset
+
+ is the sum of the 
+\begin_inset Formula $m$
+\end_inset
+
+ largest entries of 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Comment
+status collapsed
+
+\begin_layout Plain Layout
+A key ingredient of this algorithm is another algorithm, also presented
  in this paper, for computing a 
 \begin_inset Formula $\vec{s}$
 \end_inset
@@ -197,6 +241,11 @@ In this paper we present an algorithm for computing a minimal nullspace
  field operations.
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
 A key component of the algorithm is order basis (also known as minimal approxima
 nt basis) computation, which are done using the algorithms from 
@@ -223,37 +272,17 @@ key "za2009"
 
 \begin_layout Standard
 The remaining paper is structured as follows.
- Basic definitions and properties of nullspace bases and order bases are
- given in the next section.
+ Basic definitions and properties of order bases and nullspace bases and
+ order bases are given in the next section.
  
 \begin_inset CommandInset ref
 LatexCommand formatted
-reference "sec:transform"
+reference "sec:Nullspace-Basis-Computation"
 
 \end_inset
 
- provides an extension to Storjohann's transformation to allow higher degree
- basis elements to be computed.
- Based on this new transformation, 
-\begin_inset CommandInset ref
-LatexCommand formatted
-reference "sec:Order-Basis-Computation"
-
-\end_inset
-
- establishes a link between two Storjohann transformed problems of different
- degrees, from which an recursive method and then an iterative algorithm
- are derived.
- The time complexity is analyzed in the next section.
- After this, 
-\begin_inset CommandInset ref
-LatexCommand formatted
-reference "sec:Unbalanced-Shift"
-
-\end_inset
-
- describes an algorithm which handles problems with a type of unbalanced
- shift.
+ then describe the computation of nullspace bases in detail and analyze
+ its cost.
  This is followed by a conclusion along with a description for topics for
  future research.
  

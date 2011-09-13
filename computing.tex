@@ -630,9 +630,9 @@ The overall cost is therefore dominated by the cost $O^{\sim}\left(n^{\omega}\le
 of the initial order basis computation.\end{pf}
 \begin{cor}
 \label{cor:costOfMinimalNullspaceBasis}If the input matrix $\mathbf{F}$
-has degree $s$, then a minimal nullspace basis of $\mathbf{F}$ can
-be computed with a cost of $O^{\sim}\left(n^{\omega}\left\lceil ms/n\right\rceil \right)$. \end{cor}
+has degree $d$, then a minimal nullspace basis of $\mathbf{F}$ can
+be computed with a cost of $O^{\sim}\left(n^{\omega}\left\lceil md/n\right\rceil \right)$. \end{cor}
 \begin{pf}
-We can just set the shift $\vec{s}$ to $\left[s,\dots,s\right]$
+We can just set the shift $\vec{s}$ to $\left[d,\dots,d\right]$
 and apply \prettyref{lem:costOfMinimalNullspaceBasisWithUniformShift}.\end{pf}
 

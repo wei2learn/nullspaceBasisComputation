@@ -69,13 +69,13 @@
 In this paper we present a deterministic algorithm for the computation
 of a minimal nullspace basis of an $m\times n$ input matrix of polynomials
 over a field $\mathbb{K}$ with $m\le n$. This algorithm computes
-a minimal nullspace basis of a degree $s$ input matrix with a cost
-of $O^{\sim}\left(n^{\omega}\left\lceil ms/n\right\rceil \right)$
+a minimal nullspace basis of a degree $d$ input matrix with a cost
+of $O^{\sim}\left(n^{\omega}\left\lceil md/n\right\rceil \right)$
 field operations in $\mathbb{K}$. The same algorithm also works in
 the more general situation on computing a shifted minimal nullspace
 basis, with a given degree shift $\vec{s}\in\mathbb{Z}^{n}$ whose
 entries bound the corresponding column degrees of the input matrix.
-If $\rho$ is the sum of $m$ largest entries of $\vec{s}$, then
+If $\rho$ is the sum of the $m$ largest entries of $\vec{s}$, then
 a $\vec{s}$-minimal right nullspace basis can be computed with a
 cost of $O^{\sim}(n^{\omega}\rho/m)$ field operations. 
 \end{abstract}
@@ -84,11 +84,9 @@ cost of $O^{\sim}(n^{\omega}\rho/m)$ field operations.
 
 \input{preliminaries.tex}
 
-\newpage{}
-
 \input{computing.tex}
 
-\newpage{}
+
 
 \bibliographystyle{plainnat}
 \bibliography{paper}

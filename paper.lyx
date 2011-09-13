@@ -186,11 +186,11 @@ In this paper we present a deterministic algorithm for the computation of
 
 .
  This algorithm computes a minimal nullspace basis of a degree 
-\begin_inset Formula $s$
+\begin_inset Formula $d$
 \end_inset
 
  input matrix with a cost of 
-\begin_inset Formula $O^{\sim}\left(n^{\omega}\left\lceil ms/n\right\rceil \right)$
+\begin_inset Formula $O^{\sim}\left(n^{\omega}\left\lceil md/n\right\rceil \right)$
 \end_inset
 
  field operations in 
@@ -208,7 +208,7 @@ In this paper we present a deterministic algorithm for the computation of
 \begin_inset Formula $\rho$
 \end_inset
 
- is the sum of 
+ is the sum of the 
 \begin_inset Formula $m$
 \end_inset
 
@@ -249,13 +249,6 @@ filename "preliminaries.lyx"
 \end_layout
 
 \begin_layout Standard
-\begin_inset Newpage newpage
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 \begin_inset CommandInset include
 LatexCommand input
 filename "computing.lyx"
@@ -266,9 +259,6 @@ filename "computing.lyx"
 \end_layout
 
 \begin_layout Standard
-\begin_inset Newpage newpage
-\end_inset
-
 
 \end_layout
 
