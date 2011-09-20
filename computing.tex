@@ -635,4 +635,12 @@ be computed with a cost of $O^{\sim}\left(n^{\omega}\left\lceil md/n\right\rceil
 \begin{pf}
 We can just set the shift $\vec{s}$ to $\left[d,\dots,d\right]$
 and apply \prettyref{lem:costOfMinimalNullspaceBasisWithUniformShift}.\end{pf}
+\begin{rem}
+One may wonder whether it is possible slightly improve the algorithm
+to remove the ceiling function in the cost $O^{\sim}\left(n^{\omega}\left\lceil md/n\right\rceil \right)$,
+to get a cost of $O^{\sim}\left(n^{\omega-1}md\right)$. Unfortunately,
+it does not seem possible. Notice that the ceiling function is only
+used to take care of the case $md<n$. In this case, the sum of the
+size of the input and the size of the output is at least $n^{2}$,
+which may already be greater than $n^{\omega-1}md$.\end{rem}
 
