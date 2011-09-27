@@ -1003,129 +1003,37 @@ Given
 \end_layout
 
 \begin_layout Proof
-See We divide the matrices 
-\begin_inset Formula $\mathbf{A}$
-\end_inset
-
- and 
+First, we divide the matrix 
 \begin_inset Formula $\mathbf{B}$
 \end_inset
 
- to column blocks according to the degree of the entries 
+ to column blocks according to the 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column degrees of its columns.
+ Let 
 \begin_inset Formula 
-\begin{align*}
-\mathbf{A} & =\left[\begin{array}{cccc}
-\mathbf{A}_{\log m} & \mathbf{A}_{\log m-1} & \cdots & \mathbf{A}_{1}\end{array}\right]\\
-\mathbf{B} & =\left[\begin{array}{cccc}
-\mathbf{B}^{\left(\log m\right)} & \mathbf{B}^{\left(\log m-1\right)} & \cdots & \mathbf{B}^{\left(1\right)}\end{array}\right]
-\end{align*}
+\[
+\left[\begin{array}{cccc}
+\mathbf{B}^{\left(\log m\right)} & \mathbf{B}^{\left(\log m-1\right)} & \cdots & \mathbf{B}^{\left(1\right)}\end{array}\right]=\mathbf{B},
+\]
 
 \end_inset
 
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
 with 
-\begin_inset Formula $\mathbf{A}_{\log m},$
-\end_inset
-
- 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\begin_inset Formula $\mathbf{A}_{\log m-1},$
-\end_inset
-
- 
-\begin_inset Formula $\mathbf{A}_{\log m-2}$
-\end_inset
-
-, ...
- , 
-\begin_inset Formula $\mathbf{A}_{1}$
-\end_inset
-
-
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
- having degrees in the range 
-\begin_inset Formula $\left[0,2\xi/m\right]$
-\end_inset
-
-, 
-\begin_inset Formula $(2\xi/m,4\xi/m]$
-\end_inset
-
-, 
-\begin_inset Formula $(4\xi/m,8\xi/m]$
-\end_inset
-
-, ..., 
-\begin_inset Formula $(\xi/2,\xi]$
-\end_inset
-
- respectively.
- That is, for 
-\begin_inset Formula $j$
-\end_inset
-
- from 1 to 
-\begin_inset Formula $\log m-1$
-\end_inset
-
-, 
-\begin_inset Formula $\mathbf{A}_{j}$
-\end_inset
-
- contains columns of 
-\begin_inset Formula $\mathbf{A}$
-\end_inset
-
- whose degrees are in the range 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\begin_inset Formula $(\xi/2^{j},\xi/2^{j-1}]$
-\end_inset
-
-, and 
-\begin_inset Formula $\mathbf{A}_{\log m}$
-\end_inset
-
- contains the remaining columns whose degrees are in the range 
-\begin_inset Formula $\left[0,2\xi/m\right]$
-\end_inset
-
-.
- The matrix 
-\begin_inset Formula $\mathbf{B}$
-\end_inset
-
- is divided in the same way, with 
 \family default
 \series default
 \shape default
@@ -1199,6 +1107,94 @@ with
 \end_inset
 
  respectively.
+ We multiply 
+\begin_inset Formula $\mathbf{A}$
+\end_inset
+
+ with each 
+\begin_inset Formula $\mathbf{B}^{\left(i\right)}$
+\end_inset
+
+ separately.
+ 
+\end_layout
+
+\begin_layout Proof
+We also divide the matrix 
+\begin_inset Formula $\mathbf{A}$
+\end_inset
+
+ to column blocks and each matrix 
+\begin_inset Formula $\mathbf{B}^{\left(i\right)}$
+\end_inset
+
+ to row blocks according to the size of the corresponding entries in 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula 
+\begin{align*}
+\left[\begin{array}{cccc}
+\vec{s}_{\log m} & \vec{s}_{\log m-1} & \cdots & \vec{s}_{1}\end{array}\right] & =\vec{s}\\
+\left[\begin{array}{cccc}
+\mathbf{A}_{\log m} & \mathbf{A}_{\log m-1} & \cdots & \mathbf{A}_{1}\end{array}\right] & =\mathbf{A}\\
+\left[\begin{array}{cccc}
+\mathbf{B}_{\log m}^{\left(\log m\right)} & \mathbf{B}_{\log m}^{\left(\log m-1\right)} & \cdots & \mathbf{B}_{\log m}^{\left(1\right)}\\
+\vdots &  &  & \vdots\\
+\mathbf{B}_{1}^{\left(\log m\right)} & \mathbf{B}_{1}^{\left(\log m-1\right)} & \cdots & \mathbf{B}_{1}^{\left(1\right)}
+\end{array}\right] & =\left[\begin{array}{cccc}
+\mathbf{B}^{\left(\log m\right)} & \mathbf{B}^{\left(\log m-1\right)} & \cdots & \mathbf{B}^{\left(1\right)}\end{array}\right]=\mathbf{B}
+\end{align*}
+
+\end_inset
+
+ with 
+\begin_inset Formula $\vec{s}_{\log m},\vec{s}_{\log m-1},\dots,\vec{s}_{\log m1}$
+\end_inset
+
+ having entries in the range 
+\begin_inset Formula $\left[0,2\xi/m\right]$
+\end_inset
+
+, 
+\begin_inset Formula $(2\xi/m,4\xi/m]$
+\end_inset
+
+, 
+\begin_inset Formula $(4\xi/m,8\xi/m]$
+\end_inset
+
+, ..., 
+\begin_inset Formula $(\xi/2,\xi]$
+\end_inset
+
+ respectively, the column dimension of 
+\begin_inset Formula $\mathbf{A}_{j}$
+\end_inset
+
+ and the row dimension of 
+\begin_inset Formula $\mathbf{B}_{j}^{\left(i\right)}$
+\end_inset
+
+ match that of 
+\begin_inset Formula $\vec{s}_{j}$
+\end_inset
+
+ for 
+\begin_inset Formula $j$
+\end_inset
+
+ from 
+\begin_inset Formula $1$
+\end_inset
+
+ to 
+\begin_inset Formula $\log m$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Proof
@@ -1254,12 +1250,8 @@ Note that there are
 \begin_inset Formula $\mathbf{A}_{j}$
 \end_inset
 
- and the corresponding rows 
+ and 
 \begin_inset Formula $\mathbf{B}_{j}^{(1)}$
-\end_inset
-
- in 
-\begin_inset Formula $\mathbf{B}^{(1)}$
 \end_inset
 
 .
