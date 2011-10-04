@@ -163,26 +163,39 @@ with $k\in O\left(m\right)$ and the sum $\theta$ of its $\vec{s}$-column
 degrees satisfies $\theta\in O\left(\xi\right)$. Then we can multiply
 $\mathbf{A}$ and $\mathbf{B}$ with a cost of $O^{\sim}(nm^{\omega-2}\xi)$. \end{lem}
 \begin{pf}
-See We divide the matrices $\mathbf{A}$ and $\mathbf{B}$ to column
-blocks according to the degree of the entries 
+First, we divide the matrix $\mathbf{B}$ to column blocks according
+to the $\vec{s}$-column degrees of its columns. Let 
+\[
+\left[\begin{array}{cccc}
+\mathbf{B}^{\left(\log m\right)} & \mathbf{B}^{\left(\log m-1\right)} & \cdots & \mathbf{B}^{\left(1\right)}\end{array}\right]=\mathbf{B},
+\]
+with $\mathbf{B}^{\left(\log m\right)}$, $\mathbf{B}^{\left(\log m-1\right)},$
+$\mathbf{B}^{\left(\log m-2\right)}$, ... , $\mathbf{B}^{\left(1\right)}$
+having $\vec{s}$-column degrees in the range $\left[0,2\xi/m\right]$,
+$(2\xi/m,4\xi/m]$, $(4\xi/m,8\xi/m]$, ..., $(\xi/2,\theta]$ respectively.
+We multiply $\mathbf{A}$ with each $\mathbf{B}^{\left(i\right)}$
+separately. 
+
+We also divide the matrix $\mathbf{A}$ to column blocks and each
+matrix $\mathbf{B}^{\left(i\right)}$ to row blocks according to the
+size of the corresponding entries in $\vec{s}$. Let 
 \begin{align*}
-\mathbf{A} & =\left[\begin{array}{cccc}
-\mathbf{A}_{\log m} & \mathbf{A}_{\log m-1} & \cdots & \mathbf{A}_{1}\end{array}\right]\\
-\mathbf{B} & =\left[\begin{array}{cccc}
-\mathbf{B}^{\left(\log m\right)} & \mathbf{B}^{\left(\log m-1\right)} & \cdots & \mathbf{B}^{\left(1\right)}\end{array}\right]
+\left[\begin{array}{cccc}
+\vec{s}_{\log m} & \vec{s}_{\log m-1} & \cdots & \vec{s}_{1}\end{array}\right] & =\vec{s}\\
+\left[\begin{array}{cccc}
+\mathbf{A}_{\log m} & \mathbf{A}_{\log m-1} & \cdots & \mathbf{A}_{1}\end{array}\right] & =\mathbf{A}\\
+\left[\begin{array}{cccc}
+\mathbf{B}_{\log m}^{\left(\log m\right)} & \mathbf{B}_{\log m}^{\left(\log m-1\right)} & \cdots & \mathbf{B}_{\log m}^{\left(1\right)}\\
+\vdots &  &  & \vdots\\
+\mathbf{B}_{1}^{\left(\log m\right)} & \mathbf{B}_{1}^{\left(\log m-1\right)} & \cdots & \mathbf{B}_{1}^{\left(1\right)}
+\end{array}\right] & =\left[\begin{array}{cccc}
+\mathbf{B}^{\left(\log m\right)} & \mathbf{B}^{\left(\log m-1\right)} & \cdots & \mathbf{B}^{\left(1\right)}\end{array}\right]=\mathbf{B}
 \end{align*}
-with $\mathbf{A}_{\log m},$ $\mathbf{A}_{\log m-1},$ $\mathbf{A}_{\log m-2}$,
-... , $\mathbf{A}_{1}$ having degrees in the range $\left[0,2\xi/m\right]$,
-$(2\xi/m,4\xi/m]$, $(4\xi/m,8\xi/m]$, ..., $(\xi/2,\xi]$ respectively.
-That is, for $j$ from 1 to $\log m-1$, $\mathbf{A}_{j}$ contains
-columns of $\mathbf{A}$ whose degrees are in the range $(\xi/2^{j},\xi/2^{j-1}]$,
-and $\mathbf{A}_{\log m}$ contains the remaining columns whose degrees
-are in the range $\left[0,2\xi/m\right]$. The matrix $\mathbf{B}$
-is divided in the same way, with $\mathbf{B}^{\left(\log m\right)}$,
-$\mathbf{B}^{\left(\log m-1\right)},$ $\mathbf{B}^{\left(\log m-2\right)}$,
-... , $\mathbf{B}^{\left(1\right)}$ having $\vec{s}$-column degrees
-in the range $\left[0,2\xi/m\right]$, $(2\xi/m,4\xi/m]$, $(4\xi/m,8\xi/m]$,
-..., $(\xi/2,\theta]$ respectively.
+ with $\vec{s}_{\log m},\vec{s}_{\log m-1},\dots,\vec{s}_{\log m1}$
+having entries in the range $\left[0,2\xi/m\right]$, $(2\xi/m,4\xi/m]$,
+$(4\xi/m,8\xi/m]$, ..., $(\xi/2,\xi]$ respectively, the column dimension
+of $\mathbf{A}_{j}$ and the row dimension of $\mathbf{B}_{j}^{\left(i\right)}$
+match that of $\vec{s}_{j}$ for $j$ from $1$ to $\log m$.
 
 First consider the multiplication 
 \[
@@ -197,12 +210,11 @@ First consider the multiplication
 Note that there are $O\left(1\right)$ columns in $\mathbf{B}^{(1)}$
 since $\theta\in O\left(\xi\right)$. We do this in $\log m$ steps.
 At step $j$ for $j$ from $1$ to $\log m$ we multiply $\mathbf{A}_{j}$
-and the corresponding rows $\mathbf{B}_{j}^{(1)}$ in $\mathbf{B}^{(1)}$.
-The column dimension of $\mathbf{A}_{j}$, which is the same as the
-row dimension of $\mathbf{B}_{j}^{(1)}$, is less than $2^{j}$. The
-degree of $\mathbf{B}_{j}^{(1)}$ is $O\left(\xi\right)$. To use
-fast multiplication, we expand $\mathbf{B}_{j}^{(1)}$ to a matrix
-$\bar{\mathbf{B}}_{j}^{(1)}$ with degree less than $\delta\in\Theta(\xi/2^{j})$
+and $\mathbf{B}_{j}^{(1)}$. The column dimension of $\mathbf{A}_{j}$,
+which is the same as the row dimension of $\mathbf{B}_{j}^{(1)}$,
+is less than $2^{j}$. The degree of $\mathbf{B}_{j}^{(1)}$ is $O\left(\xi\right)$.
+To use fast multiplication, we expand $\mathbf{B}_{j}^{(1)}$ to a
+matrix $\bar{\mathbf{B}}_{j}^{(1)}$ with degree less than $\delta\in\Theta(\xi/2^{j})$
 and column dimension $q\in O(2^{j})$ as follows. Write 
 \[
 \mathbf{B}_{j}^{(1)}=\mathbf{B}_{j,0}^{(1)}+\mathbf{B}_{j,1}^{(1)}x^{\delta}+\dots+\mathbf{B}_{j,q-1}^{(1)}x^{\delta(q-1)}=\sum_{k=0}^{q-1}\mathbf{B}_{j,k}^{(1)}x^{\delta k}
