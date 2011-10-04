@@ -260,7 +260,7 @@ filename "computing.lyx"
 
 \begin_layout Standard
 \begin_inset CommandInset include
-LatexCommand include
+LatexCommand input
 filename "conclusion.lyx"
 
 \end_inset

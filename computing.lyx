@@ -81,7 +81,7 @@ name "sec:Nullspace-Basis-Computation"
 \begin_layout Standard
 In this section, we describe an algorithm for computing a shifted minimal
  nullspace basis, and then analyze its cost.
- The algorithm uses two computation process recursively.
+ The algorithm uses two computation processes recursively.
  The first process described in 
 \begin_inset CommandInset ref
 LatexCommand formatted
@@ -173,45 +173,6 @@ Let
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Comment
-status collapsed
-
-\begin_layout Plain Layout
-In addition, it also provides a bound on the sum of the 
-\begin_inset Formula $\vec{s}$
-\end_inset
-
--column degrees of 
-\begin_inset Formula $\vec{s}$
-\end_inset
-
--minimal nullspace bases as shown in 
-\begin_inset CommandInset ref
-LatexCommand formatted
-reference "lem:boundOfSumOfShiftedDegreesOfNullspaceBasis"
-
-\end_inset
-
-, which uses an intermediate result on a bound of the sum of 
-\begin_inset Formula $\vec{s}$
-\end_inset
-
--column degrees of order bases as shown in 
-\begin_inset CommandInset ref
-LatexCommand formatted
-reference "lem:boundOfSumOfShiftedDegreesOfOrderBasis"
-
-\end_inset
-
-.
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -453,28 +414,6 @@ reference "lem:boundOnDegreesOfFA"
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Comment
-status collapsed
-
-\begin_layout Plain Layout
-This allows the initial bound on the shift to propagate on both the intermediate
- results 
-\begin_inset Formula $\mathbf{A}$
-\end_inset
-
- and the residual 
-\begin_inset Formula $\mathbf{FA}$
-\end_inset
-
- to propagate throughout the computation, hence the complexity 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 For simplicity, we also assume without loss of generality that the columns
  of 
 \begin_inset Formula $\mathbf{F}$
@@ -499,27 +438,6 @@ For simplicity, we also assume without loss of generality that the columns
 
 .
  It provides a convenient bound throughout the computation.
-\begin_inset Note Comment
-status collapsed
-
-\begin_layout Plain Layout
- The algorithm we present in this section computes a 
-\begin_inset Formula $\vec{s}$
-\end_inset
-
--minimal null space basis 
-\begin_inset Formula $\mathbf{N}$
-\end_inset
-
- with a cost of 
-\begin_inset Formula $h(n,\xi)=O^{\sim}(n^{\omega-1}\xi)$
-\end_inset
-
-.
-\end_layout
-
-\end_inset
-
  Let 
 \begin_inset Formula $\rho=\sum_{n-m+1}^{n}s_{i}$
 \end_inset
@@ -555,7 +473,7 @@ status collapsed
 \end_inset
 
 , we improve this later to 
-\begin_inset Formula $O^{\sim}\left(n^{\omega-1}ms\right)=O^{\sim}\left(n^{\omega-1}\rho\right)=O^{\sim}\left(n^{\omega-2}m\xi\right)$
+\begin_inset Formula $O^{\sim}\left(n^{\omega}\left\lceil ms/n\right\rceil \right)=O^{\sim}\left(n^{\omega}\left\lceil \rho/n\right\rceil \right)=O^{\sim}\left(n^{\omega-1}\left\lceil m\xi/n\right\rceil \right)$
 \end_inset
 
 .
@@ -571,33 +489,6 @@ For general unbalanced shifts, the cost improvement requires the ability
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Comment
-status collapsed
-
-\begin_layout Plain Layout
-Let us first assume 
-\begin_inset Formula $m\le n\le3m$
-\end_inset
-
-.
- Let 
-\begin_inset Formula $s=\xi/n$
-\end_inset
-
- be the average of the entries of 
-\begin_inset Formula $\vec{s}$
-\end_inset
-
-.
- 
-\end_layout
-
-\end_inset
-
- 
 \end_layout
 
 \begin_layout Subsection
@@ -739,23 +630,6 @@ Any column
 \end_inset
 
 .
- 
-\begin_inset Note Comment
-status collapsed
-
-\begin_layout Plain Layout
-\begin_inset Formula $\sum_{i=n-k+1}^{n}s_{i}$
-\end_inset
-
- must be at least 
-\begin_inset Formula $k\sigma$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
  Recall from 
 \begin_inset CommandInset ref
 LatexCommand formatted
@@ -771,16 +645,6 @@ reference "lem:boundOfSumOfShiftedDegreesOfOrderBasis"
 \begin_inset Formula $\mathbf{P}$
 \end_inset
 
- 
-\begin_inset Note Comment
-status collapsed
-
-\begin_layout Plain Layout
-is at most 
-\end_layout
-
-\end_inset
-
  satisfies 
 \begin_inset Formula $\sum\deg_{\vec{s}}\mathbf{P}\le\sum\vec{s}+m\sigma$
 \end_inset
@@ -793,17 +657,7 @@ is at most
 \begin_inset Formula $\mathbf{P}_{1}$
 \end_inset
 
- must 
-\begin_inset Note Comment
-status collapsed
-
-\begin_layout Plain Layout
-be at most
-\end_layout
-
-\end_inset
-
- satisfy 
+ must satisfy 
 \begin_inset Formula $\sum\deg_{\vec{s}}\mathbf{P}_{1}\le\sum\vec{s}+m\sigma-\kappa\sigma$
 \end_inset
 
@@ -1909,264 +1763,6 @@ It remains to show that any
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Comment
-status collapsed
-
-\begin_layout Lemma
-\begin_inset CommandInset label
-LatexCommand label
-name "lem:continueComputingOrderBasis-1"
-
-\end_inset
-
-For an input matrix 
-\begin_inset Formula $\mathbf{F}\in\mathbb{K}\left[x\right]^{m\times n}$
-\end_inset
-
-, an order vector 
-\begin_inset Formula $\vec{\sigma}$
-\end_inset
-
-, and a shift vector 
-\begin_inset Formula $\vec{s}$
-\end_inset
-
-, if 
-\begin_inset Formula $\mathbf{P}$
-\end_inset
-
- is a 
-\begin_inset Formula $\left(\mathbf{F},\vec{\sigma},\vec{s}\right)$
-\end_inset
-
--basis with 
-\begin_inset Formula $\vec{s}$
-\end_inset
-
--column degrees 
-\begin_inset Formula $\vec{s}'$
-\end_inset
-
-, and 
-\begin_inset Formula $\mathbf{P}'$
-\end_inset
-
- is a 
-\begin_inset Formula $(\mathbf{F}\mathbf{P},\vec{\tau},\vec{s}')$
-\end_inset
-
- -basis with 
-\begin_inset Formula $\vec{s}'$
-\end_inset
-
--column degrees 
-\begin_inset Formula $\vec{s}"$
-\end_inset
-
-, where 
-\begin_inset Formula $\vec{\tau}\ge\vec{\sigma}$
-\end_inset
-
- component-wise, then 
-\begin_inset Formula $\mathbf{P}\mathbf{P}'$
-\end_inset
-
- is a 
-\begin_inset Formula $(\mathbf{F},\vec{\tau},\vec{s})$
-\end_inset
-
--basis with 
-\begin_inset Formula $\vec{s}$
-\end_inset
-
--column degrees 
-\begin_inset Formula $\vec{s}"$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Proof
-It is clear that 
-\begin_inset Formula $\mathbf{P}\mathbf{P}'$
-\end_inset
-
- has order 
-\begin_inset Formula $(\mathbf{F},\vec{\tau})$
-\end_inset
-
-.
- We now show that 
-\begin_inset Formula $\mathbf{P}\mathbf{P}'$
-\end_inset
-
- is 
-\begin_inset Formula $\vec{s}$
-\end_inset
-
--column reduced and has 
-\begin_inset Formula $\vec{s}$
-\end_inset
-
--column degrees 
-\begin_inset Formula $\vec{s}"$
-\end_inset
-
-, or equivalently, 
-\begin_inset Formula $x^{\vec{s}}\mathbf{P}\mathbf{P}'$
-\end_inset
-
- is column reduced and has column degrees 
-\begin_inset Formula $\vec{s}"$
-\end_inset
-
-.
- Notice that 
-\begin_inset Formula $x^{\vec{s}}\mathbf{P}$
-\end_inset
-
- has column degrees 
-\begin_inset Formula $\vec{s}'$
-\end_inset
-
- and a full rank leading column coefficient matrix 
-\begin_inset Formula $P$
-\end_inset
-
-.
- Hence 
-\begin_inset Formula $x^{\vec{s}}\mathbf{P}x^{-\vec{s}'}$
-\end_inset
-
- has column degrees 
-\begin_inset Formula $\left[0,\dots0\right]$
-\end_inset
-
-.
- (If one is concerned about the entries not being polynomials, one can simply
- multiply it by 
-\begin_inset Formula $x^{\xi}$
-\end_inset
-
- to shift the degrees up.) Similarly, 
-\begin_inset Formula $x^{\vec{s}'}\mathbf{P}'x^{-\vec{s}"}$
-\end_inset
-
- has column degrees 
-\begin_inset Formula $[0,\dots,0]$
-\end_inset
-
- and a full rank leading column coefficient matrix 
-\begin_inset Formula $P'$
-\end_inset
-
-.
- Putting them together, 
-\begin_inset Formula $x^{\vec{s}}\mathbf{P}x^{-\vec{s}'}x^{\vec{s}'}\mathbf{P}'x^{-\vec{s}"}=x^{\vec{s}}\mathbf{P}\mathbf{P}'x^{-\vec{s}"}$
-\end_inset
-
- has column degrees 
-\begin_inset Formula $[0,\dots,0]$
-\end_inset
-
- and a full rank leading column coefficient matrix 
-\begin_inset Formula $PP'$
-\end_inset
-
-.
- It follows that 
-\begin_inset Formula $x^{\vec{s}}\mathbf{P}\mathbf{P}'$
-\end_inset
-
- has column degrees 
-\begin_inset Formula $\vec{s}"$
-\end_inset
-
-, or equivalently, the 
-\begin_inset Formula $\vec{s}$
-\end_inset
-
--column degrees of 
-\begin_inset Formula $\mathbf{PP}'$
-\end_inset
-
- is 
-\begin_inset Formula $\vec{s}"$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Proof
-It remains to show that any 
-\begin_inset Formula $\mathbf{t}\in\left\langle \left(\mathbf{F},\vec{\tau}\right)\right\rangle $
-\end_inset
-
- is generated by the columns of 
-\begin_inset Formula $\mathbf{PP}'$
-\end_inset
-
-.
- Since 
-\begin_inset Formula $\mathbf{t}\in\left\langle \left(\mathbf{F},\vec{\sigma}\right)\right\rangle $
-\end_inset
-
-, it is generated by the 
-\begin_inset Formula $\left(\mathbf{F},\vec{\sigma}\right)$
-\end_inset
-
--basis 
-\begin_inset Formula $\mathbf{P}$
-\end_inset
-
-, that is, 
-\begin_inset Formula $\mathbf{t}=\mathbf{P}\mathbf{a}$
-\end_inset
-
- for 
-\begin_inset Formula $\mathbf{a}=\mathbf{P}^{-1}\mathbf{t}\in\mathbb{K}\left[x\right]^{n}$
-\end_inset
-
-.
- Also, 
-\begin_inset Formula $\mathbf{t}\in\left\langle \left(\mathbf{F},\vec{\tau}\right)\right\rangle $
-\end_inset
-
- implies that 
-\begin_inset Formula $\mathbf{a}\in\left\langle \left(\mathbf{FP},\vec{\tau}\right)\right\rangle $
-\end_inset
-
- since 
-\begin_inset Formula $\mathbf{F}\mathbf{P}\mathbf{a}=\mathbf{F}\mathbf{t}\equiv0\mod x^{\vec{\tau}}$
-\end_inset
-
-.
- It follows that 
-\begin_inset Formula $\mathbf{a}=\mathbf{P}'\mathbf{b}$
-\end_inset
-
- for 
-\begin_inset Formula $\mathbf{b}=\mathbf{P}'^{-1}\mathbf{a}\in\mathbb{K}\left[x\right]^{n}$
-\end_inset
-
-.
- Therefore, 
-\begin_inset Formula $\mathbf{a}=\mathbf{P}^{-1}\mathbf{t}=\mathbf{P}'\mathbf{b}$
-\end_inset
-
-, which gives 
-\begin_inset Formula $\mathbf{t}=\mathbf{P}\mathbf{P}'\mathbf{b}$
-\end_inset
-
-.
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Lemma

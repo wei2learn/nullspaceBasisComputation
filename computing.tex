@@ -5,7 +5,7 @@
 
 In this section, we describe an algorithm for computing a shifted
 minimal nullspace basis, and then analyze its cost. The algorithm
-uses two computation process recursively. The first process described
+uses two computation processes recursively. The first process described
 in \prettyref{sub:continueComputingNullspaceBasisByColumns} uses
 an order basis computation to compute a subset of nullspace basis
 elements of lower degree, and results in a new problem of lower column
@@ -26,14 +26,6 @@ Then for any polynomial matrix $\mathbf{A}$, the column degrees of
 $\mathbf{FA}$ are bounded component-wise by the $\vec{s}$-column
 degrees of $\mathbf{A}$.
 \end{lem}
-\begin{comment}
-In addition, it also provides a bound on the sum of the $\vec{s}$-column
-degrees of $\vec{s}$-minimal nullspace bases as shown in \prettyref{lem:boundOfSumOfShiftedDegreesOfNullspaceBasis},
-which uses an intermediate result on a bound of the sum of $\vec{s}$-column
-degrees of order bases as shown in \prettyref{lem:boundOfSumOfShiftedDegreesOfOrderBasis}.
-\end{comment}
-
-
 A key requirement of efficient computation is making sure that the
 intermediate computations do not blow up. This requirement is satisfied
 by the existence of a bound $\xi=\sum\vec{s}$, the sum of all entries
@@ -68,39 +60,21 @@ which is at least $k\sigma$, since every column of $\mathbf{F}\bar{\mathbf{N}}$
 is nonzero and has order $\sigma$. So the sum of the $\vec{s}$-column
 degrees of $\mathbf{N}$ is bounded by $\xi+k\sigma-k\sigma=\xi$.
 \end{pf}
-\begin{comment}
-This allows the initial bound on the shift to propagate on both the
-intermediate results $\mathbf{A}$ and the residual $\mathbf{FA}$
-to propagate throughout the computation, hence the complexity 
-\end{comment}
-
-
 For simplicity, we also assume without loss of generality that the
 columns of $\mathbf{F}$ and the corresponding entries of $\vec{s}=\left[s_{1},\dots,s_{n}\right]$
 are arranged so that the entries of $\vec{s}$ in increasing orders.
 Let $\xi=\sum\vec{s}$ be the sum of the entries of $\vec{s}$. It
-provides a convenient bound throughout the computation.%
-\begin{comment}
- The algorithm we present in this section computes a $\vec{s}$-minimal
-null space basis $\mathbf{N}$ with a cost of $h(n,\xi)=O^{\sim}(n^{\omega-1}\xi)$.
-\end{comment}
-{} Let $\rho=\sum_{n-m+1}^{n}s_{i}$ be the sum of $m$ largest entries
-of $\vec{s}$, and $s=\rho/m$ be their average. The algorithm we
-present in this section computes a $\vec{s}$-minimal null space basis
-$\mathbf{N}$ with a cost of $g(n,\rho)=O^{\sim}(n^{\omega}s)$. For
-uniform shift $\vec{s}=\left[s,\dots,s\right]$, we improve this later
-to $O^{\sim}\left(n^{\omega-1}ms\right)=O^{\sim}\left(n^{\omega-1}\rho\right)=O^{\sim}\left(n^{\omega-2}m\xi\right)$.
+provides a convenient bound throughout the computation. Let $\rho=\sum_{n-m+1}^{n}s_{i}$
+be the sum of $m$ largest entries of $\vec{s}$, and $s=\rho/m$
+be their average. The algorithm we present in this section computes
+a $\vec{s}$-minimal null space basis $\mathbf{N}$ with a cost of
+$g(n,\rho)=O^{\sim}(n^{\omega}s)$. For uniform shift $\vec{s}=\left[s,\dots,s\right]$,
+we improve this later to $O^{\sim}\left(n^{\omega}\left\lceil ms/n\right\rceil \right)=O^{\sim}\left(n^{\omega}\left\lceil \rho/n\right\rceil \right)=O^{\sim}\left(n^{\omega-1}\left\lceil m\xi/n\right\rceil \right)$.
 \begin{comment}
 For general unbalanced shifts, the cost improvement requires the ability
 to efficiently compute order basis with general shifts.
 \end{comment}
 
-
-\begin{comment}
-Let us first assume $m\le n\le3m$. Let $s=\xi/n$ be the average
-of the entries of $\vec{s}$. 
-\end{comment}
-{} 
 
 
 \subsection{\label{sub:continueComputingNullspaceBasisByColumns}Reducing the
@@ -122,21 +96,11 @@ $3m/2.$\end{lem}
 \begin{pf}
 Any column $\mathbf{p}$ of $\mathbf{P}_{2}$ must have $\vec{s}$-column
 degree at least $\sigma$, so their sum must satisfy $\sum\deg_{\vec{s}}\mathbf{P}_{2}\ge\kappa\sigma$.
-\begin{comment}
-$\sum_{i=n-k+1}^{n}s_{i}$ must be at least $k\sigma$
-\end{comment}
-{} Recall from \prettyref{lem:boundOfSumOfShiftedDegreesOfOrderBasis}
+Recall from \prettyref{lem:boundOfSumOfShiftedDegreesOfOrderBasis}
 that the sum of $\vec{s}$-column degrees of the columns of $\mathbf{P}$
-\begin{comment}
-is at most 
-\end{comment}
-{} satisfies $\sum\deg_{\vec{s}}\mathbf{P}\le\sum\vec{s}+m\sigma$,
-so the sum of $\vec{s}$-column degrees of the columns of $\mathbf{P}_{1}$
-must %
-\begin{comment}
-be at most
-\end{comment}
-{} satisfy $\sum\deg_{\vec{s}}\mathbf{P}_{1}\le\sum\vec{s}+m\sigma-\kappa\sigma$.
+satisfies $\sum\deg_{\vec{s}}\mathbf{P}\le\sum\vec{s}+m\sigma$, so
+the sum of $\vec{s}$-column degrees of the columns of $\mathbf{P}_{1}$
+must satisfy $\sum\deg_{\vec{s}}\mathbf{P}_{1}\le\sum\vec{s}+m\sigma-\kappa\sigma$.
 On the other hand, the lowest possible value of $\sum\deg_{\vec{s}}\mathbf{P}_{1}$
 is $\sum_{i=1}^{n-\kappa}s_{i}$ (which occurs when $\mathbf{P}_{1}=\left[\mathbf{I},0\right]^{T}$)
 based on the assumption that the entries of $\vec{s}=\left[s_{1},\dots,s_{n}\right]$
@@ -299,47 +263,7 @@ implies that $\mathbf{a}\in\left\langle \left(\mathbf{FP},\tau\right)\right\rang
 since $\mathbf{F}\mathbf{P}\mathbf{a}=\mathbf{F}\mathbf{t}\equiv0\mod x^{\tau}$.
 It follows that $\mathbf{a}=\mathbf{P}'\mathbf{b}$ for $\mathbf{b}=\mathbf{P}'^{-1}\mathbf{a}\in\mathbb{K}\left[x\right]^{n}$.
 Therefore, $\mathbf{a}=\mathbf{P}^{-1}\mathbf{t}=\mathbf{P}'\mathbf{b}$,
-which gives $\mathbf{t}=\mathbf{P}\mathbf{P}'\mathbf{b}$.
-\end{pf}
-\begin{comment}
-\begin{lem}
-\label{lem:continueComputingOrderBasis-1}For an input matrix $\mathbf{F}\in\mathbb{K}\left[x\right]^{m\times n}$,
-an order vector $\vec{\sigma}$, and a shift vector $\vec{s}$, if
-$\mathbf{P}$ is a $\left(\mathbf{F},\vec{\sigma},\vec{s}\right)$-basis
-with $\vec{s}$-column degrees $\vec{s}'$, and $\mathbf{P}'$ is
-a $(\mathbf{F}\mathbf{P},\vec{\tau},\vec{s}')$ -basis with $\vec{s}'$-column
-degrees $\vec{s}"$, where $\vec{\tau}\ge\vec{\sigma}$ component-wise,
-then $\mathbf{P}\mathbf{P}'$ is a $(\mathbf{F},\vec{\tau},\vec{s})$-basis
-with $\vec{s}$-column degrees $\vec{s}"$.\end{lem}
-\begin{pf}
-It is clear that $\mathbf{P}\mathbf{P}'$ has order $(\mathbf{F},\vec{\tau})$.
-We now show that $\mathbf{P}\mathbf{P}'$ is $\vec{s}$-column reduced
-and has $\vec{s}$-column degrees $\vec{s}"$, or equivalently, $x^{\vec{s}}\mathbf{P}\mathbf{P}'$
-is column reduced and has column degrees $\vec{s}"$. Notice that
-$x^{\vec{s}}\mathbf{P}$ has column degrees $\vec{s}'$ and a full
-rank leading column coefficient matrix $P$. Hence $x^{\vec{s}}\mathbf{P}x^{-\vec{s}'}$
-has column degrees $\left[0,\dots0\right]$. (If one is concerned
-about the entries not being polynomials, one can simply multiply it
-by $x^{\xi}$ to shift the degrees up.) Similarly, $x^{\vec{s}'}\mathbf{P}'x^{-\vec{s}"}$
-has column degrees $[0,\dots,0]$ and a full rank leading column coefficient
-matrix $P'$. Putting them together, $x^{\vec{s}}\mathbf{P}x^{-\vec{s}'}x^{\vec{s}'}\mathbf{P}'x^{-\vec{s}"}=x^{\vec{s}}\mathbf{P}\mathbf{P}'x^{-\vec{s}"}$
-has column degrees $[0,\dots,0]$ and a full rank leading column coefficient
-matrix $PP'$. It follows that $x^{\vec{s}}\mathbf{P}\mathbf{P}'$
-has column degrees $\vec{s}"$, or equivalently, the $\vec{s}$-column
-degrees of $\mathbf{PP}'$ is $\vec{s}"$.
-
-It remains to show that any $\mathbf{t}\in\left\langle \left(\mathbf{F},\vec{\tau}\right)\right\rangle $
-is generated by the columns of $\mathbf{PP}'$. Since $\mathbf{t}\in\left\langle \left(\mathbf{F},\vec{\sigma}\right)\right\rangle $,
-it is generated by the $\left(\mathbf{F},\vec{\sigma}\right)$-basis
-$\mathbf{P}$, that is, $\mathbf{t}=\mathbf{P}\mathbf{a}$ for $\mathbf{a}=\mathbf{P}^{-1}\mathbf{t}\in\mathbb{K}\left[x\right]^{n}$.
-Also, $\mathbf{t}\in\left\langle \left(\mathbf{F},\vec{\tau}\right)\right\rangle $
-implies that $\mathbf{a}\in\left\langle \left(\mathbf{FP},\vec{\tau}\right)\right\rangle $
-since $\mathbf{F}\mathbf{P}\mathbf{a}=\mathbf{F}\mathbf{t}\equiv0\mod x^{\vec{\tau}}$.
-It follows that $\mathbf{a}=\mathbf{P}'\mathbf{b}$ for $\mathbf{b}=\mathbf{P}'^{-1}\mathbf{a}\in\mathbb{K}\left[x\right]^{n}$.
-Therefore, $\mathbf{a}=\mathbf{P}^{-1}\mathbf{t}=\mathbf{P}'\mathbf{b}$,
 which gives $\mathbf{t}=\mathbf{P}\mathbf{P}'\mathbf{b}$.\end{pf}
-\end{comment}
-
 \begin{lem}
 \label{lem:continueComputingNullspaceBasisByColumns}Let $\mathbf{P}=\left[\mathbf{P}_{1},\mathbf{P}_{2}\right]$
 be a $\left(\mathbf{F},3s,\vec{s}\right)$-basis with $\vec{s}$-column
