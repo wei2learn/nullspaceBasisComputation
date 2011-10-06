@@ -1495,14 +1495,14 @@ reference "lem:continueComputingOrderBasis"
 \end_inset
 
 , a special case of Theorem 5.1 in 
-\series bold
-
 \begin_inset CommandInset citation
 LatexCommand citep
 key "BL1997"
 
 \end_inset
 
+
+\series bold
  
 \series default
 also used in 
@@ -1777,7 +1777,7 @@ Let
 \end_inset
 
  be a 
-\begin_inset Formula $\left(\mathbf{F},3s,\vec{s}\right)$
+\begin_inset Formula $\left(\mathbf{F},\sigma,\vec{s}\right)$
 \end_inset
 
 -basis with 
@@ -1811,15 +1811,15 @@ Let
 \end_inset
 
  be a 
-\begin_inset Formula $\left(\mathbf{F}\mathbf{P}_{2},\sigma,\vec{b}'\right)$
+\begin_inset Formula $\left(\mathbf{F}\mathbf{P}_{2},\tau,\vec{b}'\right)$
 \end_inset
 
 -basis, where 
-\begin_inset Formula $\sigma$
+\begin_inset Formula $\tau$
 \end_inset
 
  is at least 
-\begin_inset Formula $3s$
+\begin_inset Formula $\sigma$
 \end_inset
 
  and is large enough for 
@@ -1861,7 +1861,7 @@ Note that
 \end_inset
 
  is an 
-\begin_inset Formula $\left(\mathbf{F}\mathbf{P},\sigma,\vec{b}\right)$
+\begin_inset Formula $\left(\mathbf{F}\mathbf{P},\tau,\vec{b}\right)$
 \end_inset
 
 -basis since 
@@ -1873,7 +1873,7 @@ Note that
 \end_inset
 
  is an 
-\begin_inset Formula $\left(\mathbf{F}\mathbf{P}_{2},\sigma,\vec{b}'\right)$
+\begin_inset Formula $\left(\mathbf{F}\mathbf{P}_{2},\tau,\vec{b}'\right)$
 \end_inset
 
 -basis.
@@ -1882,7 +1882,7 @@ Note that
 \end_inset
 
  is a 
-\begin_inset Formula $\left(\mathbf{F},\sigma,\vec{s}\right)$
+\begin_inset Formula $\left(\mathbf{F},\tau,\vec{s}\right)$
 \end_inset
 
 -basis.
@@ -1899,6 +1899,172 @@ Note that
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Example
+\begin_inset CommandInset label
+LatexCommand label
+name "exm:continueComputingNullspaceBasisByColumns"
+
+\end_inset
+
+Let us look at an example of computing nullspace basis using 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:continueComputingNullspaceBasisByColumns"
+
+\end_inset
+
+.
+ Let 
+\end_layout
+
+\begin_layout Example
+\begin_inset Formula 
+\[
+\mathbf{F}=\left[\begin{array}{cccc}
+x+x^{2}+x^{3} & 1+x & 0 & 1+x\\
+1+x^{2}+x^{3} & x+x^{2}+x^{3} & x+x^{2} & x^{3}
+\end{array}\right]\in\mathbb{Z}_{2}\left[x\right]^{2\times4}.
+\]
+
+\end_inset
+
+Let 
+\begin_inset Formula $\sigma=3,$
+\end_inset
+
+ 
+\begin_inset Formula $\vec{s}=\left[3,3,3,3\right]$
+\end_inset
+
+.
+ First compute a 
+\begin_inset Formula $\left(\mathbf{F},\sigma,\vec{s}\right)$
+\end_inset
+
+-basis 
+\begin_inset Formula 
+\[
+\mathbf{P}=\left[\begin{array}{cccc}
+0 & 0 & x^{2} & x\\
+1 & 0 & 0 & x^{2}\\
+1 & x^{2} & x+x^{2} & 1+x\\
+1 & 0 & 0 & 0
+\end{array}\right],
+\]
+
+\end_inset
+
+ with the 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column degrees 
+\begin_inset Formula $\vec{b}'=\left[3,5,5,5\right]$
+\end_inset
+
+ and the residual 
+\begin_inset Formula 
+\[
+\mathbf{F}\mathbf{P}=\left[\begin{array}{cccc}
+0 & 0 & x^{3}+x^{4}+x^{5} & x^{4}\\
+0 & x^{3}+x^{4} & x^{5} & x^{3}+x^{5}
+\end{array}\right]
+\]
+
+\end_inset
+
+ We see that 
+\begin_inset Formula 
+\[
+\mathbf{P}_{1}=\begin{bmatrix}0\\
+1\\
+1\\
+1
+\end{bmatrix}
+\]
+
+\end_inset
+
+ is the only nullspace basis element computed.
+ Let 
+\begin_inset Formula $\mathbf{P}_{2}$
+\end_inset
+
+ be the matrix consists of the remaining columns of 
+\begin_inset Formula $\mathbf{P}$
+\end_inset
+
+.
+ We then compute a 
+\begin_inset Formula $\left(\mathbf{F}\mathbf{P}_{2},11,\vec{b}'\right)$
+\end_inset
+
+-basis 
+\begin_inset Formula 
+\[
+\mathbf{Q}'=\left[\begin{array}{ccc}
+1+x+x^{4} & x^{4} & x^{3}+x^{5}\\
+x+x^{2} & x^{5} & x^{4}+x^{6}\\
+1+x^{3} & x^{4}+x^{5}+x^{6} & x^{3}+x^{4}+x^{6}
+\end{array}\right],
+\]
+
+\end_inset
+
+ which gives 
+\begin_inset Formula 
+\[
+\mathbf{F}\mathbf{P}_{2}\mathbf{Q}'=\begin{bmatrix}0 & 0 & x^{11}\\
+0 & x^{11} & 0
+\end{bmatrix}.
+\]
+
+\end_inset
+
+ Hence 
+\begin_inset Formula 
+\[
+\mathbf{Q}=\begin{bmatrix}1+x+x^{4}\\
+x+x^{2}\\
+1+x^{3}
+\end{bmatrix}
+\]
+
+\end_inset
+
+ is a 
+\begin_inset Formula $\vec{b}'$
+\end_inset
+
+-minimal nullspace basis of 
+\begin_inset Formula $\mathbf{F}\mathbf{P}_{2}$
+\end_inset
+
+, and 
+\begin_inset Formula 
+\[
+\left[\mathbf{P}_{1},\mathbf{P}_{2}\mathbf{Q}\right]=\left[\begin{array}{cc}
+0 & x+x^{3}\\
+1 & x^{2}+x^{5}\\
+1 & 1+x+x^{6}\\
+1 & 0
+\end{array}\right]
+\]
+
+\end_inset
+
+ is a complete 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-minimal nullspace basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -2125,7 +2291,7 @@ Our next task is computing a
 
 .
  Hence we can use 
-\begin_inset Formula $\mathbf{G}=\mathbf{F}\mathbf{P}_{2}/x^{3s}$
+\begin_inset Formula $\mathbf{G}=\mathbf{F}\mathbf{P}_{2}/x^{\sigma}$
 \end_inset
 
  instead to compute the remaining basis elements.
@@ -2276,7 +2442,7 @@ reference "lem:boundOnDegreesOfFA"
 \begin_inset Formula $\mathbf{F}\mathbf{P}_{2}/x^{\sigma}$
 \end_inset
 
- are bounded by the entries of a corresponding subset 
+ are bounded by the entries of the corresponding subset 
 \begin_inset Formula $\vec{t}$
 \end_inset
 
@@ -2284,12 +2450,77 @@ reference "lem:boundOnDegreesOfFA"
 \begin_inset Formula $\vec{b}-\sigma$
 \end_inset
 
-, which is in turn bounded by the entries of 
+, which is in turn bounded by the entries of the corresponding subset of
+ 
 \begin_inset Formula $\vec{s}$
 \end_inset
 
 .
  
+\end_layout
+
+\begin_layout Example
+\begin_inset CommandInset label
+LatexCommand label
+name "exm:reducingDegree"
+
+\end_inset
+
+From 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "exm:continueComputingNullspaceBasisByColumns"
+
+\end_inset
+
+, note that instead of using the residual 
+\begin_inset Formula 
+\[
+\mathbf{F}\mathbf{P}_{2}=\left[\begin{array}{ccc}
+0 & x^{3}+x^{4}+x^{5} & x^{4}\\
+x^{3}+x^{4} & x^{5} & x^{3}+x^{5}
+\end{array}\right]
+\]
+
+\end_inset
+
+to compute an 
+\begin_inset Formula $\left(\mathbf{F}\mathbf{P}_{2},\tau,[5,5,5]\right)$
+\end_inset
+
+-basis, we can instead use 
+\begin_inset Formula 
+\[
+\mathbf{G}=\mathbf{F}\mathbf{P}_{2}/x^{3}=\left[\begin{array}{ccc}
+0 & 1+x+x^{2} & x\\
+1+x & x^{2} & 1+x^{2}
+\end{array}\right]
+\]
+
+\end_inset
+
+ to compute a 
+\begin_inset Formula $\left(\mathbf{G},\tau,[2,2,2]\right)$
+\end_inset
+
+-basis.
+ Note that the column degrees of 
+\begin_inset Formula $\mathbf{G}$
+\end_inset
+
+ are bounded by the new shift 
+\begin_inset Formula $\left[2,2,2\right]$
+\end_inset
+
+, which is in turn bounded by the corresponding entries 
+\begin_inset Formula $\left[3,3,3\right]$
+\end_inset
+
+ of 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -2757,6 +2988,128 @@ It remains to show that any
  as required.
 \end_layout
 
+\begin_layout Example
+Let us compute a 
+\begin_inset Formula $\vec{t}$
+\end_inset
+
+-minimal nullspace basis of 
+\begin_inset Formula 
+\[
+\mathbf{G}=\left[\begin{array}{ccc}
+0 & 1+x+x^{2} & x\\
+1+x & x^{2} & 1+x^{2}
+\end{array}\right]
+\]
+
+\end_inset
+
+ from 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "exm:reducingDegree"
+
+\end_inset
+
+, where 
+\begin_inset Formula $\vec{t}=\left[2,2,2\right]$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula 
+\begin{align*}
+\mathbf{G}_{1} & =\left[\begin{array}{ccc}
+0 & 1+x+x^{2} & x\end{array}\right]\\
+\mathbf{G}_{2} & =\left[\begin{array}{ccc}
+1+x & x^{2} & 1+x^{2}\end{array}\right].
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example
+First we compute a 
+\begin_inset Formula $\vec{t}$
+\end_inset
+
+-minimal nullspace basis 
+\begin_inset Formula $\mathbf{N}_{1}$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathbf{G}_{1}$
+\end_inset
+
+, with 
+\begin_inset Formula 
+\[
+\mathbf{N}_{1}=\left[\begin{array}{cc}
+1 & 0\\
+0 & x\\
+0 & 1+x+x^{2}
+\end{array}\right]
+\]
+
+\end_inset
+
+ and its 
+\begin_inset Formula $\vec{t}$
+\end_inset
+
+-column degrees 
+\begin_inset Formula $\vec{u}=\left[2,4\right]$
+\end_inset
+
+.
+ Next, we compute a 
+\begin_inset Formula $\vec{u}$
+\end_inset
+
+-minimal nullspace basis 
+\begin_inset Formula $\mathbf{N}_{2}$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathbf{G}_{2}\mathbf{N}_{1}=\left[\begin{array}{cc}
+1+x & 1+x+x^{4}\end{array}\right]$
+\end_inset
+
+, with 
+\begin_inset Formula 
+\[
+\mathbf{N}_{2}=\begin{bmatrix}1+x+x^{4}\\
+1+x
+\end{bmatrix}.
+\]
+
+\end_inset
+
+ Then 
+\begin_inset Formula 
+\[
+\mathbf{N}_{1}\mathbf{N}_{2}=\left[\begin{array}{c}
+1+x+x^{4}\\
+x+x^{2}\\
+1+x^{3}
+\end{array}\right]
+\]
+
+\end_inset
+
+ is a 
+\begin_inset Formula $\vec{t}$
+\end_inset
+
+-minimal nullspace basis of 
+\begin_inset Formula $\mathbf{G}$
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Standard
 While 
 \begin_inset CommandInset ref
@@ -2776,7 +3129,7 @@ reference "lem:continueComputingNullspaceBasisByRows"
  shows that that the nullspace basis can also be computed by rows and then
  reduce the row dimensions.
  Again, we need to check these computations can be done efficiently.
- 
+ In the following, 
 \begin_inset CommandInset ref
 LatexCommand formatted
 reference "lem:sizeOfG2N1"
@@ -3026,8 +3379,11 @@ reference "alg:minimalNullspaceBasis"
 
 .
  
+\end_layout
+
+\begin_layout Standard
 \begin_inset CommandInset include
-LatexCommand include
+LatexCommand input
 filename "algorithmNullspaceBasis.lyx"
 
 \end_inset

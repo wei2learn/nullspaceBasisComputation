@@ -227,7 +227,7 @@ Hence \prettyref{lem:multiplyUnbalancedMatrices} applies.
 It remains to show that the residual $\mathbf{F}\mathbf{P}_{2}$ can
 be used to compute the remaining nullspace basis elements in \prettyref{lem:continueComputingNullspaceBasisByColumns},
 which is based on \prettyref{lem:continueComputingOrderBasis}, a
-special case of Theorem 5.1 in \textbf{\citep{BL1997} }also used
+special case of Theorem 5.1 in \citep{BL1997}\textbf{ }also used
 in \citep{za2009}. We include a proof here for completeness.
 \begin{lem}
 \label{lem:continueComputingOrderBasis}For an input matrix $\mathbf{F}\in\mathbb{K}\left[x\right]^{m\times n}$,
@@ -266,11 +266,11 @@ Therefore, $\mathbf{a}=\mathbf{P}^{-1}\mathbf{t}=\mathbf{P}'\mathbf{b}$,
 which gives $\mathbf{t}=\mathbf{P}\mathbf{P}'\mathbf{b}$.\end{pf}
 \begin{lem}
 \label{lem:continueComputingNullspaceBasisByColumns}Let $\mathbf{P}=\left[\mathbf{P}_{1},\mathbf{P}_{2}\right]$
-be a $\left(\mathbf{F},3s,\vec{s}\right)$-basis with $\vec{s}$-column
+be a $\left(\mathbf{F},\sigma,\vec{s}\right)$-basis with $\vec{s}$-column
 degrees $\vec{b}$ and $\mathbf{P}_{1}$ consists of the nullspace
 basis elements computed. Let $\vec{b}'$ be the $\vec{s}$-column
-degrees of$\mathbf{P}_{2}$. Let $\mathbf{Q}'$ be a $\left(\mathbf{F}\mathbf{P}_{2},\sigma,\vec{b}'\right)$-basis,
-where $\sigma$ is at least $3s$ and is large enough for $\mathbf{Q}'=\left[\mathbf{Q},\mathbf{Q}_{2}\right]$
+degrees of$\mathbf{P}_{2}$. Let $\mathbf{Q}'$ be a $\left(\mathbf{F}\mathbf{P}_{2},\tau,\vec{b}'\right)$-basis,
+where $\tau$ is at least $\sigma$ and is large enough for $\mathbf{Q}'=\left[\mathbf{Q},\mathbf{Q}_{2}\right]$
 to contain a complete nullspace basis $\mathbf{Q}$ of $\mathbf{F}\mathbf{P}_{2}$,
 then $\left[\mathbf{P}_{1},\mathbf{P}_{2}\mathbf{Q}\right]$ is a
 $\vec{s}$-minimal nullspace basis of $\mathbf{F}$.\end{lem}
@@ -281,13 +281,84 @@ Note that
  & \mathbf{Q}'
 \end{bmatrix}
 \]
- is an $\left(\mathbf{F}\mathbf{P},\sigma,\vec{b}\right)$-basis since
+ is an $\left(\mathbf{F}\mathbf{P},\tau,\vec{b}\right)$-basis since
 $\mathbf{F}\mathbf{P}=\left[\mathbf{0},\mathbf{F}\mathbf{P}_{2}\right]$
-and $\mathbf{Q}'$ is an $\left(\mathbf{F}\mathbf{P}_{2},\sigma,\vec{b}'\right)$-basis.
+and $\mathbf{Q}'$ is an $\left(\mathbf{F}\mathbf{P}_{2},\tau,\vec{b}'\right)$-basis.
 It follows that $\mathbf{P}\mathbf{P}'=\left[\mathbf{P}_{1},\mathbf{P}_{2}\mathbf{Q}'\right]=\left[\mathbf{P}_{1},\mathbf{P}_{2}\mathbf{Q},\mathbf{P}_{2}\mathbf{Q}_{2}\right]$
-is a $\left(\mathbf{F},\sigma,\vec{s}\right)$-basis. Hence $\left[\mathbf{P}_{1},\mathbf{P}_{2}\mathbf{Q}\right]$
-is a complete $\vec{s}$-minimal nullspace basis of $\mathbf{F}$.
-\end{pf}
+is a $\left(\mathbf{F},\tau,\vec{s}\right)$-basis. Hence $\left[\mathbf{P}_{1},\mathbf{P}_{2}\mathbf{Q}\right]$
+is a complete $\vec{s}$-minimal nullspace basis of $\mathbf{F}$.\end{pf}
+\begin{exmp}
+\label{exm:continueComputingNullspaceBasisByColumns}Let us look at
+an example of computing nullspace basis using \prettyref{lem:continueComputingNullspaceBasisByColumns}.
+Let 
+
+\[
+\mathbf{F}=\left[\begin{array}{cccc}
+x+x^{2}+x^{3} & 1+x & 0 & 1+x\\
+1+x^{2}+x^{3} & x+x^{2}+x^{3} & x+x^{2} & x^{3}
+\end{array}\right]\in\mathbb{Z}_{2}\left[x\right]^{2\times4}.
+\]
+Let $\sigma=3,$ $\vec{s}=\left[3,3,3,3\right]$. First compute a
+$\left(\mathbf{F},\sigma,\vec{s}\right)$-basis 
+\[
+\mathbf{P}=\left[\begin{array}{cccc}
+0 & 0 & x^{2} & x\\
+1 & 0 & 0 & x^{2}\\
+1 & x^{2} & x+x^{2} & 1+x\\
+1 & 0 & 0 & 0
+\end{array}\right],
+\]
+ with the $\vec{s}$-column degrees $\vec{b}'=\left[3,5,5,5\right]$
+and the residual 
+\[
+\mathbf{F}\mathbf{P}=\left[\begin{array}{cccc}
+0 & 0 & x^{3}+x^{4}+x^{5} & x^{4}\\
+0 & x^{3}+x^{4} & x^{5} & x^{3}+x^{5}
+\end{array}\right]
+\]
+ We see that 
+\[
+\mathbf{P}_{1}=\begin{bmatrix}0\\
+1\\
+1\\
+1
+\end{bmatrix}
+\]
+ is the only nullspace basis element computed. Let $\mathbf{P}_{2}$
+be the matrix consists of the remaining columns of $\mathbf{P}$.
+We then compute a $\left(\mathbf{F}\mathbf{P}_{2},11,\vec{b}'\right)$-basis
+\[
+\mathbf{Q}'=\left[\begin{array}{ccc}
+1+x+x^{4} & x^{4} & x^{3}+x^{5}\\
+x+x^{2} & x^{5} & x^{4}+x^{6}\\
+1+x^{3} & x^{4}+x^{5}+x^{6} & x^{3}+x^{4}+x^{6}
+\end{array}\right],
+\]
+ which gives 
+\[
+\mathbf{F}\mathbf{P}_{2}\mathbf{Q}'=\begin{bmatrix}0 & 0 & x^{11}\\
+0 & x^{11} & 0
+\end{bmatrix}.
+\]
+ Hence 
+\[
+\mathbf{Q}=\begin{bmatrix}1+x+x^{4}\\
+x+x^{2}\\
+1+x^{3}
+\end{bmatrix}
+\]
+ is a $\vec{b}'$-minimal nullspace basis of $\mathbf{F}\mathbf{P}_{2}$,
+and 
+\[
+\left[\mathbf{P}_{1},\mathbf{P}_{2}\mathbf{Q}\right]=\left[\begin{array}{cc}
+0 & x+x^{3}\\
+1 & x^{2}+x^{5}\\
+1 & 1+x+x^{6}\\
+1 & 0
+\end{array}\right]
+\]
+ is a complete $\vec{s}$-minimal nullspace basis of $\mathbf{F}$. 
+\end{exmp}
 \prettyref{lem:continueComputingNullspaceBasisByColumns} shows that
 the remaining $\vec{s}$-minimal nullspace basis elements $\mathbf{P}_{2}\mathbf{Q}$
 can be correctly computed from the residual $\mathbf{F}\mathbf{P}_{2}$.
@@ -322,7 +393,7 @@ rows costs $O^{\sim}\left(nm^{\omega-2}\xi\right)$.
 Our next task is computing a $\vec{b}'$-minimal nullspace basis of
 the residual $\mathbf{F}\mathbf{P}_{2}$. It is useful to note that
 the lower degree terms of $\mathbf{F}\mathbf{P}_{2}$ are zero since
-it has order $\sigma$. Hence we can use $\mathbf{G}=\mathbf{F}\mathbf{P}_{2}/x^{3s}$
+it has order $\sigma$. Hence we can use $\mathbf{G}=\mathbf{F}\mathbf{P}_{2}/x^{\sigma}$
 instead to compute the remaining basis elements. But we still need
 verify that the size of $\mathbf{G}$ is small enough to allow efficient
 computation of the remaining basis elements. \prettyref{lem:boundOnShiftedDegrees}
@@ -345,9 +416,31 @@ degree increase for each column is at most $\sigma$.
 From \prettyref{lem:boundOnDegreesOfFA}, the column degrees of $\mathbf{F}\mathbf{P}/x^{\sigma}$
 are bounded by $\vec{b}-\sigma$, where $\vec{b}$ is the $\vec{s}$-column
 degrees of $\mathbf{P}$. Hence the column degrees of $\mathbf{F}\mathbf{P}_{2}/x^{\sigma}$
-are bounded by the entries of a corresponding subset $\vec{t}$ of
-$\vec{b}-\sigma$, which is in turn bounded by the entries of $\vec{s}$. 
-
+are bounded by the entries of the corresponding subset $\vec{t}$
+of $\vec{b}-\sigma$, which is in turn bounded by the entries of the
+corresponding subset of $\vec{s}$. 
+\begin{exmp}
+\label{exm:reducingDegree}From \prettyref{exm:continueComputingNullspaceBasisByColumns},
+note that instead of using the residual 
+\[
+\mathbf{F}\mathbf{P}_{2}=\left[\begin{array}{ccc}
+0 & x^{3}+x^{4}+x^{5} & x^{4}\\
+x^{3}+x^{4} & x^{5} & x^{3}+x^{5}
+\end{array}\right]
+\]
+to compute an $\left(\mathbf{F}\mathbf{P}_{2},\tau,[5,5,5]\right)$-basis,
+we can instead use 
+\[
+\mathbf{G}=\mathbf{F}\mathbf{P}_{2}/x^{3}=\left[\begin{array}{ccc}
+0 & 1+x+x^{2} & x\\
+1+x & x^{2} & 1+x^{2}
+\end{array}\right]
+\]
+ to compute a $\left(\mathbf{G},\tau,[2,2,2]\right)$-basis. Note
+that the column degrees of $\mathbf{G}$ are bounded by the new shift
+$\left[2,2,2\right]$, which is in turn bounded by the corresponding
+entries $\left[3,3,3\right]$ of $\vec{s}$.
+\end{exmp}
 At this point, using \prettyref{lem:continueComputingNullspaceBasisByColumns}
 and \prettyref{lem:boundOnShiftedDegrees}, the problem is reduced
 to computing a $\vec{t}$-minimal nullspace basis of $\mathbf{G}=\mathbf{F}\mathbf{P}_{2}/x^{3s}$,
@@ -423,16 +516,61 @@ basis of $\mathbf{G}$. Also, $\mathbf{G}\mathbf{n}=0$ implies that
 $\mathbf{G}_{2}\mathbf{N}_{1}\mathbf{a}=0$, hence $\mathbf{a}=\mathbf{N}_{2}\mathbf{b}$
 for some vector $\mathbf{b}$ as $\mathbf{N}_{2}$ is a nullspace
 basis of $\mathbf{G}_{2}\mathbf{N}_{1}$. We now have $\mathbf{n}=\mathbf{N}_{1}\mathbf{N}_{2}\mathbf{b}$
-as required.
-\end{pf}
+as required.\end{pf}
+\begin{exmp}
+Let us compute a $\vec{t}$-minimal nullspace basis of 
+\[
+\mathbf{G}=\left[\begin{array}{ccc}
+0 & 1+x+x^{2} & x\\
+1+x & x^{2} & 1+x^{2}
+\end{array}\right]
+\]
+ from \prettyref{exm:reducingDegree}, where $\vec{t}=\left[2,2,2\right]$.
+Let 
+\begin{align*}
+\mathbf{G}_{1} & =\left[\begin{array}{ccc}
+0 & 1+x+x^{2} & x\end{array}\right]\\
+\mathbf{G}_{2} & =\left[\begin{array}{ccc}
+1+x & x^{2} & 1+x^{2}\end{array}\right].
+\end{align*}
+
+
+First we compute a $\vec{t}$-minimal nullspace basis $\mathbf{N}_{1}$
+of $\mathbf{G}_{1}$, with 
+\[
+\mathbf{N}_{1}=\left[\begin{array}{cc}
+1 & 0\\
+0 & x\\
+0 & 1+x+x^{2}
+\end{array}\right]
+\]
+ and its $\vec{t}$-column degrees $\vec{u}=\left[2,4\right]$. Next,
+we compute a $\vec{u}$-minimal nullspace basis $\mathbf{N}_{2}$
+of $\mathbf{G}_{2}\mathbf{N}_{1}=\left[\begin{array}{cc}
+1+x & 1+x+x^{4}\end{array}\right]$, with 
+\[
+\mathbf{N}_{2}=\begin{bmatrix}1+x+x^{4}\\
+1+x
+\end{bmatrix}.
+\]
+ Then 
+\[
+\mathbf{N}_{1}\mathbf{N}_{2}=\left[\begin{array}{c}
+1+x+x^{4}\\
+x+x^{2}\\
+1+x^{3}
+\end{array}\right]
+\]
+ is a $\vec{t}$-minimal nullspace basis of $\mathbf{G}$.
+\end{exmp}
 While \prettyref{lem:continueComputingNullspaceBasisByColumns} allows
 us to compute nullspace basis by columns and then reduce the column
 dimensions, \prettyref{lem:continueComputingNullspaceBasisByRows}
 shows that that the nullspace basis can also be computed by rows and
 then reduce the row dimensions. Again, we need to check these computations
-can be done efficiently. \prettyref{lem:sizeOfG2N1} shows that the
-size of $\mathbf{G}_{2}\mathbf{N}_{1}$ is within a required bound.
-Then \prettyref{lem:mutiplyingG2N1} and \prettyref{lem:multiplyingN1N2}
+can be done efficiently. In the following, \prettyref{lem:sizeOfG2N1}
+shows that the size of $\mathbf{G}_{2}\mathbf{N}_{1}$ is within a
+required bound. Then \prettyref{lem:mutiplyingG2N1} and \prettyref{lem:multiplyingN1N2}
 show that the multiplication $\mathbf{G}_{2}\mathbf{N}_{1}$ and the
 multiplication $\mathbf{N}_{1}\mathbf{N}_{2}$ can be done efficiently,
 which are again consequences of \prettyref{lem:multiplyUnbalancedMatrices}.
@@ -470,7 +608,9 @@ is bounded by $\left\lceil m/2\right\rceil \times m$. The sum of
 column degrees of $\mathbf{G}_{1}$ and that of $\mathbf{G}_{2}\mathbf{N}_{1}$
 are both bounded by $\xi$ still. Hence, the same computation process
 can be repeated on these two smaller problems. This gives as a recursive
-algorithm, shown in \prettyref{alg:minimalNullspaceBasis}. \include{algorithmNullspaceBasis}
+algorithm, shown in \prettyref{alg:minimalNullspaceBasis}. 
+
+\input{algorithmNullspaceBasis.tex}
 
 
 \subsection{Overall cost}
