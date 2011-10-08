@@ -84,9 +84,9 @@ First, we compute an $\left(\mathbf{F},3s,\vec{s}\right)$-basis $\mathbf{P}$,
 which can be done with a cost $O^{\sim}\left(n^{\omega}s\right)$
 using the algorithm from \citet{Giorgi2003}. Note that if $\vec{s}$
 is balanced, then we can compute with a cost $O^{\sim}\left(n^{\omega}\left\lceil \rho/n\right\rceil \right)$
-using the algorithm from \textbf{\citet{za2009}}. We claim at most
-$3m/2$ columns of \textbf{$\mathbf{P}$} are not nullspace basis
-elements of $\mathbf{F}$.
+using the algorithm from \citet{za2009}. We claim at most $3m/2$
+columns of \textbf{$\mathbf{P}$} are not nullspace basis elements
+of $\mathbf{F}$.
 \begin{lem}
 \label{lem:dimensionOfPartialNullspaceBasisBasedOnOrder} Let $\mathbf{P}=[\mathbf{P}_{1},\mathbf{P}_{2}]$
 be a $(\mathbf{F},3s,\vec{s})$-basis with $\mathbf{P}_{1}$ containing
@@ -712,7 +712,7 @@ be computed with a cost of $O^{\sim}\left(n^{\omega}\left\lceil md/n\right\rceil
 We can just set the shift $\vec{s}$ to $\left[d,\dots,d\right]$
 and apply \prettyref{lem:costOfMinimalNullspaceBasisWithUniformShift}.\end{pf}
 \begin{rem}
-One may wonder whether it is possible slightly improve the algorithm
+One may wonder whether it is possible to slightly improve the algorithm
 to remove the ceiling function in the cost $O^{\sim}\left(n^{\omega}\left\lceil md/n\right\rceil \right)$,
 to get a cost of $O^{\sim}\left(n^{\omega-1}md\right)$. Unfortunately,
 it does not seem possible. Notice that the ceiling function is only

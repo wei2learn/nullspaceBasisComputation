@@ -531,16 +531,12 @@ key "Giorgi2003"
 \end_inset
 
  using the algorithm from 
-\series bold
-
 \begin_inset CommandInset citation
 LatexCommand citet
 key "za2009"
 
 \end_inset
 
-
-\series default
 .
  We claim at most 
 \begin_inset Formula $3m/2$
@@ -4134,8 +4130,8 @@ reference "lem:costOfMinimalNullspaceBasisWithUniformShift"
 \end_layout
 
 \begin_layout Remark
-One may wonder whether it is possible slightly improve the algorithm to
- remove the ceiling function in the cost 
+One may wonder whether it is possible to slightly improve the algorithm
+ to remove the ceiling function in the cost 
 \begin_inset Formula $O^{\sim}\left(n^{\omega}\left\lceil md/n\right\rceil \right)$
 \end_inset
 

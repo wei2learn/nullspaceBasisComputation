@@ -14,10 +14,10 @@ degrees $\vec{s}'$.}
 
 \STATE{$\xi:=\sum_{i=1}^{n}s_{n}$; $\rho:=\sum_{i=n-m+1}^{n}s_{n};$ $s:=\rho/m$; }
 
-\label{line:orderBasis}\STATE{$\left[\mathbf{P},\vec{b}\right]:=\mab\left(\mathbf{F},3s,\vec{s}\right)$,
+\STATE{$\left[\mathbf{P},\vec{b}\right]:=\mab\left(\mathbf{F},3s,\vec{s}\right)$,
 a $\left(\mathbf{F},3s,\vec{s}\right)$-basis with the columns of
 $\mathbf{P}$ and the entries of is $\vec{s}$-column degrees $\vec{b}$
-arranged so that the entries of $\vec{b}$ are in non-decreasing order;}
+arranged so that the entries of $\vec{b}$ are in non-decreasing order;}\label{line:orderBasis}
 
 \STATE{$\left[\mathbf{P}_{1},\mathbf{P}_{2}\right]:=\mathbf{P}$ where $\mathbf{P}_{1}$
 consists of all columns $\mathbf{p}$ of $\mathbf{P}$ satisfying
@@ -25,7 +25,7 @@ $\mathbf{F}\mathbf{p}=0$;}
 
 \STATE{ $\vec{t}=\deg_{\vec{s}}\mathbf{P}_{2}-\left[3s,3s,\dots,3s\right];$}
 
-\label{line:multiplyFP2}\STATE{$\mathbf{G}:=\mathbf{F}\mathbf{P}_{2}/x^{3s}$;}
+\STATE{$\mathbf{G}:=\mathbf{F}\mathbf{P}_{2}/x^{3s}$;}\label{line:multiplyFP2}
 
 \STATE{$\left[\mathbf{G}_{1}^{T},\mathbf{G}_{2}^{T}\right]^{T}:=\mathbf{G}$,
 with $\mathbf{G}_{1}$ having $\left\lfloor m/2\right\rfloor $ rows
@@ -33,11 +33,11 @@ and $\mathbf{G}_{2}$ having $\left\lceil m/2\right\rceil $ rows;}
 
 \STATE{$\left[\mathbf{N}_{1},\vec{u}\right]:=\mnb\left(\mathbf{G}_{1},\vec{t}\right);$ }
 
-\label{line:multiplyG2N1}\STATE{$\left[\mathbf{N}_{2},\vec{v}\right]:=\mnb\left(\mathbf{G}_{2}\mathbf{N}_{1},\vec{u}\right);$}
+\STATE{$\left[\mathbf{N}_{2},\vec{v}\right]:=\mnb\left(\mathbf{G}_{2}\mathbf{N}_{1},\vec{u}\right);$}\label{line:multiplyG2N1}
 
-\label{line:multiplyN1N2}\STATE{$\mathbf{Q}:=\mathbf{N}_{1}\mathbf{N}_{2}$;}
+\STATE{$\mathbf{Q}:=\mathbf{N}_{1}\mathbf{N}_{2}$;}\label{line:multiplyN1N2}
 
-\label{line:multiplyP2Q}\RETURN $\left[\mathbf{P}_{1},\mathbf{P}_{2}\mathbf{Q}\right],\left[\deg_{\vec{s}}\mathbf{P}_{1},\vec{v}\right]$
+\RETURN $\left[\mathbf{P}_{1},\mathbf{P}_{2}\mathbf{Q}\right],\left[\deg_{\vec{s}}\mathbf{P}_{1},\vec{v}\right]$\label{line:multiplyP2Q}
 \end{algorithmic}
 \end{algorithm}
 

@@ -204,15 +204,8 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "line:orderBasis"
-
-\end_inset
-
-
 \begin_inset Flex STATE
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Formula $\left[\mathbf{P},\vec{b}\right]:=\mab\left(\mathbf{F},3s,\vec{s}\right)$
@@ -264,6 +257,13 @@ status open
 
  are in non-decreasing order;
 \end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "line:orderBasis"
 
 \end_inset
 
@@ -320,13 +320,6 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "line:multiplyFP2"
-
-\end_inset
-
-
 \begin_inset Flex STATE
 status open
 
@@ -336,6 +329,13 @@ status open
 
 ;
 \end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "line:multiplyFP2"
 
 \end_inset
 
@@ -391,13 +391,6 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "line:multiplyG2N1"
-
-\end_inset
-
-
 \begin_inset Flex STATE
 status open
 
@@ -411,16 +404,16 @@ status open
 \end_inset
 
 
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
-name "line:multiplyN1N2"
+name "line:multiplyG2N1"
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Flex STATE
 status open
 
@@ -434,16 +427,16 @@ status open
 \end_inset
 
 
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
-name "line:multiplyP2Q"
+name "line:multiplyN1N2"
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset ERT
 status open
 
@@ -458,6 +451,13 @@ RETURN
 
  
 \begin_inset Formula $\left[\mathbf{P}_{1},\mathbf{P}_{2}\mathbf{Q}\right],\left[\deg_{\vec{s}}\mathbf{P}_{1},\vec{v}\right]$
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "line:multiplyP2Q"
+
 \end_inset
 
 
