@@ -109,16 +109,13 @@ status open
 \end_inset
 
 
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
 name "alg:minimalNullspaceBasis"
 
 \end_inset
 
- 
+
 \end_layout
 
 \begin_layout Plain Layout
@@ -205,7 +202,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Flex STATE
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Formula $\left[\mathbf{P},\vec{b}\right]:=\mab\left(\mathbf{F},3s,\vec{s}\right)$
@@ -295,6 +292,59 @@ status open
 \end_inset
 
 ;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Flex IF
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula $m=1$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Flex IFBODY
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+RETURN
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $\mathbf{P}_{1},\deg_{\vec{s}}\mathbf{P}_{1}$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Flex ELSE
+status collapsed
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \end_inset
@@ -457,6 +507,11 @@ RETURN
 \begin_inset CommandInset label
 LatexCommand label
 name "line:multiplyP2Q"
+
+\end_inset
+
+
+\end_layout
 
 \end_inset
 

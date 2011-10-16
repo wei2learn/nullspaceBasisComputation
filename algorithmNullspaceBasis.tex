@@ -1,8 +1,6 @@
 \begin{algorithm}[t]
 \caption{$\mnb(\mathbf{F},\vec{s})$ Compute Minimal Nullspace Basis}
-
-
-\label{alg:minimalNullspaceBasis} 
+\label{alg:minimalNullspaceBasis}
 
 \begin{algorithmic}
 [1]\REQUIRE{$\mathbf{F}\in\mathbb{K}\left[x\right]^{m\times n}$, $\vec{s}=[s_{1},\dots,s_{n}]\in\mathbb{Z}^{n}$
@@ -23,6 +21,12 @@ arranged so that the entries of $\vec{b}$ are in non-decreasing order;}\label{li
 consists of all columns $\mathbf{p}$ of $\mathbf{P}$ satisfying
 $\mathbf{F}\mathbf{p}=0$;}
 
+\IF{$m=1$}
+
+\ifbody{\RETURN $\mathbf{P}_{1},\deg_{\vec{s}}\mathbf{P}_{1}$ 
+
+\ELSE{}
+
 \STATE{ $\vec{t}=\deg_{\vec{s}}\mathbf{P}_{2}-\left[3s,3s,\dots,3s\right];$}
 
 \STATE{$\mathbf{G}:=\mathbf{F}\mathbf{P}_{2}/x^{3s}$;}\label{line:multiplyFP2}
@@ -37,7 +41,7 @@ and $\mathbf{G}_{2}$ having $\left\lceil m/2\right\rceil $ rows;}
 
 \STATE{$\mathbf{Q}:=\mathbf{N}_{1}\mathbf{N}_{2}$;}\label{line:multiplyN1N2}
 
-\RETURN $\left[\mathbf{P}_{1},\mathbf{P}_{2}\mathbf{Q}\right],\left[\deg_{\vec{s}}\mathbf{P}_{1},\vec{v}\right]$\label{line:multiplyP2Q}
+\RETURN $\left[\mathbf{P}_{1},\mathbf{P}_{2}\mathbf{Q}\right],\left[\deg_{\vec{s}}\mathbf{P}_{1},\vec{v}\right]$\label{line:multiplyP2Q}}
 \end{algorithmic}
 \end{algorithm}
 

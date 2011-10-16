@@ -1001,7 +1001,7 @@ We also divide the matrix
 \end_inset
 
  with 
-\begin_inset Formula $\vec{s}_{\log m},\vec{s}_{\log m-1},\dots,\vec{s}_{\log m1}$
+\begin_inset Formula $\vec{s}_{\log m},\vec{s}_{\log m-1},\dots,\vec{s}_{1}$
 \end_inset
 
  having entries in the range 
@@ -3244,7 +3244,7 @@ The computation of
 \begin_inset Formula $\mathbf{N}_{2}$
 \end_inset
 
- , the dimension of in put matrix 
+ , the dimension of input matrix 
 \begin_inset Formula $\mathbf{G}_{2}\mathbf{N}_{1}$
 \end_inset
 
