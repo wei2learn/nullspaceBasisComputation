@@ -4031,35 +4031,5 @@ reference "lem:costOfMinimalNullspaceBasisWithUniformShift"
 .
 \end_layout
 
-\begin_layout Remark
-One may wonder whether it is possible to slightly improve the algorithm
- to remove the ceiling function in the cost 
-\begin_inset Formula $O^{\sim}\left(n^{\omega}\left\lceil md/n\right\rceil \right)$
-\end_inset
-
-, to get a cost of 
-\begin_inset Formula $O^{\sim}\left(n^{\omega-1}md\right)$
-\end_inset
-
-.
- Unfortunately, it does not seem possible.
- Notice that the ceiling function is only used to take care of the case
- 
-\begin_inset Formula $md<n$
-\end_inset
-
-.
- In this case, the sum of the size of the input and the size of the output
- is at least 
-\begin_inset Formula $n^{2}$
-\end_inset
-
-, which may already be greater than 
-\begin_inset Formula $n^{\omega-1}md$
-\end_inset
-
-.
-\end_layout
-
 \end_body
 \end_document
