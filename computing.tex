@@ -1,3 +1,43 @@
+%% LyX 2.0.0 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english,amsthm,seceqn,secthm]{elsart}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{color}
+\usepackage{verbatim}
+\usepackage{prettyref}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[authoryear]{natbib}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+\floatstyle{ruled}
+\newfloat{algorithm}{tbp}{loa}
+\providecommand{\algorithmname}{Algorithm}
+\floatname{algorithm}{\protect\algorithmname}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+ \let\AND\relax 
+ \usepackage{algorithmic}
+\floatstyle{ruled}
+\newfloat{algorithm}{tbp}{loa}
+\floatname{algorithm}{Algorithm}
+\usepackage{algorithmic}
+\newcommand{\forbody}[1]{ #1 \ENDFOR }
+\newcommand{\ifbody}[1]{ #1  \ENDIF}
+\newcommand{\whilebody}[1]{ #1  \ENDWHILE}
+\renewcommand{\algorithmicprint}{\textbf{draw}}
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+
+
+\makeatother
+
+\usepackage{babel}
+\begin{document}
 
 \section{Computation of Minimal Nullspace Basis}
 
@@ -343,10 +383,10 @@ of $\mathbf{F}\mathbf{P}_{2}$, let us first show that the multiplication
 $\mathbf{P}_{2}\mathbf{Q}$ can be done efficiently, which is again
 a corollary of \prettyref{lem:multiplyUnbalancedMatrices}.
 \begin{lem}
-\label{cor:multiplyingP2Q}The multiplication of $\mathbf{P}_{2}$
+\label{lem:multiplyingP2Q}The multiplication of $\mathbf{P}_{2}$
 and $\mathbf{Q}$ can be done with a cost of $O^{\sim}\left(nm^{\omega-2}\xi\right)$.\end{lem}
 \begin{pf}
-Note that the dimension of $\mathbf{P}_{2}$ is $O(m)\times n$ from
+Note that the dimension of $\mathbf{P}_{2}$ is $n\times O(m)$ from
 \prettyref{lem:dimensionOfPartialNullspaceBasisBasedOnOrder}and column
 degrees of $\mathbf{P}_{2}$ are bounded by the $\vec{s}$-column
 degrees $\vec{b}_{2}$ of $\mathbf{P}_{2}$ since $\vec{s}$ is non-negative.
@@ -356,9 +396,9 @@ are bounded by the $\vec{s}$-column degrees $\vec{b}_{2}$ of $\mathbf{P}_{2}$
 the sum of the $\vec{b}_{2}$-column degrees of $\mathbf{Q}$ is bounded
 by the sum of the column degrees of $\mathbf{F}\mathbf{P}_{2}$, which
 is bounded by $\sum\vec{b}_{2}\le4\xi$ from \prettyref{cor:multiplyingFP2}.
-Now if we separate $\mathbf{F}$ to $n/m$ blocks rows each with no
-more than $m$ rows, \prettyref{lem:multiplyUnbalancedMatrices} can
-be used to multiply each block row with $\mathbf{P}_{2}$, which costs
+Now if we separate $\mathbf{P}_{2}$ to $n/m$ blocks rows each with
+no more than $m$ rows, \prettyref{lem:multiplyUnbalancedMatrices}
+can be used to multiply each block row with $\mathbf{Q}$, which costs
 $O^{\sim}(m^{\omega-1}\xi)$. Hence doing this for all $n/m$ block
 rows costs $O^{\sim}\left(nm^{\omega-2}\xi\right)$.
 \end{pf}
@@ -603,13 +643,12 @@ We may assume $m$ is a power of 2, which can be achieved by appending
 zero rows to $\mathbf{F}$. Note that $\rho\in\Theta\left(\xi\right)$
 when $n\in O\left(m\right)$. Then \prettyref{line:orderBasis} costs
 $O^{\sim}\left(n^{\omega}s\right)=O^{\sim}\left(m^{\omega-1}\rho\right)$;
-\prettyref{line:multiplyFP2} and \prettyref{cor:multiplyingP2Q}cost
+\prettyref{line:multiplyFP2} and \prettyref{line:multiplyP2Q} cost
 $O^{\sim}\left(nm^{\omega-2}\xi\right)=O^{\sim}\left(m^{\omega-1}\xi\right)$.
-The remaining operations including multiplications on \prettyref{line:multiplyG2N1},
-\prettyref{line:multiplyN1N2}, and \prettyref{line:multiplyP2Q}
-cost $O^{\sim}\left(m^{\omega-1}\xi\right)$. Let $g(m,\xi)$ be the
-computational cost of the original problem, then we have the recurrence
-relation 
+The remaining operations including multiplications on \prettyref{line:multiplyG2N1}
+and \prettyref{line:multiplyN1N2} cost $O^{\sim}\left(m^{\omega-1}\xi\right)$.
+Let $g(m,\xi)$ be the computational cost of the original problem,
+then we have the recurrence relation 
 \[
 g(m,\xi)\in O^{\sim}(m^{\omega-1}\xi)+g(m/2,\xi)+g(m/2,\xi),
 \]
@@ -687,3 +726,4 @@ be computed with a cost of $O^{\sim}\left(n^{\omega}\left\lceil md/n\right\rceil
 We can just set the shift $\vec{s}$ to $\left[d,\dots,d\right]$
 and apply \prettyref{lem:costOfMinimalNullspaceBasisWithUniformShift}.\end{pf}
 
+\end{document}

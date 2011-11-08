@@ -2040,7 +2040,7 @@ Note that the dimension of
 \end_inset
 
  is 
-\begin_inset Formula $O(m)\times n$
+\begin_inset Formula $n\times O(m)$
 \end_inset
 
  from 
@@ -2127,7 +2127,7 @@ reference "cor:multiplyingFP2"
 
 .
  Now if we separate 
-\begin_inset Formula $\mathbf{F}$
+\begin_inset Formula $\mathbf{P}_{2}$
 \end_inset
 
  to 
@@ -2146,7 +2146,7 @@ reference "lem:multiplyUnbalancedMatrices"
 \end_inset
 
  can be used to multiply each block row with 
-\begin_inset Formula $\mathbf{P}_{2}$
+\begin_inset Formula $\mathbf{Q}$
 \end_inset
 
 , which costs 
@@ -3380,11 +3380,11 @@ reference "line:multiplyFP2"
  and 
 \begin_inset CommandInset ref
 LatexCommand formatted
-reference "cor:multiplyingP2Q"
+reference "line:multiplyP2Q"
 
 \end_inset
 
-cost 
+ cost 
 \begin_inset Formula $O^{\sim}\left(nm^{\omega-2}\xi\right)=O^{\sim}\left(m^{\omega-1}\xi\right)$
 \end_inset
 
@@ -3396,17 +3396,10 @@ reference "line:multiplyG2N1"
 
 \end_inset
 
-, 
+ and 
 \begin_inset CommandInset ref
 LatexCommand formatted
 reference "line:multiplyN1N2"
-
-\end_inset
-
-, and 
-\begin_inset CommandInset ref
-LatexCommand formatted
-reference "line:multiplyP2Q"
 
 \end_inset
 
