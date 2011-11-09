@@ -1048,6 +1048,61 @@ We also divide the matrix
 \end_layout
 
 \begin_layout Proof
+Notice that 
+\begin_inset Formula $\mathbf{B}_{(j)}^{(i)}$
+\end_inset
+
+ for 
+\begin_inset Formula $j>i$
+\end_inset
+
+ must be zero.
+ Otherwise, the 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column degree of 
+\begin_inset Formula $\mathbf{B}^{(i)}$
+\end_inset
+
+ would exceed 
+\begin_inset Formula $\xi/2^{i-1}$
+\end_inset
+
+, a contradiction since by definition the 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column degree of 
+\begin_inset Formula $\mathbf{B}^{(i)}$
+\end_inset
+
+ is bounded by 
+\begin_inset Formula $\xi/2^{i-1}$
+\end_inset
+
+.
+ So 
+\begin_inset Formula $\mathbf{B}$
+\end_inset
+
+ actually has a block triangular shape 
+\begin_inset Formula 
+\[
+\mathbf{B}=\left[\begin{array}{cccc}
+\mathbf{B}_{\log m}^{\left(\log m\right)} & \mathbf{B}_{\log m}^{\left(\log m-1\right)} & \cdots & \mathbf{B}_{\log m}^{\left(1\right)}\\
+ & \mathbf{B}_{\log m-1}^{\left(\log m-1\right)} &  & \vdots\\
+ &  & \ddots\\
+ &  &  & \mathbf{B}_{1}^{\left(1\right)}
+\end{array}\right]
+\]
+
+\end_inset
+
+ but remember the blocks have varying sizes.
+\end_layout
+
+\begin_layout Proof
 First consider the multiplication 
 \begin_inset Formula 
 \[
@@ -1267,28 +1322,12 @@ Next we multiply
 \end_inset
 
 .
- We proceed in the same way as before, but notice that the columns of 
-\begin_inset Formula $\mathbf{A}$
+ We proceed in the same way as before, but notice that 
+\begin_inset Formula $\mathbf{A}_{1}\mathbf{B}_{1}^{(2)}$
 \end_inset
 
- whose degrees are higher than 
-\begin_inset Formula $\xi/2$
-\end_inset
-
- are no longer needed since the corresponding rows in 
-\begin_inset Formula $\mathbf{B}^{(2)}$
-\end_inset
-
- must be 0, as the 
-\begin_inset Formula $\vec{s}$
-\end_inset
-
--column degree of 
-\begin_inset Formula $\mathbf{B}^{(2)}$
-\end_inset
-
- is bounded by 
-\begin_inset Formula $\xi/2$
+ is no longer needed since 
+\begin_inset Formula $\mathbf{B}_{1}^{(2)}=0$
 \end_inset
 
 .
@@ -1334,24 +1373,12 @@ Continue doing this, it cost
 \end_inset
 
 .
-  As before, notice that the columns of 
-\begin_inset Formula $\mathbf{A}$
+  As before, remember that 
+\begin_inset Formula $\mathbf{B}_{(j)}^{(i)}=0$
 \end_inset
 
- whose degrees are higher than 
-\begin_inset Formula $\xi/2^{i-1}$
-\end_inset
-
- are not needed, as 
-\begin_inset Formula $\vec{s}$
-\end_inset
-
--column degrees of 
-\begin_inset Formula $\mathbf{B}^{(i)}$
-\end_inset
-
- is bounded by 
-\begin_inset Formula $\xi/2^{i-1}$
+ for 
+\begin_inset Formula $j>i$
 \end_inset
 
 .
@@ -2015,7 +2042,7 @@ reference "lem:multiplyUnbalancedMatrices"
 \begin_layout Lemma
 \begin_inset CommandInset label
 LatexCommand label
-name "cor:multiplyingP2Q"
+name "lem:multiplyingP2Q"
 
 \end_inset
 

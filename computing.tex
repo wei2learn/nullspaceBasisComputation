@@ -201,6 +201,21 @@ $(4\xi/m,8\xi/m]$, ..., $(\xi/2,\xi]$ respectively, the column dimension
 of $\mathbf{A}_{j}$ and the row dimension of $\mathbf{B}_{j}^{\left(i\right)}$
 match that of $\vec{s}_{j}$ for $j$ from $1$ to $\log m$.
 
+Notice that $\mathbf{B}_{(j)}^{(i)}$ for $j>i$ must be zero. Otherwise,
+the $\vec{s}$-column degree of $\mathbf{B}^{(i)}$ would exceed $\xi/2^{i-1}$,
+a contradiction since by definition the $\vec{s}$-column degree of
+$\mathbf{B}^{(i)}$ is bounded by $\xi/2^{i-1}$. So $\mathbf{B}$
+actually has a block triangular shape 
+\[
+\mathbf{B}=\left[\begin{array}{cccc}
+\mathbf{B}_{\log m}^{\left(\log m\right)} & \mathbf{B}_{\log m}^{\left(\log m-1\right)} & \cdots & \mathbf{B}_{\log m}^{\left(1\right)}\\
+ & \mathbf{B}_{\log m-1}^{\left(\log m-1\right)} &  & \vdots\\
+ &  & \ddots\\
+ &  &  & \mathbf{B}_{1}^{\left(1\right)}
+\end{array}\right]
+\]
+ but remember the blocks have varying sizes.
+
 First consider the multiplication 
 \[
 \mathbf{A}\mathbf{B}^{\left(1\right)}=\left[\begin{array}{cccc}
@@ -238,20 +253,15 @@ multiplying $\mathbf{A}$ and $\mathbf{B}^{(1)}$ over $\log(n)$
 steps cost $O^{\sim}\left(nm^{\omega-2}\xi\right)$. 
 
 Next we multiply $\mathbf{A}$ with $\mathbf{B}^{(2)}$. We proceed
-in the same way as before, but notice that the columns of $\mathbf{A}$
-whose degrees are higher than $\xi/2$ are no longer needed since
-the corresponding rows in $\mathbf{B}^{(2)}$ must be 0, as the $\vec{s}$-column
-degree of $\mathbf{B}^{(2)}$ is bounded by $\xi/2$. Multiplying
-$\mathbf{A}$ and $\mathbf{B}^{(2)}$ also cost $O^{\sim}\left(nm^{\omega-2}\xi\right)$.
+in the same way as before, but notice that $\mathbf{A}_{1}\mathbf{B}_{1}^{(2)}$
+is no longer needed since $\mathbf{B}_{1}^{(2)}=0$. Multiplying $\mathbf{A}$
+and $\mathbf{B}^{(2)}$ also cost $O^{\sim}\left(nm^{\omega-2}\xi\right)$.
 
 Continue doing this, it cost $O^{\sim}\left(nm^{\omega-2}\xi\right)$.
 to multiply $\mathbf{A}$ with the columns $\mathbf{B}^{(i)}$ for
-$i$ from $1$ to $\log m$.  As before, notice that the columns of
-$\mathbf{A}$ whose degrees are higher than $\xi/2^{i-1}$ are not
-needed, as $\vec{s}$-column degrees of $\mathbf{B}^{(i)}$ is bounded
-by $\xi/2^{i-1}$. The overall cost for $i$ from 1 to $\log m$ is
-$O^{\sim}\left(nm^{\omega-2}\xi\right)$ to multiply $\mathbf{A}$
-and $\mathbf{B}$. 
+$i$ from $1$ to $\log m$.  As before, remember that $\mathbf{B}_{(j)}^{(i)}=0$
+for $j>i$. The overall cost for $i$ from 1 to $\log m$ is $O^{\sim}\left(nm^{\omega-2}\xi\right)$
+to multiply $\mathbf{A}$ and $\mathbf{B}$. 
 \end{pf}
 With \prettyref{lem:multiplyUnbalancedMatrices}, we can now do the
 multiplication $\mathbf{F}\mathbf{P}_{2}$ efficiently.
