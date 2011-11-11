@@ -1461,7 +1461,7 @@ Since
 \end_inset
 
  satisfies 
-\begin_inset Formula $\sum\deg_{\vec{s}}\mathbf{P}_{2}\le3sn+\xi=4\xi$
+\begin_inset Formula $\sum\deg_{\vec{s}}\mathbf{P}_{2}\le3sm+\xi=4\xi$
 \end_inset
 
  by 

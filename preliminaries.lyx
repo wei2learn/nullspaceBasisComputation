@@ -1129,7 +1129,7 @@ Minimal nullspace bases can be directly computed via order basis computation
 \end_inset
 
 -basis cost 
-\begin_inset Formula $O^{\sim}\left(n^{\omega-1}\left\lceil m^{2}d/n\right\rceil \right)$
+\begin_inset Formula $O^{\sim}\left(n^{\omega}\left\lceil m^{2}d/n\right\rceil \right)$
 \end_inset
 
  using the algorithm from 
