@@ -358,7 +358,7 @@ status open
 
 \begin_layout Plain Layout
  
-\begin_inset Formula $\vec{t}=\deg_{\vec{s}}\mathbf{P}_{2}-\left[3s,3s,\dots,3s\right];$
+\begin_inset Formula $\vec{t}:=\deg_{\vec{s}}\mathbf{P}_{2}-\left[3s,3s,\dots,3s\right];$
 \end_inset
 
 

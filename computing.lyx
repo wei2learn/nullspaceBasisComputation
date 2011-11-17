@@ -1466,7 +1466,7 @@ Since
 
  by 
 \begin_inset CommandInset ref
-LatexCommand ref
+LatexCommand formatted
 reference "lem:boundOfSumOfShiftedDegreesOfOrderBasis"
 
 \end_inset
@@ -3276,7 +3276,7 @@ The computation of
 \end_inset
 
  is bounded by 
-\begin_inset Formula $\left\lceil m/2\right\rceil \times m$
+\begin_inset Formula $\left\lceil m/2\right\rceil \times(3m/2)$
 \end_inset
 
 .
@@ -3968,7 +3968,39 @@ reference "lem:costLowColDimension"
 
 \end_inset
 
- to apply for computing a .
+ to apply for computing a 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $\vec{t}$
+\end_inset
+
+-minimal nullspace basis of 
+\begin_inset Formula $\mathbf{F}\mathbf{P}_{2}/x^{3s}$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+.
  Hence the remaining work costs 
 \begin_inset Formula $O^{\sim}\left(m^{\omega}s\right)$
 \end_inset
