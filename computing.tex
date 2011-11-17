@@ -593,18 +593,24 @@ us to compute nullspace basis by columns and then reduce the column
 dimensions, \prettyref{lem:continueComputingNullspaceBasisByRows}
 shows that that the nullspace basis can also be computed by rows and
 then reduce the row dimensions. Again, we need to check these computations
-can be done efficiently. In the following, \prettyref{lem:sizeOfG2N1}
-shows that the size of $\mathbf{G}_{2}\mathbf{N}_{1}$ is within a
-required bound. Then \prettyref{lem:mutiplyingG2N1} and \prettyref{lem:multiplyingN1N2}
+can be done efficiently. In the following, %
+\begin{comment}
+\prettyref{lem:sizeOfG2N1} shows that the size of $\mathbf{G}_{2}\mathbf{N}_{1}$
+is within a required bound. Then
+\end{comment}
+{} \prettyref{lem:mutiplyingG2N1} and \prettyref{lem:multiplyingN1N2}
 show that the multiplication $\mathbf{G}_{2}\mathbf{N}_{1}$ and the
 multiplication $\mathbf{N}_{1}\mathbf{N}_{2}$ can be done efficiently,
-which are again consequences of \prettyref{lem:multiplyUnbalancedMatrices}.
+which are again consequences of \prettyref{lem:multiplyUnbalancedMatrices}.%
+\begin{comment}
 \begin{lem}
 \label{lem:sizeOfG2N1}The sum of the column degrees of $\mathbf{G}_{2}\mathbf{N}_{1}$
 is bounded by $\xi$.\end{lem}
 \begin{pf}
 This follows from \prettyref{lem:boundOfSumOfShiftedDegreesOfNullspaceBasis}
 and \prettyref{lem:boundOnDegreesOfFA}.\end{pf}
+\end{comment}
+
 \begin{lem}
 \label{lem:mutiplyingG2N1}The multiplication of $\mathbf{G}_{2}$
 and $\mathbf{N}_{1}$ can be done with a cost of $O^{\sim}(m^{\omega-1}\xi)$.\end{lem}
@@ -630,10 +636,11 @@ $\mathbf{N}_{1}$, the dimension of the input matrix $\mathbf{G}_{1}$
 is bounded by $\left\lfloor m/2\right\rfloor \times\left(3m/2\right)$.
 For computing $\mathbf{N}_{2}$ , the dimension of input matrix $\mathbf{G}_{2}\mathbf{N}_{1}$
 is bounded by $\left\lceil m/2\right\rceil \times(3m/2)$. The sum
-of column degrees of $\mathbf{G}_{1}$ and that of $\mathbf{G}_{2}\mathbf{N}_{1}$
-are both bounded by $\xi$ still. Hence, the same computation process
-can be repeated on these two smaller problems. This gives as a recursive
-algorithm, shown in \prettyref{alg:minimalNullspaceBasis}. 
+of column degrees of $\mathbf{G}_{1}$ is bounded by $\sum\vec{t}\le\xi$,
+and that of $\mathbf{G}_{2}\mathbf{N}_{1}$ is bounded by $\sum\vec{u}\le\xi$
+still. Hence, the same computation process can be repeated on these
+two smaller problems. This gives as a recursive algorithm, shown in
+\prettyref{alg:minimalNullspaceBasis}. 
 
 \input{algorithmNullspaceBasis.tex}
 

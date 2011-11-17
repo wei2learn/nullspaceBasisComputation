@@ -3055,6 +3055,10 @@ reference "lem:continueComputingNullspaceBasisByRows"
  reduce the row dimensions.
  Again, we need to check these computations can be done efficiently.
  In the following, 
+\begin_inset Note Comment
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset CommandInset ref
 LatexCommand formatted
 reference "lem:sizeOfG2N1"
@@ -3066,7 +3070,12 @@ reference "lem:sizeOfG2N1"
 \end_inset
 
  is within a required bound.
- Then 
+ Then
+\end_layout
+
+\end_inset
+
+ 
 \begin_inset CommandInset ref
 LatexCommand formatted
 reference "lem:mutiplyingG2N1"
@@ -3096,7 +3105,8 @@ reference "lem:multiplyUnbalancedMatrices"
 \end_inset
 
 .
-\end_layout
+\begin_inset Note Comment
+status collapsed
 
 \begin_layout Lemma
 \begin_inset CommandInset label
@@ -3132,6 +3142,11 @@ reference "lem:boundOnDegreesOfFA"
 \end_inset
 
 .
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Lemma
@@ -3284,12 +3299,16 @@ The computation of
 \begin_inset Formula $\mathbf{G}_{1}$
 \end_inset
 
- and that of 
+ is bounded by 
+\begin_inset Formula $\sum\vec{t}\le\xi$
+\end_inset
+
+, and that of 
 \begin_inset Formula $\mathbf{G}_{2}\mathbf{N}_{1}$
 \end_inset
 
- are both bounded by 
-\begin_inset Formula $\xi$
+ is bounded by 
+\begin_inset Formula $\sum\vec{u}\le\xi$
 \end_inset
 
  still.
