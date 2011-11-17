@@ -3295,23 +3295,32 @@ The computation of
 \end_inset
 
 .
- The sum of column degrees of 
+ The column degrees of 
 \begin_inset Formula $\mathbf{G}_{1}$
 \end_inset
 
- is bounded by 
+ are bounded by the entries of 
+\begin_inset Formula $\vec{t}$
+\end_inset
+
+, with 
 \begin_inset Formula $\sum\vec{t}\le\xi$
 \end_inset
 
-, and that of 
+.
+ Similarly, the column degrees of 
 \begin_inset Formula $\mathbf{G}_{2}\mathbf{N}_{1}$
 \end_inset
 
- is bounded by 
+ are bounded by the entries of 
+\begin_inset Formula $\vec{u}$
+\end_inset
+
+, with 
 \begin_inset Formula $\sum\vec{u}\le\xi$
 \end_inset
 
- still.
+.
  Hence, the same computation process can be repeated on these two smaller
  problems.
  This gives as a recursive algorithm, shown in 
