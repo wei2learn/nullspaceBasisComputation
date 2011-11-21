@@ -3106,7 +3106,7 @@ reference "lem:multiplyUnbalancedMatrices"
 
 .
 \begin_inset Note Comment
-status collapsed
+status open
 
 \begin_layout Lemma
 \begin_inset CommandInset label
@@ -3227,13 +3227,6 @@ reference "lem:multiplyUnbalancedMatrices"
 \end_inset
 
 , and by 
-\begin_inset CommandInset ref
-LatexCommand formatted
-reference "lem:sizeOfG2N1"
-
-\end_inset
-
- and 
 \begin_inset CommandInset ref
 LatexCommand formatted
 reference "lem:boundOfSumOfShiftedDegreesOfNullspaceBasis"

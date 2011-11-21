@@ -1,3 +1,43 @@
+%% LyX 2.0.0 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english,amsthm,seceqn,secthm]{elsart}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{color}
+\usepackage{verbatim}
+\usepackage{prettyref}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[authoryear]{natbib}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+\floatstyle{ruled}
+\newfloat{algorithm}{tbp}{loa}
+\providecommand{\algorithmname}{Algorithm}
+\floatname{algorithm}{\protect\algorithmname}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+ \let\AND\relax 
+ \usepackage{algorithmic}
+\floatstyle{ruled}
+\newfloat{algorithm}{tbp}{loa}
+\floatname{algorithm}{Algorithm}
+\usepackage{algorithmic}
+\newcommand{\forbody}[1]{ #1 \ENDFOR }
+\newcommand{\ifbody}[1]{ #1  \ENDIF}
+\newcommand{\whilebody}[1]{ #1  \ENDWHILE}
+\renewcommand{\algorithmicprint}{\textbf{draw}}
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+
+
+\makeatother
+
+\usepackage{babel}
+\begin{document}
 
 \section{Computation of Minimal Nullspace Basis}
 
@@ -583,7 +623,7 @@ and $\mathbf{N}_{2}$ can be done with a cost of $O^{\sim}(m^{\omega-1}\xi)$.\end
 \prettyref{lem:multiplyUnbalancedMatrices} applies because the sum
 of the column degrees of $\mathbf{N}_{1}$ is bounded by the sum of
 the $\vec{t}$-column degrees of $\mathbf{N}_{1}$, which is $\sum\vec{u}\le\xi$,
-and by \prettyref{lem:sizeOfG2N1} and \prettyref{lem:boundOfSumOfShiftedDegreesOfNullspaceBasis}
+and by \prettyref{lem:boundOfSumOfShiftedDegreesOfNullspaceBasis}
 the sum of $\vec{u}$-column degrees of $\mathbf{N}_{2}$ is also
 bounded by $\xi$.
 \end{pf}
@@ -704,3 +744,4 @@ be computed with a cost of $O^{\sim}\left(n^{\omega}\left\lceil md/n\right\rceil
 We can just set the shift $\vec{s}$ to $\left[d,\dots,d\right]$
 and apply \prettyref{lem:costOfMinimalNullspaceBasisWithUniformShift}.\end{pf}
 
+\end{document}
