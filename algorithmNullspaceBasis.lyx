@@ -103,7 +103,11 @@ status open
 \begin_inset Formula $\mnb(\mathbf{F},\vec{s})$
 \end_inset
 
- Compute Minimal Nullspace Basis
+ Compute 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-Minimal Nullspace Basis
 \end_layout
 
 \end_inset
@@ -181,11 +185,11 @@ A
 status open
 
 \begin_layout Plain Layout
-\begin_inset Formula $\xi:=\sum_{i=1}^{n}s_{n}$
+\begin_inset Formula $\xi:=\sum_{i=1}^{n}s_{i}$
 \end_inset
 
 ; 
-\begin_inset Formula $\rho:=\sum_{i=n-m+1}^{n}s_{n};$
+\begin_inset Formula $\rho:=\sum_{i=n-m+1}^{n}s_{i};$
 \end_inset
 
  

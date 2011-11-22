@@ -1,5 +1,5 @@
 \begin{algorithm}[t]
-\caption{$\mnb(\mathbf{F},\vec{s})$ Compute Minimal Nullspace Basis}
+\caption{$\mnb(\mathbf{F},\vec{s})$ Compute $\vec{s}$-Minimal Nullspace Basis}
 \label{alg:minimalNullspaceBasis}
 
 \begin{algorithmic}
@@ -10,7 +10,7 @@ column degrees of $\mathbf{F}$.}
 \ENSURE{A $\vec{s}$-minimal nullspace basis of $\mathbf{F}$ and its $\vec{s}$-column
 degrees $\vec{s}'$.}
 
-\STATE{$\xi:=\sum_{i=1}^{n}s_{n}$; $\rho:=\sum_{i=n-m+1}^{n}s_{n};$ $s:=\rho/m$; }
+\STATE{$\xi:=\sum_{i=1}^{n}s_{i}$; $\rho:=\sum_{i=n-m+1}^{n}s_{i};$ $s:=\rho/m$; }
 
 \STATE{$\left[\mathbf{P},\vec{b}\right]:=\mab\left(\mathbf{F},3s,\vec{s}\right)$,
 a $\left(\mathbf{F},3s,\vec{s}\right)$-basis with the columns of
